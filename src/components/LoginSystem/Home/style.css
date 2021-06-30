@@ -1,0 +1,11 @@
+*,::before,::after{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.container{
+    width:100%;
+    height:100vh;
+    background:url("../../../assets/img/LoginPage.jpg")no-repeat center/cover;
+}

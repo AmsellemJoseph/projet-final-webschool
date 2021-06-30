@@ -1,13 +1,15 @@
 import './App.css';
-import Register from './components/LoginSystem/Register/Register'
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import LoginSystem from './components/LoginSystem/Home/LoginSystem'
 
 
 function App() {
   return (
-    <div className="App">
-      <Register/>
-    </div>
+    // <Router>
+      <div className="App">
+        <LoginSystem />
+      </div>
+    // </Router>
   );
 }
 

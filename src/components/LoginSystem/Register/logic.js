@@ -1,5 +1,5 @@
 const axios = require('axios');
-const sha1 = require('js-sha1')
+var md5 = require('md5');
 
 class Registering {
 
@@ -98,7 +98,8 @@ class Registering {
     createUser = async () => {
         const newUser = {
             username: this.username,
-            password: sha1("21") + sha1(this.pass1 + "2108") + sha1("08"),
+            password: md5(this.pass1),
+            // password: this.pass1,
             firstname: this.first,
             lastname: this.last,
             mail: this.mail,

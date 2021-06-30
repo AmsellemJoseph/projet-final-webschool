@@ -75,6 +75,22 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             db.collection("users").findOneAndUpdate(query, replacement, options)
             res.redirect("http://localhost:3000");
         })
+
+        route.post('/connection',(req,res)=>{
+            const mail = req.body.params.user.mail;
+            const password = req.body.params.user.password;
+            db.collection("users").find({mail:mail}).toArray()
+            .then((result)=>{
+                console.log(result[0].password)
+                console.log(password)
+                if(result[0].password === password){
+                    res.send({connection:true})
+                }else{
+                    res.send({connection:false})
+                }
+            })
+            .catch((err)=>{ console.log(err) })
+        })
     })
 
 
