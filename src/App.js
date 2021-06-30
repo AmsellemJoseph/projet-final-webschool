@@ -1,6 +1,7 @@
-
 import './App.css';
-import Register from './components/LoginSystem/Register'
+import Register from './components/LoginSystem/Register/Register'
+
+
 
 function App() {
   return (

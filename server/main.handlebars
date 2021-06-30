@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="back">
+
+            <h1>CONGRATULATION!!</h1>
+            <h3>Welcome to our amazing website!</h3>
+            <p>Your almost there.</p>
+            <p>To complete your registration <a
+                    href="http://localhost:2108/registration/confirmregistration?mail=${mail}">Click here!</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
+<style>
+    *,
+    ::before,
+    ::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        color: #f1b50e;
+    }
+
+    body {
+        text-align: center;
+        background: #f1b50e;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center
+    }
+    .back{
+        width: 320px;
+        height:auto;
+        background: #333;
+        border-radius: 15px;
+    }
+    h1 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin: 10px;
+    }
+
+    p {
+        margin: 10px;
+    }
+</style>
