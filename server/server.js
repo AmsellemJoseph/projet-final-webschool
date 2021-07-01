@@ -34,7 +34,14 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
-
+        route.post("/getuser",(req,res)=>{
+            const mail = req.body.params.mail;
+            db.collection("users").find({mail:mail}).toArray()
+            .then((result)=>{
+                res.send(result)
+            })
+            .catch((err) => { console.log(err) })
+        })
         route.post("/verifMail", (req, res) => {
             const mail = req.body.params.mailLower;
             db.collection("users").find({ mail: mail }).toArray()
@@ -76,20 +83,27 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             res.redirect("http://localhost:3000");
         })
 
-        route.post('/connection',(req,res)=>{
+        route.post('/connection', (req, res) => {
             const mail = req.body.params.user.mail;
             const password = req.body.params.user.password;
+            db.collection("users").find({ mail: mail }).toArray()
+                .then((result) => {
+                    if (result[0].password === password) {
+                        res.send({ connection: true })
+                    } else {
+                        res.send({ connection: false })
+                    }
+                })
+                .catch((err) => { console.log(err) })
+        })
+
+        route.post('/verifpending',(req,res)=>{
+            const mail = req.body.params.mail;
             db.collection("users").find({mail:mail}).toArray()
             .then((result)=>{
-                console.log(result[0].password)
-                console.log(password)
-                if(result[0].password === password){
-                    res.send({connection:true})
-                }else{
-                    res.send({connection:false})
-                }
+                res.send({confirmed:result[0].confirmed})
             })
-            .catch((err)=>{ console.log(err) })
+            .catch((err)=>{console.log(err)})
         })
     })
 

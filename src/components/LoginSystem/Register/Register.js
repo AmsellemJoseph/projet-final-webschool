@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import Registering from './logic'
-import { useSelector,useDispatch } from 'react-redux';
-import './style.css'
+import { useSelector, useDispatch } from 'react-redux';
+import './register.css'
 
 const Register = () => {
     const [error, setError] = useState('');
@@ -14,7 +14,22 @@ const Register = () => {
         }
     }
 
-    const showRegister = useSelector(state=>state)
+    const dispatch = useDispatch();
+
+    const close = ()=>{
+        dispatch({
+            type: "CLOSEALL"
+        })
+    }
+    const toggleLog = ()=>{
+        dispatch({
+            type:"TOGGLELOGIN"
+        })
+    }
+
+    const {showRegister} = useSelector(state=>({
+        ...state.loginReducer
+    }))
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -69,12 +84,12 @@ const Register = () => {
         setError("Bien ajoute");
     }
 
-
+    console.log(showRegister)
     return (
-        <div className={showRegister.showRegister?"container-reg":"container-empty"}>
-            <div className="overlay"></div>
-            <div className="form">
-                <h2>REGISTRATION</h2>
+        <div className={showRegister ? "container-reg" : "container-empty"}>
+            <div className="overlay-reg" onClick={close}></div>
+            <div className="container-form-reg">
+                <h2>Registration</h2>
                 <p style={{ color: 'red' }}>{error}</p>
                 <form className="form-reg"
                     onSubmit={handleSubmit}
@@ -113,8 +128,8 @@ const Register = () => {
                         <button className="butReg" type="submit">Register</button>
                     </div>
 
+                    <p onClick={toggleLog}>Already registered? Click here</p>
                 </form>
-                <p>Already registered? Click here</p>
             </div>
         </div>
     )

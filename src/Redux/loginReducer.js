@@ -21,7 +21,7 @@ export default function loginReducer(state = initialState, action) {
             }
         }
         case 'TOGGLEREG': {
-            if (state.showLogin) {
+            if (state.showRegister) {
                 return {
                     ...state,
                     showLogin: false,

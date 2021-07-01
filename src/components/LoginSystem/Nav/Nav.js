@@ -1,5 +1,5 @@
 import React from "react";
-import './style.css'
+import './nav.css'
 import {useDispatch} from 'react-redux';
 
 const Nav = ()=>{
