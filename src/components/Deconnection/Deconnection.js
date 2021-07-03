@@ -1,25 +1,36 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {BrowserRouter as Router,Switch,Route,Redirect} from 'react-router-dom'
-import SwitchRoute from '../Mainsite/Switch/SwitchRoute'
+import {BrowserRouter as Router,useHistory} from 'react-router-dom'
 
 const Deconnection = ()=>{
 
-    const {logged} = useSelector(state => ({
-        ...state.userLoggedReducer
+    const history = useHistory();
+
+    const {admin} = useSelector(state => ({
+        ...state.userLoggedReducer,
+        ...state.userInfoReducer
     }))
+    
+    if(admin){
+        history.push('/admin');
+    }
 
     const dispatch = useDispatch();
     const handleDeconnection = ()=>{
         dispatch({
-            type:"DECO"
+            type:"DECO",
+        })
+        dispatch({
+            type:"DESTROY"
         })
         localStorage.setItem("logged",JSON.stringify(false))
+        localStorage.setItem("user",JSON.stringify(""))
+        history.push('/');
     }
 
     return(
         <Router>  
-            {logged?<button onClick={handleDeconnection}>Deconnection</button>:<Route component={SwitchRoute}/>}
+            <button onClick={handleDeconnection}>Deconnection</button>
         </Router>
 
     )

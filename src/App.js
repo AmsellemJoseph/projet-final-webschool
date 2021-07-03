@@ -1,21 +1,23 @@
+
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoginSystem from './components/LoginSystem/Home/LoginSystem'
-import SwitchRoute from './components/Mainsite/Switch/SwitchRoute'
-import Deconnection from './components/Deconnection/Deconnection'
-
+import Admin from './components/Admin/Home/Admin'
+import Accueil from './components/Mainsite/Acceuil/Accueil'
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path='/' component={SwitchRoute} />
-          <Route default component={SwitchRoute}/>
+          <Route exact path='/' component={LoginSystem} />
+          <Route path='/login' component={LoginSystem}/>
+          <Route path='/accueil' component={Accueil}/>
+          <Route path="/admin" component={Admin}/>
+
         </Switch>
       </div>
     </Router>
-    // <Deconnection/>
   );
 }
 

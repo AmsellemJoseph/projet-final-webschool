@@ -1,5 +1,5 @@
 const initialState = {
-    username: ""
+    user: ""
 }
 
 export default function userInfoReducer(state = initialState, action) {
@@ -7,13 +7,13 @@ export default function userInfoReducer(state = initialState, action) {
         case "CREATE": {
             return {
                 ...state,
-                username: action.payload
+                user: action.payload
             }
         }
         case "DESTROY": {
             return {
                 ...state,
-                username: ""
+                user: ""
             }
         }
         default: {

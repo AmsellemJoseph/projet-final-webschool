@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import axios from 'axios';
 import Registering from './logic'
 import { useSelector, useDispatch } from 'react-redux';
 import './register.css'
@@ -16,18 +15,18 @@ const Register = () => {
 
     const dispatch = useDispatch();
 
-    const close = ()=>{
+    const close = () => {
         dispatch({
             type: "CLOSEALL"
         })
     }
-    const toggleLog = ()=>{
+    const toggleLog = () => {
         dispatch({
-            type:"TOGGLELOGIN"
+            type: "TOGGLELOGIN"
         })
     }
 
-    const {showRegister} = useSelector(state=>({
+    const { showRegister } = useSelector(state => ({
         ...state.loginReducer
     }))
 
@@ -84,7 +83,6 @@ const Register = () => {
         setError("Bien ajoute");
     }
 
-    console.log(showRegister)
     return (
         <div className={showRegister ? "container-reg" : "container-empty"}>
             <div className="overlay-reg" onClick={close}></div>

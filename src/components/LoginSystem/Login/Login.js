@@ -1,13 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import LoginLogic from './logic'
 import { useSelector, useDispatch } from 'react-redux';
 import "./login.css"
-import { BrowserRouter as Router, Switch, Route,Redirect } from 'react-router-dom'
-import SwitchRoute from '../../Mainsite/Switch/SwitchRoute'
+import { BrowserRouter as Router, useHistory } from 'react-router-dom'
 
 const Login = () => {
+    const history = useHistory()
+    const dispatch = useDispatch();
 
-    const {showLogin,logged} = useSelector(state=>({
+    
+
+    useEffect(() => {
+        dispatch({
+            type: "DESTROY",
+        })
+        const verifLog = JSON.parse(localStorage.getItem('logged'));
+    if (verifLog) {
+        if (verifLog.logged == true) {
+           return history.push('/accueil');
+        }
+    }
+
+    }, [])
+
+
+    const { showLogin, logged, admin } = useSelector(state => ({
         ...state.loginReducer,
         ...state.userLoggedReducer
     }))
@@ -20,7 +37,6 @@ const Login = () => {
         }
     }
 
-    const dispatch = useDispatch();
 
     const close = () => {
         dispatch({
@@ -33,10 +49,13 @@ const Login = () => {
         })
     }
 
-    const log = ()=>{
+    const userCookie = (user) => {
         dispatch({
-            type:"LOG"
+            type: "CREATE",
+            payload: user
         })
+        localStorage.setItem("user", JSON.stringify(user))
+        localStorage.setItem("logged", JSON.stringify({ logged: true }));
     }
 
     const handleSubmit = async (e) => {
@@ -53,46 +72,61 @@ const Login = () => {
             return setError("Bad password!");
         }
         const pending = await Logger.verifPending();
-        console.log(pending.data.confirmed)
         if (!pending.data.confirmed) {
             return setError("Your account is not yet active, please click on the link you received in your mailbox.")
         }
         const info = await Logger.recupInfo();
-        console.log(info.data[0]);
+        if (info.data[0].confirmed) {
+        }
+        const user = {
+            username: info.data[0].username,
+            mail: info.data[0].mail,
+            credit: info.data[0].credit,
+            firstname: info.data[0].firstname,
+            lastname: info.data[0].lastname,
+        }
+        if (info.data[0].admin == true) {
+            localStorage.setItem('admin', JSON.stringify({ admin: true }));
+            return history.push('/admin')
+        }
 
-        log();
-
-
+        userCookie(user);
         setError("");
+        return history.push('/accueil')
     }
 
     return (
-        <div className={showLogin ? "container-log" : 'container-empty'}>
-            <div onClick={close} className="overlay-log"></div>
-            <div className="container-form-log">
-                <h2>Login</h2>
-                <p style={{ color: 'red' }}>{error}</p>
-                <form className="form-log"
-                    onSubmit={handleSubmit}
-                    action="" method="post">
+        <Router>
+            <div className={showLogin ? "container-log" : 'container-empty'}>
+                <div onClick={close} className="overlay-log"></div>
+                <div className="container-form-log">
+                    <h2>Login</h2>
+                    <p style={{ color: 'red' }}>{error}</p>
+                    <form className="form-log"
+                        onSubmit={handleSubmit}
+                        method="post">
 
-                    <div className="inputs-log">
-                        {/* <label htmlFor="mail">Mail</label> */}
-                        <input ref={addInput} type="email" name="mail" placeholder="Mail" required />
-                    </div>
+                        <div className="inputs-log">
+                            {/* <label htmlFor="mail">Mail</label> */}
+                            <input ref={addInput} type="email" name="mail" placeholder="Mail" required />
+                        </div>
 
-                    <div className="inputs-log">
-                        {/* <label htmlFor="pass1">Password</label> */}
-                        <input ref={addInput} type="password" name="pass1" placeholder="Password" required />
-                    </div>
+                        <div className="inputs-log">
+                            {/* <label htmlFor="pass1">Password</label> */}
+                            <input ref={addInput} type="password" name="pass1" placeholder="Password" required />
+                        </div>
 
-                    <div>
-                        <button className="butlog" type="submit">Login</button>
-                    </div>
-                    <p onClick={toggleReg}>Not registered? Click here</p>
-                </form>
+                        <div>
+                            <button className="butlog" type="submit">Login</button>
+                        </div>
+                        <p onClick={toggleReg}>Not registered? Click here</p>
+
+                    </form>
+                </div>
+
             </div>
-        </div>
+        </Router>
+
     )
 }
 

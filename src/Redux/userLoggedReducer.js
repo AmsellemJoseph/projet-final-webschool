@@ -1,8 +1,9 @@
 const initialState = {
     logged: false,
+    admin: false
 }
 
-export default function userReducer(state = initialState, action) {
+export default function userLoggedReducer(state = initialState, action) {
     switch (action.type) {
         case "LOG": {
             return {
@@ -10,10 +11,24 @@ export default function userReducer(state = initialState, action) {
                 logged: true
             }
         }
-        case "DECO":{
-            return{
+        case "DECO": {
+            return {
                 ...state,
                 logged: false,
+            }
+        }
+        case "ADMINON": {
+            return {
+                ...state,
+                admin: true,
+                logged: true,
+            }
+        }
+        case "SECURITY": {
+            return {
+                ...state,
+                logged: false,
+                admin: false,
             }
         }
         default: {

@@ -1,20 +1,27 @@
-import React from 'react';
-import {useSelector} from 'react-redux'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import Deconnection from '../../Deconnection/Deconnection'
+const Accueil = () => {
 
-const Accueil = ()=>{
+    const history = useHistory();
 
-    const {logged} = useSelector(state => ({
+    const { user, admin } = useSelector(state => ({
+        ...state.userInfoReducer,
         ...state.userLoggedReducer
     }))
 
-    localStorage.setItem("logged",JSON.stringify(logged))
+    const verifLog = JSON.parse(localStorage.getItem('logged'))
+    if (!verifLog || verifLog.logged == false) {
+        history.push('/');
+    }
+    console.log(admin)
 
-    return(
-    <div>
-        <h1>Salut ma couille!!</h1>
-        <Deconnection/>
-    </div>
+    return (
+        <div>
+            <h1>Salut {user.username}</h1>
+            <Deconnection/>
+        </div>
     )
 }
 
