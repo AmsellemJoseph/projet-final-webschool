@@ -6,33 +6,37 @@
 }
 
 .container-form-reg h2{
-    margin-top:25px;
-    margin-bottom:20px;
+    margin-top:15px;
+    margin-bottom:10px;
+    font-size:20px;
+    color: #71f6ff;
+    font-family: 'Press Start 2P';
 }
 
 .container-reg{
     width:100%;
-    height:120vh;
+    height:100vh;
     display: flex;
     justify-content:center;
     align-items:center;
 }
 .overlay-reg{
     width:100%;
-    height:120vh;
+    height:100vh;
     background: rgba(51, 51, 51,0.5);
     position: absolute;
 }
 .container-form-reg{
     position:absolute;
     top: 80px;
-    width:320px;
-    height:520px;
+    width:300px;
+    height:500px;
     background:white;
     z-index: 10;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    background:#1a1e4d;
 }
 .form-reg{
     width:100%;
@@ -41,31 +45,37 @@
     flex-direction: column;
     justify-content:space-evenly
 }
-.inputs-reg{
+.container-form-reg .inputs-reg{
     margin: auto;
     width:90%;
     display: flex;
     flex-direction:column;
     align-items:center;
 }
-input{
+.container-form-reg input{
     border: none;
     outline: none;
     width:80%;
     height:35px;
-    border-bottom: 2px solid gray;
+    color: #71f6ff;
+    border-bottom: 2px solid #71f6ff;
     padding-left: 20px;
+    background-color:#1a1e4d;;
     
 }
-.butReg{
+.container-form-reg .butReg{
     margin: auto;
+    height: 25px;
+    border-radius: 5px;
     width:80%;
     margin-top: 20px;
     margin-bottom: 20px;
     background: rgb(33,210,254);
+    outline: none;
+    border: none;
     background: linear-gradient(150deg, rgba(33,210,254,1) 0%, rgba(160,53,253,1) 100%);
 }
-p{
+.container-form-reg p{
     cursor: pointer;
     margin-bottom: 5px;
 }
@@ -74,6 +84,16 @@ p{
 }
 .container-form-reg p{
     padding-bottom: 25px;
+}
+
+.container-form-reg input::placeholder{
+    color: #71f6ff;
+}
+
+.container-form-reg p{
+    cursor: pointer;
+    margin-bottom: 5px;
+    color:#71f6ff
 }
 
 @media screen and (max-width:500px){

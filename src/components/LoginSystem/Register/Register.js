@@ -5,6 +5,7 @@ import './register.css'
 
 const Register = () => {
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const inputs = useRef([]);
 
     const addInput = (elements) => {
@@ -80,7 +81,8 @@ const Register = () => {
         if (!create.data.response) {
             return setError("An error as occured, please try later");
         }
-        setError("Bien ajoute");
+        setError('')
+        setSuccess("Registration taken into account, please check your mailbox to confirm your registration");
     }
 
     return (
@@ -88,7 +90,8 @@ const Register = () => {
             <div className="overlay-reg" onClick={close}></div>
             <div className="container-form-reg">
                 <h2>Registration</h2>
-                <p style={{ color: 'red' }}>{error}</p>
+                <p style={{ color: '#a035fd' }}>{error}</p>
+                <p style={{ color: '#f3ef83' }}>{success}</p>
                 <form className="form-reg"
                     onSubmit={handleSubmit}
                     action="" method="post">

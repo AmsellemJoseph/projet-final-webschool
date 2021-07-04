@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import {useSelector} from 'react-redux';
 import Register from '../Register/Register'
 import Login from '../Login/Login'
 import Nav from '../Nav/Nav'
 import './style.css';
 
 const LoginSystem = () => {
+
+    const {showLogin, showRegister} = useSelector(state => ({
+        ...state.loginReducer
+    }))
 
     const [localLog, setLocalLog] = useState({ logged: false })
     useState(() => {
@@ -20,10 +25,15 @@ const LoginSystem = () => {
     }, [])
 
     return (
-        <div className="container">
+        <div className="container-main-logPage">
+        <div className="container-navLog">
             <Nav />
             <Register />
             <Login />
+        </div>
+        {!showLogin&&!showRegister?<div className="title-log">
+            <h1>WELCOME TO KING OF GAMES!!!</h1>
+            </div>:null}
         </div>
     )
 }

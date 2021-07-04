@@ -101,7 +101,7 @@ const Login = () => {
                 <div onClick={close} className="overlay-log"></div>
                 <div className="container-form-log">
                     <h2>Login</h2>
-                    <p style={{ color: 'red' }}>{error}</p>
+                    <p style={{ color: '#a035fd' }}>{error}</p>
                     <form className="form-log"
                         onSubmit={handleSubmit}
                         method="post">
@@ -119,7 +119,7 @@ const Login = () => {
                         <div>
                             <button className="butlog" type="submit">Login</button>
                         </div>
-                        <p onClick={toggleReg}>Not registered? Click here</p>
+                        <p onClick={toggleReg}>Not registered yet? Click here</p>
 
                     </form>
                 </div>
