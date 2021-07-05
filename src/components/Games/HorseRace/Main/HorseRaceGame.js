@@ -1,0 +1,86 @@
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import HorseLine from './HorseLine'
+import './style.css'
+import HorceRaceResult from './HorceRaceResult'
+
+const HorseRaceGame = () => {
+
+    const { nbrHorse } = useSelector(state => ({
+        ...state.horseReducer
+    }))
+    const [temps, setTemp] = useState([]);
+    const [tempsTotal, setTempTotal] = useState([]);
+    const [flag,setFlag]=useState(false)
+    const lignes = nbrHorse.nbrHorse;
+
+
+    useEffect(() => {
+        const tempA = () => {
+
+            let tempsTempArr = []
+            let tempLignArr = []
+            for (let i = 0; i < lignes; i++) {
+                for (let j = 0; j < 5; j++) {
+                    let tempsTemp = (Math.random() * 3 + 2);
+                    tempsTemp = Math.floor(tempsTemp*100)/100
+                    tempLignArr.push(tempsTemp);
+                    tempsTemp = 0;
+                }
+                tempsTempArr.push(tempLignArr);
+                tempLignArr = [];
+            }
+            setTemp(tempsTempArr)
+        }
+        
+        tempA();
+
+    }, [])
+
+    useEffect(() => {
+        const tempT = () => {
+
+            let total = 0
+            let totalArr = []
+            for (let i = 0; i < temps.length; i++) {
+                for (let j = 0; j < 5; j++) {
+                    console.log(temps[i][j]);
+                    total += temps[i][j];
+                }
+                totalArr.push(total);
+                total = 0;
+            }
+            setTempTotal(totalArr);
+        }
+        tempT();
+    },[temps])
+
+
+
+    const tempsFinal = tempsTotal.sort((a,b)=>a-b)[tempsTotal.length-1]+2;
+    console.log("TEMPS FINAL "+tempsFinal)
+
+    // useEffect(()=>{
+        setTimeout(() => {
+            setFlag(true);
+        }, 22000);
+
+    // },[])
+
+
+
+    console.log(temps)
+    console.log(tempsTotal)
+    console.log(flag);
+    return (<>
+        {flag?<HorceRaceResult tempsTotal={tempsTotal}/>:
+        <div className="horseracegame-main-container">
+            {temps.map((temp, i) => {
+                return <HorseLine temps={temp} key={i} />
+            })}
+        </div>}
+        </>
+    )
+}
+
+export default HorseRaceGame

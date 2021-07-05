@@ -1,0 +1,80 @@
+.horseracegame-main-container{
+    width:100%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.main-container-horse-line{
+    margin:auto;
+    width:80%;
+    display: flex;
+}
+
+.line{
+    position: relative;
+    width:20%;
+    height:20px;
+    background: #000;
+    margin: 20px 0px;
+}
+
+.horse{
+    opacity: 0;
+    position:absolute;
+    top: -5px;
+    width: 30px;
+    height:30px;
+    background-color: blue;
+    z-index: 10;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+@keyframes cheval {
+    0%{
+        opacity: 0;
+    }
+    0.1%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 1;
+        left:0px;
+    }
+    99.9%{
+        opacity: 1;
+        left:100%;
+    }
+    /* 99%{
+        opacity: 0;
+    } */
+    100%{
+        left:100%;
+        opacity: 0;
+    }
+}
+@keyframes cheval2 {
+    0%{
+        opacity: 0;
+    }
+    0.1%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 1;
+        left:0px;
+    }
+    99.9%{
+        opacity: 1;
+        left:100%;
+    }
+    /* 99%{
+        opacity: 0;
+    } */
+    100%{
+        opacity: 1;
+        left:100%;
+    }
+}
+

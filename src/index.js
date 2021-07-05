@@ -8,11 +8,13 @@ import { Provider } from 'react-redux'
 import loginReducer from './Redux/loginReducer'
 import userLoggedReducer from './Redux/userLoggedReducer'
 import userInfoReducer from './Redux/userInfoReducer'
+import horseReducer from './Redux/horseReducer'
 
 const rootReducer = combineReducers({
   loginReducer,
   userLoggedReducer,
-  userInfoReducer
+  userInfoReducer,
+  horseReducer
 })
 
 const store = createStore(rootReducer)

@@ -31,7 +31,7 @@ const Deconnection = () => {
     return (
         <Router>
             <div className="button-deconnection" >
-                <button onClick={handleDeconnection}>Deconnection</button>
+                <button onClick={handleDeconnection}>Disconnect</button>
             </div>
         </Router>
 

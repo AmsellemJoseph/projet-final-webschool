@@ -5,6 +5,7 @@ import LoginSystem from './components/LoginSystem/Home/LoginSystem'
 import Admin from './components/Admin/Home/Admin'
 import Accueil from './components/Mainsite/Acceuil/Accueil'
 import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
+import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/accueil' component={Accueil}/>
           <Route path="/admin" component={Admin}/>
           <Route path='/horserace' component={HorceRaceMain}/>
+          <Route path='/horseracegame' component={HorseRaceGame}/>
 
         </Switch>
       </div>

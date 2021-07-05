@@ -23,8 +23,7 @@ const NavBarUser = () => {
 
     return (
         <div className="container-navbar-user">
-            <p>Hi {getUser.username}</p>
-            <p>You have {getUser.credit} credit(s)</p>
+            <p>Hi {getUser.username}!<br/> You have {getUser.credit} credit(s)</p>
             <p>Buy more credits</p>
             <Deconnection />
         </div>

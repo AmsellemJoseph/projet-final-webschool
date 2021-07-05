@@ -34,13 +34,13 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
-        route.post("/getuser",(req,res)=>{
+        route.post("/getuser", (req, res) => {
             const mail = req.body.params.mail;
-            db.collection("users").find({mail:mail}).toArray()
-            .then((result)=>{
-                res.send(result)
-            })
-            .catch((err) => { console.log(err) })
+            db.collection("users").find({ mail: mail }).toArray()
+                .then((result) => {
+                    res.send(result)
+                })
+                .catch((err) => { console.log(err) })
         })
         route.post("/verifMail", (req, res) => {
             const mail = req.body.params.mailLower;
@@ -97,13 +97,13 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 .catch((err) => { console.log(err) })
         })
 
-        route.post('/verifpending',(req,res)=>{
+        route.post('/verifpending', (req, res) => {
             const mail = req.body.params.mail;
-            db.collection("users").find({mail:mail}).toArray()
-            .then((result)=>{
-                res.send({confirmed:result[0].confirmed})
-            })
-            .catch((err)=>{console.log(err)})
+            db.collection("users").find({ mail: mail }).toArray()
+                .then((result) => {
+                    res.send({ confirmed: result[0].confirmed })
+                })
+                .catch((err) => { console.log(err) })
         })
     })
 
@@ -133,12 +133,13 @@ route.post("/mailing", (req, res) => {
         from: 'no-reply@Youhouhou.com',
         to: mail,
         subject: 'completing your registration',
-        html: `<h1>CONGRATULATION!!</h1>
-            <h3>Welcome to our amazing website!</h3>
-            <p>Your almost there.</p>
-            <p>To complete your registration</p> 
-            <a href="http://localhost:2108/registration/confirmregistration?mail=${mail}">Click here!</a>
-`,
+        html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;">
+                <h1 style="color:#71f6ff;">CONGRATULATION!!</h1>
+                <h3 style="color:#71f6ff;">Welcome to our amazing website!</h3>
+                <p style="color:#71f6ff;">Your almost there.</p>
+                 <p style="color:#71f6ff;">To complete your registration</p> 
+                 <a style="color:#a035fd;" href="http://localhost:2108/registration/confirmregistration?mail=${mail}">Click here!</a>
+             </div>`,
     };
 
     transporter.sendMail(mailOptions, (err, data) => {
