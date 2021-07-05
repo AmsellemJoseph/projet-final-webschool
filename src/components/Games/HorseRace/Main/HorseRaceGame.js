@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import HorseLine from './HorseLine'
+
 import './style.css'
 import HorceRaceResult from './HorceRaceResult'
 
@@ -22,7 +23,7 @@ const HorseRaceGame = () => {
             let tempLignArr = []
             for (let i = 0; i < lignes; i++) {
                 for (let j = 0; j < 5; j++) {
-                    let tempsTemp = (Math.random() * 3 + 2);
+                    let tempsTemp = (Math.random() * 2.5)+(Math.random() * 2.5);
                     tempsTemp = Math.floor(tempsTemp*100)/100
                     tempLignArr.push(tempsTemp);
                     tempsTemp = 0;
@@ -44,7 +45,6 @@ const HorseRaceGame = () => {
             let totalArr = []
             for (let i = 0; i < temps.length; i++) {
                 for (let j = 0; j < 5; j++) {
-                    console.log(temps[i][j]);
                     total += temps[i][j];
                 }
                 totalArr.push(total);
@@ -56,27 +56,18 @@ const HorseRaceGame = () => {
     },[temps])
 
 
+    console.log(nbrHorse);
+    const petitTemps = tempsTotal.sort((a,b)=>b-a)[tempsTotal.length-1];
 
-    const tempsFinal = tempsTotal.sort((a,b)=>a-b)[tempsTotal.length-1]+2;
-    console.log("TEMPS FINAL "+tempsFinal)
-
-    // useEffect(()=>{
         setTimeout(() => {
             setFlag(true);
         }, 22000);
 
-    // },[])
-
-
-
-    console.log(temps)
-    console.log(tempsTotal)
-    console.log(flag);
     return (<>
-        {flag?<HorceRaceResult tempsTotal={tempsTotal}/>:
+        {flag?<HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal}/>:
         <div className="horseracegame-main-container">
             {temps.map((temp, i) => {
-                return <HorseLine temps={temp} key={i} />
+                return <HorseLine temps={temp} key={i} routecourse={i}/>
             })}
         </div>}
         </>

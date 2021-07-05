@@ -105,6 +105,24 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
+        route.put("/credits",(req,res)=>{
+            const mail = req.body.params.mail;
+            const credit = req.body.params.mise;
+            const query = {mail:mail}
+            const replacement = { $inc: { "credit": -credit } }
+            const options = { "returnNewDocument": false };
+            console.log(credit)
+            db.collection("users").findOneAndUpdate(query, replacement, options)
+        })
+        route.put("/creditsplus",(req,res)=>{
+            const mail = req.body.params.mail;
+            const gain = req.body.params.gain;
+            const query = {mail:mail}
+            console.log(gain)
+            const replacement = { $inc: { "credit": gain } }
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query, replacement, options)
+        })
     })
 
 
@@ -133,7 +151,7 @@ route.post("/mailing", (req, res) => {
         from: 'no-reply@Youhouhou.com',
         to: mail,
         subject: 'completing your registration',
-        html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;">
+        html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;font-family:sans-serif;">
                 <h1 style="color:#71f6ff;">CONGRATULATION!!</h1>
                 <h3 style="color:#71f6ff;">Welcome to our amazing website!</h3>
                 <p style="color:#71f6ff;">Your almost there.</p>

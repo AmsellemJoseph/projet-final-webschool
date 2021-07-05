@@ -6,7 +6,7 @@ const Font = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Press Start 2P']
+        families: ['Press Start 2P','Audiowide']
       }
     });
   }, []);
