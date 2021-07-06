@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Token from '../../../../utils/Token'
+import './style.css'
 const axios = require('axios');
 
 
 const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
+    const [gainCredit,setGainCredit]= useState(0)
     const history = useHistory();
-    const { nbrHorse } = useSelector(state => ({
-        ...state.horseReducer
+    const { nbrHorse,race } = useSelector(state => ({
+        ...state.horseReducer,
+        ...state.gameLauncherReducer
     }))
 
     const [flag, setFlag] = useState(false)
@@ -40,12 +43,16 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
                 let gain = 0
                 if (nbrHorses == 2) {
                     gain = mise;
+                    setGainCredit(gain)
                 } else if (nbrHorses == 3) {
                     gain = 2 * mise
+                    setGainCredit(gain)
                 } else if (nbrHorses == 4) {
                     gain = 3 * mise
+                    setGainCredit(gain)
                 } else if (nbrHorses == 5) {
                     gain = 4 * mise
+                    setGainCredit(gain)
                 }
                 winCredits(mail, gain)
                 setWin("YOU WON!!")
@@ -55,18 +62,21 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
         credits()
     }, [])
     setTimeout(() => {
+        dispatch({
+            type:"RESETGAME"
+        })
         history.push('/')
     }, 5000);
 
     console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 
     return (
-        <div>
-            <Token/>
-            {tempsTotal.map((temp, i) => {
-                return <p key={i}>Le coureur {i + 1} a termine la course en {temp}s!</p>
-            })}
-            {flag ? win : loose}
+        <div className="container-result">
+            {race?null:<Token/>}
+            {flag ? <div className="container-result-win">
+                <h2>CONGRATULATION</h2>
+                <p>You won {gainCredit} tokens</p>
+            </div> : <div className="container-result-loose"></div>}
         </div>
     )
 }

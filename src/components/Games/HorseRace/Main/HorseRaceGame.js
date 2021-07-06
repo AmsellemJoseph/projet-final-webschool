@@ -8,8 +8,9 @@ import HorceRaceResult from './HorceRaceResult'
 
 const HorseRaceGame = () => {
 
-    const { nbrHorse } = useSelector(state => ({
-        ...state.horseReducer
+    const { nbrHorse, race } = useSelector(state => ({
+        ...state.horseReducer,
+        ...state.gameLauncherReducer,
     }))
     const [temps, setTemp] = useState([]);
     const [tempsTotal, setTempTotal] = useState([]);
@@ -69,9 +70,8 @@ const HorseRaceGame = () => {
     setTimeout(() => {
         setFlag(true);
     }, 22000);
-
     return (<>
-        <Token/>
+        {race ? null : <Token />}
         {flag ? <HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal} ind={ind} /> :
             <div className="horseracegame-main-container">
                 {temps.map((temp, i) => {

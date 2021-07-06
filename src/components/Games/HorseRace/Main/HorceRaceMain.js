@@ -24,34 +24,10 @@ const HorceRaceMain = () => {
 
     }, [])
 
-    // useEffect(() => {
-        // const tok = async () => {
-        //     const mail = JSON.parse(localStorage.getItem('user'))
-        //     const tokenLocal = JSON.parse(localStorage.getItem('token'))
-        //     if (!mail || !tokenLocal) {
-        //         history.push('/login')
-        //     }
-        //     console.log(tokenLocal);
-        //     const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-        //     console.log(tokTemp.data);
-        //     if (tokTemp.data == 1) {
-        //         history.push('/accueil')
-        //     } else {
-        //         localStorage.setItem("token", JSON.stringify(""))
-        //         localStorage.setItem("user", JSON.stringify(""))
-        //         history.push('/login')
-        //     }
-        // }
-
-    //     Tok()
-    // }, [])
-
-    console.log(getUser);
-
     const history = useHistory();
     const dispatch = useDispatch();
-    const { nbrHorse } = useSelector(state => ({
-        ...state.horseReducer,
+    const { race } = useSelector(state => ({
+        ...state.gameLauncherReducer,
     }))
     const [part, setPart] = useState(2);
     const [mise, setMise] = useState(10);
@@ -80,23 +56,23 @@ const HorceRaceMain = () => {
             choix: choix
         }
         handleHorses(game)
+        dispatch({
+            type:"SETRACE"
+        })
         history.push('/horseracegame')
 
     }
     useEffect(() => {
         const opt = []
-        console.log(choix);
         for (let i = 1; i <= part; i++) {
-            console.log(i);
             opt.push(<option key={i} value={i}>Starship number {i}</option>)
         }
         setOption(opt)
     }, [part])
 
-    console.log(choix);
     return (
         <div className="container-main-Race">
-            <Token/>
+            {race?null:<Token/>}
             {/* <NavBar/> */}
             <h2>STAR RACE GAME</h2>
 

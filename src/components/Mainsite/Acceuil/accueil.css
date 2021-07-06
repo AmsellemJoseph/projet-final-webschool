@@ -1,6 +1,20 @@
 .containerGames button{
+    cursor: pointer;
+    border:none;
+    outline: none;
     width:200px;
     height:200px;
+    font-family: 'Audiowide';
+    color: #9c3cff;
+    font-size: 20px;
+    border:2px solid #21d2fe;
+    transition: all 0.3s ease-in-out;
+    background-color: #1a1e4d;
+
+}
+.containerGames button:hover{
+    color:#21d2fe;
+    background: #9c3cff;
 }
 
 .container-accueil{

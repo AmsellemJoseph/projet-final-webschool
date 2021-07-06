@@ -6,9 +6,11 @@ import Admin from './components/Admin/Home/Admin'
 import Accueil from './components/Mainsite/Acceuil/Accueil'
 import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
 import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
+import Test from './utils/Test'
 
 function App() {
   return (
+    // <Test/>
     <Router>
       <div className="App">
         <Switch>
