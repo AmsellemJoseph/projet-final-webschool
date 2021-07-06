@@ -11,18 +11,18 @@ const LoginSystem = () => {
         ...state.loginReducer
     }))
 
-    const [localLog, setLocalLog] = useState({ logged: false })
-    useState(() => {
-        const verifLog = () => {
-            var ver = JSON.parse(localStorage.getItem('logged'));
-            if (ver) {
-                if (ver.logged == true || ver.logged == false) {
-                    setLocalLog({ logged: ver.logged })
-                }
-            }
-        }
-        verifLog()
-    }, [])
+    // const [localLog, setLocalLog] = useState({ logged: false })
+    // useState(() => {
+    //     const verifLog = () => {
+    //         var ver = JSON.parse(localStorage.getItem('logged'));
+    //         if (ver) {
+    //             if (ver.logged == true || ver.logged == false) {
+    //                 setLocalLog({ logged: ver.logged })
+    //             }
+    //         }
+    //     }
+    //     verifLog()
+    // }, [])
 
     return (
         <div className="container-main-logPage">

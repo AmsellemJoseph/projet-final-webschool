@@ -86,15 +86,15 @@ class Registering {
         return true
     }
     verifRegexMail = () => {
-        const regex = /[a-z0-9]/;
-        const mailLower = this.mail.toLowerCase().replace("@", "").replaceAll(".", "").replaceAll("-", "").replaceAll("_", "");
+        const regex = new RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
+        const mailLower = this.mail.toLowerCase();
 
-        for (let i = 0; i < mailLower.length; i++) {
-            if (regex.exec(mailLower[i]) == null) {
-                return false;
-            }
+        var valid = regex.test(mailLower)
+        if(!valid){
+            return false;
         }
         return true;
+
     }
     createUser = async () => {
         const newUser = {
@@ -107,6 +107,7 @@ class Registering {
             confirmed: false,
             credit: 100,
             admin: false,
+            token:md5(Date.now())
         }
         const create = await axios.post(`${this.server}/createuser`, { params: { newUser } })
         return create;

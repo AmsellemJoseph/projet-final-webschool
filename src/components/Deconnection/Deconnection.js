@@ -25,6 +25,7 @@ const Deconnection = () => {
         })
         localStorage.setItem("logged", JSON.stringify(false))
         localStorage.setItem("user", JSON.stringify(""))
+        localStorage.setItem("token", JSON.stringify(""))
         history.push('/');
     }
 

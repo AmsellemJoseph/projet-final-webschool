@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import Token from '../../../../utils/Token'
 const axios = require('axios');
 
-const HorceRaceResult = ({ tempsTotal, petitTemps }) => {
+
+const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
     const history = useHistory();
     const { nbrHorse } = useSelector(state => ({
         ...state.horseReducer
     }))
 
+    const [flag, setFlag] = useState(false)
+
     const [win, setWin] = useState('');
     const [loose, setLoose] = useState('');
-
-    const ind = tempsTotal.indexOf(petitTemps)
 
     const dispatch = useDispatch();
 
@@ -29,7 +31,7 @@ const HorceRaceResult = ({ tempsTotal, petitTemps }) => {
             const mail = userTemp.mail
             const mise = nbrHorse.mise
             const nbrHorses = nbrHorse.nbrHorse;
-            if (nbrHorse.choix != ind) {
+            if (nbrHorse.choix != (ind + 1)) {
                 looseCredit(mail, mise)
                 setLoose("YOU LOOSE!!")
             }
@@ -47,6 +49,7 @@ const HorceRaceResult = ({ tempsTotal, petitTemps }) => {
                 }
                 winCredits(mail, gain)
                 setWin("YOU WON!!")
+                setFlag(true)
             }
         }
         credits()
@@ -55,14 +58,15 @@ const HorceRaceResult = ({ tempsTotal, petitTemps }) => {
         history.push('/')
     }, 5000);
 
+    console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 
     return (
         <div>
+            <Token/>
             {tempsTotal.map((temp, i) => {
                 return <p key={i}>Le coureur {i + 1} a termine la course en {temp}s!</p>
             })}
-            {loose}
-            {win}
+            {flag ? win : loose}
         </div>
     )
 }

@@ -111,17 +111,38 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             const query = {mail:mail}
             const replacement = { $inc: { "credit": -credit } }
             const options = { "returnNewDocument": false };
-            console.log(credit)
             db.collection("users").findOneAndUpdate(query, replacement, options)
         })
         route.put("/creditsplus",(req,res)=>{
             const mail = req.body.params.mail;
             const gain = req.body.params.gain;
             const query = {mail:mail}
-            console.log(gain)
             const replacement = { $inc: { "credit": gain } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options)
+        })
+
+        route.post('/gettoken',(req,res)=>{
+            const mail = req.body.params.mail.mail;
+            const token = req.body.params.tokenLocal;
+            db.collection('users').find({mail:mail}).toArray()
+            .then((result)=>{
+                if(result[0].token===token){
+                    res.send(true)
+                }else{
+                    res.send(false)
+                }
+            })
+            .catch((err)=>{console.log(err)})
+        })
+        route.put('/settoken',(req,res)=>{
+            const token = req.body.params.token
+            const mail = req.body.params.user.mail
+            const query = {mail:mail}
+            const replacement = { $set: { "token": token } }
+            const options = { "returnNewDocument": false };
+            db.collection('users').findOneAndUpdate(query,replacement,options);
+            res.send(true)
         })
     })
 

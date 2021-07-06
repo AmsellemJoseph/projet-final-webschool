@@ -3,23 +3,39 @@ import LoginLogic from './logic'
 import { useSelector, useDispatch } from 'react-redux';
 import "./login.css"
 import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+var md5 = require('md5');
+const axios = require('axios')
+
 
 const Login = () => {
     const history = useHistory()
     const dispatch = useDispatch();
 
-    
+    useEffect(() => {
+        const tok = async () => {
+        const tokenLocal = JSON.parse(localStorage.getItem('token'))
+        const mail = JSON.parse(localStorage.getItem('user'))
+        console.log(tokenLocal);
+        const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
+        console.log(tokTemp.data);
+        if(tokTemp.data==1){
+            console.log("oui")
+            history.push('/accueil')
+        }else{
+            localStorage.setItem("token", JSON.stringify(""))
+            localStorage.setItem("user", JSON.stringify(""))
+            console.log('non')
+        }
+    }
+
+    tok()
+}, [])
+
 
     useEffect(() => {
         dispatch({
             type: "DESTROY",
         })
-        const verifLog = JSON.parse(localStorage.getItem('logged'));
-    if (verifLog) {
-        if (verifLog.logged == true) {
-           return history.push('/accueil');
-        }
-    }
 
     }, [])
 
@@ -49,13 +65,19 @@ const Login = () => {
         })
     }
 
-    const userCookie = (user) => {
+    const userCookie = async (user, token) => {
         dispatch({
             type: "CREATE",
             payload: user
         })
+        var token = md5(Date.now())
         localStorage.setItem("user", JSON.stringify(user))
-        localStorage.setItem("logged", JSON.stringify({ logged: true }));
+        const flagToken = await axios.put('http://localhost:2108/registration/settoken', { params: { token,user } })
+        if(flagToken){
+            localStorage.setItem("token", JSON.stringify(token))
+            localStorage.setItem("logged", JSON.stringify({ logged: true }));
+            return true
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -79,20 +101,24 @@ const Login = () => {
         if (info.data[0].confirmed) {
         }
         const user = {
-            username: info.data[0].username,
             mail: info.data[0].mail,
-            credit: info.data[0].credit,
-            firstname: info.data[0].firstname,
-            lastname: info.data[0].lastname,
         }
         if (info.data[0].admin == true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));
             return history.push('/admin')
         }
 
-        userCookie(user);
         setError("");
-        return history.push('/accueil')
+        // var token = md5(Date.now())
+        const flag = await userCookie(user);
+
+        console.log(flag)
+
+        if(flag){
+            console.log("Coucou");
+             history.push('/accueil')
+        }
+
     }
 
     return (

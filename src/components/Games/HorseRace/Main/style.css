@@ -6,6 +6,10 @@
     width:100%;
     height:100vh;
     background: url('../../../../assets/img/starrace2.jpg') no-repeat center/cover;
+    margin:auto;
+}
+.container-main-Race form{
+    margin:auto
 }
 
 .container-main-Race h2{
@@ -124,3 +128,66 @@
     }
 }
 
+.container-form-race{
+    background: #1a1e4d;
+    width:300px;
+    height:auto;
+    margin:auto;
+
+}
+
+.container-form-race form{
+    width:300px;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.form-par{
+    margin: 10px 0;
+    display:flex;
+    flex-direction: column;
+}
+.form-par label{
+    margin-bottom: 10px;
+    color: #71f6ff;
+}
+
+.form-par input, .form-par select{
+    color: #71f6ff;
+    background: #1a1e4d;
+    outline: none;
+    border: none;
+    border: 1px solid #891199;
+}
+
+.container-form-race button{
+    width:100%;
+    height:25px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: #1a1e4d;
+    border: 1px solid #891199;
+    color:#71f6ff;
+    transition: all 0.5s ease-in-out;
+    font-family: 'Audiowide';
+    font-size:20px;
+    line-height: 25px;
+}
+
+.container-form-race button:hover{
+    background:#891199;
+    border: 1px solid #71f6ff;
+    /* color:#1a1e4d; */
+}
+
+.line3 p{
+    font-family: 'Press Start 2P';
+    font-size: 12px;
+}
+
+@media screen and (max-width:570px){
+    .container-main-Race h2{
+        font-size:22px;
+    }
+}

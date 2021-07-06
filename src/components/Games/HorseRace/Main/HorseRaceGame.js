@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import Token from '../../../../utils/Token'
 import HorseLine from './HorseLine'
 
 import './style.css'
@@ -12,9 +13,10 @@ const HorseRaceGame = () => {
     }))
     const [temps, setTemp] = useState([]);
     const [tempsTotal, setTempTotal] = useState([]);
-    const [flag,setFlag]=useState(false)
+    const [flag, setFlag] = useState(false)
     const lignes = nbrHorse.nbrHorse;
 
+    const color = ['blue', 'red', 'yellow', 'green', 'purple']
 
     useEffect(() => {
         const tempA = () => {
@@ -23,8 +25,8 @@ const HorseRaceGame = () => {
             let tempLignArr = []
             for (let i = 0; i < lignes; i++) {
                 for (let j = 0; j < 5; j++) {
-                    let tempsTemp = (Math.random() * 2.5)+(Math.random() * 2.5);
-                    tempsTemp = Math.floor(tempsTemp*100)/100
+                    let tempsTemp = (Math.random() * 2.5) + (Math.random() * 2.5);
+                    tempsTemp = Math.floor(tempsTemp * 100) / 100
                     tempLignArr.push(tempsTemp);
                     tempsTemp = 0;
                 }
@@ -33,7 +35,7 @@ const HorseRaceGame = () => {
             }
             setTemp(tempsTempArr)
         }
-        
+
         tempA();
 
     }, [])
@@ -45,7 +47,7 @@ const HorseRaceGame = () => {
             let totalArr = []
             for (let i = 0; i < temps.length; i++) {
                 for (let j = 0; j < 5; j++) {
-                    total += temps[i][j];
+                    total = total + temps[i][j];
                 }
                 totalArr.push(total);
                 total = 0;
@@ -53,24 +55,30 @@ const HorseRaceGame = () => {
             setTempTotal(totalArr);
         }
         tempT();
-    },[temps])
+    }, [temps])
 
+    var petitTemps = 30;
+    for (let i = 0; i < tempsTotal.length; i++) {
+        if (tempsTotal[i] < petitTemps) {
+            petitTemps = tempsTotal[i];
+        }
+    }
 
-    console.log(nbrHorse);
-    const petitTemps = tempsTotal.sort((a,b)=>b-a)[tempsTotal.length-1];
+    const ind = tempsTotal.indexOf(petitTemps)
 
-        setTimeout(() => {
-            setFlag(true);
-        }, 22000);
+    setTimeout(() => {
+        setFlag(true);
+    }, 22000);
 
     return (<>
-        {flag?<HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal}/>:
-        <div className="horseracegame-main-container">
-            {temps.map((temp, i) => {
-                return <HorseLine temps={temp} key={i} routecourse={i}/>
-            })}
-        </div>}
-        </>
+        <Token/>
+        {flag ? <HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal} ind={ind} /> :
+            <div className="horseracegame-main-container">
+                {temps.map((temp, i) => {
+                    return <HorseLine temps={temp} key={i} number={i} color={color[i]} />
+                })}
+            </div>}
+    </>
     )
 }
 
