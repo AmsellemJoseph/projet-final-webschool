@@ -1,6 +1,7 @@
 const initialState = {
     showLogin: false,
     showRegister: false,
+    showForgot:false
 }
 
 export default function loginReducer(state = initialState, action) {
@@ -10,13 +11,15 @@ export default function loginReducer(state = initialState, action) {
                 return {
                     ...state,
                     showLogin: false,
-                    showRegister: false
+                    showRegister: false,
+                    showForgot:false
                 }
             } else {
                 return {
                     ...state,
                     showLogin: true,
-                    showRegister: false
+                    showRegister: false,
+                    showForgot:false
                 }
             }
         }
@@ -26,12 +29,31 @@ export default function loginReducer(state = initialState, action) {
                     ...state,
                     showLogin: false,
                     showRegister: false,
+                    showForgot:false
                 }
             } else {
                 return {
                     ...state,
                     showLogin: false,
-                    showRegister: true
+                    showRegister: true,
+                    showForgot:false
+                }
+            }
+        }
+        case 'TOGGLEFORGOT':{
+            if(state.showForgot){
+                return{
+                    ...state,
+                    showLogin: false,
+                    showRegister: false,
+                    showForgot:false
+                }
+            }else{
+                return{
+                    ...state,
+                    showLogin: false,
+                    showRegister: false,
+                    showForgot:true
                 }
             }
         }
@@ -40,6 +62,7 @@ export default function loginReducer(state = initialState, action) {
                 ...state,
                 showLogin: false,
                 showRegister: false,
+                showForgot:false
             }
         }
         default:{

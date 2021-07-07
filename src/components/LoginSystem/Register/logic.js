@@ -19,7 +19,13 @@ class Registering {
         this.pass2 = pass2;
         this.first = first;
         this.last = last;
-        this.mail = mail;
+        let mailG=""
+        if (mail.includes("gmail")) {
+            mailG = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+        } else {
+            mailG = mail
+        }
+        this.mail = mailG;
     }
 
     empty = () => {
@@ -35,8 +41,8 @@ class Registering {
         return true
     }
     verifPass = () => {
-        const pass = this.pass1.toString()
-        if (pass.length < 6) {
+        let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})')
+        if (!strongPassword.test(this.pass1)) {
             return false
         }
         return true;
@@ -86,34 +92,50 @@ class Registering {
         return true
     }
     verifRegexMail = () => {
+        let mailLower = this.mail
+        // if (this.mail.includes("gmail")) {
+        //     mailLower = this.mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+        // } else {
+        //     mailLower = this.mail
+        // }
         const regex = new RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
-        const mailLower = this.mail.toLowerCase();
 
         var valid = regex.test(mailLower)
-        if(!valid){
+        if (!valid) {
             return false;
         }
         return true;
 
     }
     createUser = async () => {
+        let mailLower=this.mail;
+        // if(this.mail.includes("gmail")){
+        //     mailLower = this.mail.replace(/['.']/g,"").replace('gmailcom',"gmail.com")
+        // }else{
+        //     mailLower = this.mail
+        // }
         const newUser = {
             username: this.username,
             password: md5(this.pass1),
             // password: this.pass1,
             firstname: this.first,
             lastname: this.last,
-            mail: this.mail,
+            mail: mailLower,
             confirmed: false,
             credit: 100,
             admin: false,
-            token:md5(Date.now())
+            token: md5(Date.now())
         }
         const create = await axios.post(`${this.server}/createuser`, { params: { newUser } })
         return create;
     }
     sendMail = async () => {
-        const mail = this.mail;
+        let mail=this.mail
+        // if (this.mail.includes("gmail")) {
+        //     mail = this.mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+        // } else {
+        //     mail = this.mail
+        // }
         const mailSending = await axios.post(`${this.server}/mailing`, { params: { mail } })
         return mailSending;
     }

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import Register from '../Register/Register'
 import Login from '../Login/Login'
+import Forgot from '../Forgot/Forgot'
 import Nav from '../Nav/Nav'
 import './style.css';
 
 const LoginSystem = () => {
 
-    const {showLogin, showRegister} = useSelector(state => ({
+    const {showLogin, showRegister,showForgot} = useSelector(state => ({
         ...state.loginReducer
     }))
 
@@ -30,8 +31,9 @@ const LoginSystem = () => {
             <Nav />
             <Register />
             <Login />
+            <Forgot />
         </div>
-        {!showLogin&&!showRegister?<div className="title-log">
+        {!showLogin&&!showRegister&&!showForgot?<div className="title-log">
             <h1>WELCOME TO KING OF GAMES!!!</h1>
             </div>:null}
         </div>

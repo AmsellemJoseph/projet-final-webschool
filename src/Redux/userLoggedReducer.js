@@ -1,6 +1,7 @@
 const initialState = {
     logged: false,
-    admin: false
+    admin: false,
+
 }
 
 export default function userLoggedReducer(state = initialState, action) {

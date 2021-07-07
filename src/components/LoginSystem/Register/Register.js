@@ -45,7 +45,7 @@ const Register = () => {
         if (!Regist.verifPass()) {
             inputs.current[1].value = "";
             inputs.current[2].value = "";
-            return setError('Password too small, please use at least 6 characters')
+            return setError('Please choose a password with a leat one lowercase character, one uppercase character, one digit and one special character and a least 8 characters long')
         }
         if (!Regist.verifRegexUsername()) {
             inputs.current[0].value = "";

@@ -6,20 +6,23 @@ import Admin from './components/Admin/Home/Admin'
 import Accueil from './components/Mainsite/Acceuil/Accueil'
 import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
 import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
+import Reset from './components/LoginSystem/Forgot/Reset'
 import Test from './utils/Test'
 
 function App() {
   return (
+    // <Reset/>
     // <Test/>
     <Router>
       <div className="App">
         <Switch>
           <Route exact path='/' component={LoginSystem} />
-          <Route path='/login' component={LoginSystem}/>
-          <Route path='/accueil' component={Accueil}/>
-          <Route path="/admin" component={Admin}/>
-          <Route path='/horserace' component={HorceRaceMain}/>
-          <Route path='/horseracegame' component={HorseRaceGame}/>
+          <Route path='/login' component={LoginSystem} />
+          <Route path='/accueil' component={Accueil} />
+          <Route path="/admin" component={Admin} />
+          <Route path='/horserace' component={HorceRaceMain} />
+          <Route path='/horseracegame' component={HorseRaceGame} />
+          <Route path='/resetpassword' component={Reset} />
 
         </Switch>
       </div>

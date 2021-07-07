@@ -42,6 +42,14 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
+        route.post("/getcredit", (req, res) => {
+            const mail = req.body.params.mailCredit
+            db.collection("users").find({ mail: mail }).toArray()
+                .then((result) => {
+                    res.send(result[0])
+                })
+                .catch((err) => { console.log(err) })
+        })
         route.post("/verifMail", (req, res) => {
             const mail = req.body.params.mailLower;
             db.collection("users").find({ mail: mail }).toArray()
@@ -105,43 +113,52 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
-        route.put("/credits",(req,res)=>{
+        route.put("/credits", (req, res) => {
             const mail = req.body.params.mail;
             const credit = req.body.params.mise;
-            const query = {mail:mail}
+            const query = { mail: mail }
             const replacement = { $inc: { "credit": -credit } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options)
         })
-        route.put("/creditsplus",(req,res)=>{
+        route.put("/creditsplus", (req, res) => {
             const mail = req.body.params.mail;
             const gain = req.body.params.gain;
-            const query = {mail:mail}
+            const query = { mail: mail }
             const replacement = { $inc: { "credit": gain } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options)
         })
 
-        route.post('/gettoken',(req,res)=>{
+        route.post('/gettoken', (req, res) => {
             const mail = req.body.params.mail.mail;
-            const token = req.body.params.tokenLocal;
-            db.collection('users').find({mail:mail}).toArray()
-            .then((result)=>{
-                if(result[0].token===token){
-                    res.send(true)
-                }else{
-                    res.send(false)
-                }
-            })
-            .catch((err)=>{console.log(err)})
+            const tokenLocal = req.body.params.tokenLocal;
+            db.collection('users').find({ mail: mail }).toArray()
+                .then((result) => {
+                    if (result[0].token == tokenLocal) {
+                        res.send(true)
+                    } else {
+                        res.send(false)
+                    }
+                })
+                .catch((err) => { console.log(err) })
         })
-        route.put('/settoken',(req,res)=>{
+        route.put('/settoken', (req, res) => {
             const token = req.body.params.token
             const mail = req.body.params.user.mail
-            const query = {mail:mail}
+            const query = { mail: mail }
             const replacement = { $set: { "token": token } }
             const options = { "returnNewDocument": false };
-            db.collection('users').findOneAndUpdate(query,replacement,options);
+            db.collection('users').findOneAndUpdate(query, replacement, options);
+            res.send(true)
+        })
+        route.put('/newpassword', (req, res) => {
+            const mail = req.body.params.mail.mail
+            const pass = req.body.params.pass
+            const query = { mail: mail }
+            const replacement = { $set: { "password": pass } }
+            const options = { "returnNewDocument": false};
+            db.collection('users').findOneAndUpdate(query, replacement, options);
             res.send(true)
         })
     })
@@ -171,13 +188,59 @@ route.post("/mailing", (req, res) => {
     let mailOptions = {
         from: 'no-reply@Youhouhou.com',
         to: mail,
-        subject: 'completing your registration',
+        subject: 'Completing your registration',
         html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;font-family:sans-serif;">
                 <h1 style="color:#71f6ff;">CONGRATULATION!!</h1>
                 <h3 style="color:#71f6ff;">Welcome to our amazing website!</h3>
                 <p style="color:#71f6ff;">Your almost there.</p>
                  <p style="color:#71f6ff;">To complete your registration</p> 
                  <a style="color:#a035fd;" href="http://localhost:2108/registration/confirmregistration?mail=${mail}">Click here!</a>
+             </div>`,
+    };
+
+    transporter.sendMail(mailOptions, (err, data) => {
+        if (err) {
+            console.error(err)
+            return res.send({ response: false });
+        } else {
+            return res.send({ response: true });
+        }
+    })
+})
+
+
+route.post("/sendmailreset", (req, res) => {
+    require('dotenv').config();
+    const nodemailer = require('nodemailer');
+    const hbs = require('nodemailer-express-handlebars')
+    const mail = req.body.params.mailLower;
+
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+    let transporter = nodemailer.createTransport({
+        secure: false,
+        port: 25,
+        service: 'gmail',
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS,
+        }
+    })
+    transporter.use("compile", hbs({
+        viewEngine: 'express-handlebars',
+        viewPath: './'
+    }))
+
+    let mailOptions = {
+        from: 'no-reply@Youhouhou.com',
+        to: mail,
+        subject: 'Resetting your password',
+        html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;font-family:sans-serif;">
+                <h1 style="color:#71f6ff;">Hi dear user!!</h1>
+                <h3 style="color:#71f6ff;">You forgot your password and want to reset it?</h3>
+                <p style="color:#71f6ff;">Alright.</p>
+                <a style="color:#a035fd;" href="http://localhost:3000/resetpassword">Click here!</a>
+                 <p style="color:red;">If you don't want to reset it or if you don't request it, dont mind of it.</p> 
              </div>`,
     };
 

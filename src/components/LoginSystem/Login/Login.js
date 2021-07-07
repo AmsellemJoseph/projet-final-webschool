@@ -65,6 +65,12 @@ const Login = () => {
         })
     }
 
+    const toggleForgot = ()=>{
+        dispatch({
+            type:"TOGGLEFORGOT"
+        })
+    }
+
     const userCookie = async (user, token) => {
         dispatch({
             type: "CREATE",
@@ -146,6 +152,7 @@ const Login = () => {
                             <button className="butlog" type="submit">Login</button>
                         </div>
                         <p onClick={toggleReg}>Not registered yet? Click here</p>
+                        <p onClick={toggleForgot}>Forgot your password? Click here</p>
 
                     </form>
                 </div>

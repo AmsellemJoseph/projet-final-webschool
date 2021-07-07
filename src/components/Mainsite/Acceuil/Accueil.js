@@ -9,7 +9,7 @@ const axios = require('axios')
 const Accueil = () => {
 
     const history = useHistory();
-
+    const [credit,setCredit]=useState('')
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,6 +19,7 @@ const Accueil = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
+            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -26,9 +27,13 @@ const Accueil = () => {
                 localStorage.setItem("user", JSON.stringify(""))
                 history.push('/login')
             }
+            const userCredit = await axios.post('http://localhost:2108/registration/getcredit', { params: { mailCredit} })
+            setCredit(userCredit.data.credit)
         }
         tok()
     }, [])
+
+    console.log(credit)
 
     const handleHorse = () => {
         dispatch({
@@ -43,7 +48,7 @@ const Accueil = () => {
             <div className='main-container-game'>
                 <h2>Choose which game you want to play.</h2>
                 <div className="containerGames">
-                    <button disabled onClick={handleHorse}>HorceRaceMain</button>
+                    {credit>=10?<button onClick={handleHorse}>HorceRaceMain</button>:<div><button style={{background:'black'}} disabled onClick={handleHorse}>HorceRaceMain <p style={{color:'red'}}>You don't have enough credit</p></button></div>}
                 </div>
             </div>
         </div>
