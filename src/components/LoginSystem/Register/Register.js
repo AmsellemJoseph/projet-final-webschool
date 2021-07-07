@@ -30,7 +30,7 @@ const Register = () => {
         })
     }
 
-    const { showRegister,loadRegister } = useSelector(state => ({
+    const { showRegister,loading } = useSelector(state => ({
         ...state.loginReducer,
         ...state.loadingReducer
     }))
@@ -123,7 +123,7 @@ const Register = () => {
                 <form className="form-reg"
                     onSubmit={handleSubmit}
                     action="" method="post">
-                        {loadRegister?<CircularIndeterminate/>:null}
+                        {loading?<CircularIndeterminate/>:null}
                     <div className="inputs-reg">
                         {/* <label htmlFor="username">Username</label> */}
                         <input ref={addInput} type="text" name="username" placeholder="Username" required />

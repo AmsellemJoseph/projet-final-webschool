@@ -3,6 +3,7 @@ import LoginLogic from './logic'
 import { useSelector, useDispatch } from 'react-redux';
 import "./login.css"
 import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+import CircularIndeterminate from '../../../utils/CircularIndeterminate'
 var md5 = require('md5');
 const axios = require('axios')
 
@@ -40,9 +41,10 @@ const Login = () => {
     }, [])
 
 
-    const { showLogin, logged, admin } = useSelector(state => ({
+    const { showLogin, logged, admin,loading } = useSelector(state => ({
         ...state.loginReducer,
-        ...state.userLoggedReducer
+        ...state.userLoggedReducer,
+        ...state.loadingReducer
     }))
 
     const [error, setError] = useState("");
@@ -71,6 +73,17 @@ const Login = () => {
         })
     }
 
+    const load = ()=>{
+        dispatch({
+            type:"LOADING"
+        })
+    }
+    const stopLoad = ()=>{
+        dispatch({
+            type:"LOADED"
+        })
+    }
+
     const userCookie = async (user, token) => {
         dispatch({
             type: "CREATE",
@@ -88,19 +101,23 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        load()
         const Logger = new LoginLogic("http://localhost:2108/registration", inputs.current[0].value, inputs.current[1].value);
         const verifMail = await Logger.mailExists();
         if (verifMail.data.response) {
             inputs.current[0].value = "";
+            stopLoad()
             return setError("This email address does not exist");
         }
         const connection = await Logger.connection();
         if (!connection.data.connection) {
             inputs.current[1].value = "";
+            stopLoad()
             return setError("Bad password!");
         }
         const pending = await Logger.verifPending();
         if (!pending.data.confirmed) {
+            stopLoad()
             return setError("Your account is not yet active, please click on the link you received in your mailbox.")
         }
         const info = await Logger.recupInfo();
@@ -111,17 +128,14 @@ const Login = () => {
         }
         if (info.data[0].admin == true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));
+            stopLoad()
             return history.push('/admin')
         }
-
+        stopLoad()
         setError("");
-        // var token = md5(Date.now())
         const flag = await userCookie(user);
 
-        console.log(flag)
-
         if(flag){
-            console.log("Coucou");
              history.push('/accueil')
         }
 
@@ -134,6 +148,7 @@ const Login = () => {
                 <div className="container-form-log">
                     <h2>Login</h2>
                     <p style={{ color: '#a035fd' }}>{error}</p>
+                    {loading?<CircularIndeterminate/>:null}
                     <form className="form-log"
                         onSubmit={handleSubmit}
                         method="post">

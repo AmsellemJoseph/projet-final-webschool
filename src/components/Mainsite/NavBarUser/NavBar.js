@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import Deconnection from '../../Deconnection/Deconnection'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './navbar.css';
 const axios = require('axios')
 
@@ -23,6 +24,7 @@ const NavBarUser = () => {
 
     return (
         <div className="container-navbar-user">
+            <p><FontAwesomeIcon icon={['fas','bars']}/></p>
             <p>Hi {getUser.username}!<br/> You have {getUser.credit} credit(s)</p>
             <p>Buy more credits</p>
             <Deconnection />

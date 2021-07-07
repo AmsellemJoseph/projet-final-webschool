@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 // import { Router } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import ForgotLogic from './logic'
+import CircularIndeterminate from '../../../utils/CircularIndeterminate'
 const md5 = require('md5')
 const axios = require('axios')
 
@@ -10,8 +11,9 @@ const Forgot = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-    const { showForgot } = useSelector(state => ({
-        ...state.loginReducer
+    const { showForgot,loading } = useSelector(state => ({
+        ...state.loginReducer,
+        ...state.loadingReducer
     }))
 
     const dispatch = useDispatch();
@@ -28,12 +30,25 @@ const Forgot = () => {
         })
     }
 
+    const load = ()=>{
+        dispatch({
+            type:"LOADING"
+        })
+    }
+    const stopLoad = ()=>{
+        dispatch({
+            type:"LOADED"
+        })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        load()
         const Forgot = new ForgotLogic('http://localhost:2108/registration', inputs.current[0].value)
         const verifMail = await Forgot.mailExists();
         if (verifMail.data.response) {
             inputs.current[0].value = "";
+            stopLoad();
             return setError("This email address does not exist");
         }
 
@@ -46,13 +61,16 @@ const Forgot = () => {
             localStorage.setItem("token", JSON.stringify(token))
             localStorage.setItem("logged", JSON.stringify({ logged: true }));
         } else {
+            stopLoad()
             return setError("An error as occured, please try again later")
         }
 
         const mailSendingReset = await Forgot.mailSendingReset();
         if (!mailSendingReset.data.response) {
+            stopLoad()
             return setError("An error has occurred, please try again later")
         }
+        stopLoad()
         setError("")
         return setSuccess("An email has been sent to you to reset your password")
     }
@@ -65,6 +83,7 @@ const Forgot = () => {
                 <h2>Forgot</h2>
                 <p style={{ color: '#a035fd' }}>{error}</p>
                 <p style={{ color: '#f3ef83' }}>{success}</p>
+                {loading?<CircularIndeterminate/>:null}
                 <form className="form-log"
                     onSubmit={handleSubmit}
                     method="post">

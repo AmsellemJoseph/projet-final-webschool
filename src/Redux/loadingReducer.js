@@ -1,5 +1,5 @@
 const initialState = {
-    loadRegister:false
+    loading:false
 }
 
 export default function loadingReducer(state=initialState, action){
@@ -8,13 +8,13 @@ export default function loadingReducer(state=initialState, action){
         case "LOADING":{
             return{
                 ...state,
-                loadRegister:true
+                loading:true
             }
         }
         case "LOADED":{
             return{
                 ...state,
-                loadRegister:false
+                loading:false
             }
         }
         default:

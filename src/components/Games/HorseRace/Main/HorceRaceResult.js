@@ -66,7 +66,7 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
             type:"RESETGAME"
         })
         history.push('/')
-    }, 5000);
+    }, 4000);
 
     console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 

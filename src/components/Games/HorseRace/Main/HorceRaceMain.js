@@ -48,6 +48,15 @@ const HorceRaceMain = () => {
             payload: game
         })
     }
+
+    const handleChangeMise = (e)=>{
+        let miseTemp = e.target.value
+        if(miseTemp>getUser.credit){
+            setMise(getUser.credit)
+        }else{
+            setMise(miseTemp)
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         const game = {
@@ -83,7 +92,7 @@ const HorceRaceMain = () => {
 
                         <label htmlFor="credit">How many credit (s) do you want to bet?</label>
                         <input type="number"
-                            onChange={e => setMise(e.target.value)} defaultValue='10' min='10' max={getUser.credit} />
+                            onChange={handleChangeMise} defaultValue='10' min='10' max={getUser.credit} />
                     </div>
                     <div className="form-par">
                         <label htmlFor="participants">How many participants do you want?</label>
