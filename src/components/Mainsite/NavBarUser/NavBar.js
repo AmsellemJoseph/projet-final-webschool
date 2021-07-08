@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Deconnection from '../../Deconnection/Deconnection'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './navbar.css';
+import './styleNavBarUser.css'
 const axios = require('axios')
 
 
@@ -21,10 +21,29 @@ const NavBarUser = () => {
 
     },[])
 
+    const {sidebar} =useSelector(state => ({
+        ...state.navBarUserReducer,
+    }))
 
+    const dispatch = useDispatch();
+
+    const open = () => {
+        dispatch({
+            type: "TOGGLENAVUSER"
+        })
+    }
+
+    const close = () => {
+        dispatch({
+            type: "CLOSENAVUSER"
+        })
+    }
+
+console.log(sidebar)
     return (
         <div className="container-navbar-user">
-            <p><FontAwesomeIcon icon={['fas','bars']}/></p>
+            {sidebar?<p><FontAwesomeIcon onClick={open} icon={['fas','times']} style={{fontSize:'38px', cursor:'pointer'}}/></p>:<p><FontAwesomeIcon onClick={open} icon={['fas','bars']} style={{fontSize:'38px', cursor:'pointer'}}/></p>}
+            
             <p>Hi {getUser.username}!<br/> You have {getUser.credit} credit(s)</p>
             <p>Buy more credits</p>
             <Deconnection />

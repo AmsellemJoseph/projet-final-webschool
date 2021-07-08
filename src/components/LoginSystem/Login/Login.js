@@ -14,23 +14,23 @@ const Login = () => {
 
     useEffect(() => {
         const tok = async () => {
-        const tokenLocal = JSON.parse(localStorage.getItem('token'))
-        const mail = JSON.parse(localStorage.getItem('user'))
-        console.log(tokenLocal);
-        const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-        console.log(tokTemp.data);
-        if(tokTemp.data==1){
-            console.log("oui")
-            history.push('/accueil')
-        }else{
-            localStorage.setItem("token", JSON.stringify(""))
-            localStorage.setItem("user", JSON.stringify(""))
-            console.log('non')
+            const tokenLocal = JSON.parse(localStorage.getItem('token'))
+            const mail = JSON.parse(localStorage.getItem('user'))
+            console.log(tokenLocal);
+            const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
+            console.log(tokTemp.data);
+            if (tokTemp.data == 1) {
+                console.log("oui")
+                history.push('/accueil')
+            } else {
+                localStorage.setItem("token", JSON.stringify(""))
+                localStorage.setItem("user", JSON.stringify(""))
+                console.log('non')
+            }
         }
-    }
 
-    tok()
-}, [])
+        tok()
+    }, [])
 
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const Login = () => {
     }, [])
 
 
-    const { showLogin, logged, admin,loading } = useSelector(state => ({
+    const { showLogin, logged, admin, loading } = useSelector(state => ({
         ...state.loginReducer,
         ...state.userLoggedReducer,
         ...state.loadingReducer
@@ -67,20 +67,20 @@ const Login = () => {
         })
     }
 
-    const toggleForgot = ()=>{
+    const toggleForgot = () => {
         dispatch({
-            type:"TOGGLEFORGOT"
+            type: "TOGGLEFORGOT"
         })
     }
 
-    const load = ()=>{
+    const load = () => {
         dispatch({
-            type:"LOADING"
+            type: "LOADING"
         })
     }
-    const stopLoad = ()=>{
+    const stopLoad = () => {
         dispatch({
-            type:"LOADED"
+            type: "LOADED"
         })
     }
 
@@ -91,8 +91,8 @@ const Login = () => {
         })
         var token = md5(Date.now())
         localStorage.setItem("user", JSON.stringify(user))
-        const flagToken = await axios.put('http://localhost:2108/registration/settoken', { params: { token,user } })
-        if(flagToken){
+        const flagToken = await axios.put('http://localhost:2108/registration/settoken', { params: { token, user } })
+        if (flagToken) {
             localStorage.setItem("token", JSON.stringify(token))
             localStorage.setItem("logged", JSON.stringify({ logged: true }));
             return true
@@ -120,6 +120,8 @@ const Login = () => {
             stopLoad()
             return setError("Your account is not yet active, please click on the link you received in your mailbox.")
         }
+
+
         const info = await Logger.recupInfo();
         if (info.data[0].confirmed) {
         }
@@ -131,12 +133,18 @@ const Login = () => {
             stopLoad()
             return history.push('/admin')
         }
+        const flag = await userCookie(user);
+        const majConnection = await Logger.majConnection();
+        if (!majConnection) {
+            stopLoad();
+            return setError("An error occurred, please try again later")
+        }
+
         stopLoad()
         setError("");
-        const flag = await userCookie(user);
 
-        if(flag){
-             history.push('/accueil')
+        if (flag) {
+            history.push('/accueil')
         }
 
     }
@@ -148,7 +156,7 @@ const Login = () => {
                 <div className="container-form-log">
                     <h2>Login</h2>
                     <p style={{ color: '#a035fd' }}>{error}</p>
-                    {loading?<CircularIndeterminate/>:null}
+                    {loading ? <CircularIndeterminate /> : null}
                     <form className="form-log"
                         onSubmit={handleSubmit}
                         method="post">

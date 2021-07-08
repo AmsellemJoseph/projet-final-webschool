@@ -8,11 +8,11 @@ import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
 import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
 import Reset from './components/LoginSystem/Forgot/Reset'
 import Test from './utils/Test'
+import MainBarUser from './components/Mainsite/NavBarUser/MainBarUser'
 
 function App() {
   return (
-    // <Reset/>
-    // <Test/>
+    // <Test />
     <Router>
       <div className="App">
         <Switch>

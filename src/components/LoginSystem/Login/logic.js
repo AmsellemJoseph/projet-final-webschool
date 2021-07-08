@@ -9,7 +9,7 @@ class LoginLogic {
 
     constructor(server, mail, password) {
         this.server = server;
-        let mailG=""
+        let mailG = ""
         if (mail.includes("gmail")) {
             mailG = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
         } else {
@@ -30,7 +30,7 @@ class LoginLogic {
     }
 
     connection = async () => {
-        let mail="";
+        let mail = "";
         if (this.mail.includes("gmail")) {
             mail = this.mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
         } else {
@@ -55,6 +55,12 @@ class LoginLogic {
         const info = await axios.post(`${this.server}/getuser`, { params: { mail } })
         return info;
     }
+    majConnection = async () => {
+        const mail = this.mail.toLocaleLowerCase();
+        const maj = await axios.put(`${this.server}/majconnection`, { params: { mail } })
+        return maj
+    }
+
 }
 
 module.exports = LoginLogic

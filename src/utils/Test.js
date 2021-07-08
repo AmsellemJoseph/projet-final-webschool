@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css'
+const axios = require('axios')
+
 
 const Test = () => {
 
+    const [selectedFile, setSelectedFile] = useState(null)
+
+    const onChangeHandler = (e) => {
+        setSelectedFile(e.target.files[0])
+    }
+
+    const onClickHandler = () => {
+        console.log(selectedFile)
+        const data = new FormData()
+        data.append('file',selectedFile)
+        axios.post('http://localhost:2108/registration/img',data,{
+
+        })
+        .then(res=>{
+            console.log(res.statusText)
+        })
+        console.log(data)
+    }
+
 
     return (
-        <div className="container-result">
+        <div>
+            <form action="" method="post"
+            // encType="multipart/form-data"
+            // onSubmit={handleSubmit}
+            >
 
-            <div className="container-result-win">
-                <h2>CONGRATULATION</h2>
-                <p>You won 100 tokens</p>
-            </div>
+                <input type="file" onChange={onChangeHandler} name="file" id="" />
+                <button type="button" onClick={onClickHandler}>upload</button>
+
+            </form>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import Deconnection from '../../Deconnection/Deconnection'
-import NavBarUser from '../NavBarUser/NavBar'
+import MainBarUser from '../NavBarUser/MainBarUser'
 import './accueil.css'
 const axios = require('axios')
 // import HorceRaceMain from '../../Games/HorseRace/Main/HorceRaceMain'
@@ -44,7 +44,7 @@ const Accueil = () => {
 
     return (
         <div className='container-accueil'>
-            <NavBarUser />
+            <MainBarUser />
             <div className='main-container-game'>
                 <h2>Choose which game you want to play.</h2>
                 <div className="containerGames">

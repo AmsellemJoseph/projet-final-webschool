@@ -124,7 +124,11 @@ class Registering {
             confirmed: false,
             credit: 100,
             admin: false,
-            token: md5(Date.now())
+            token: md5(Date.now()),
+            profilPic:'default.jpg',
+            created:Date.now(),
+            lastConnection:Date.now(),
+            nbrConnection:0,
         }
         const create = await axios.post(`${this.server}/createuser`, { params: { newUser } })
         return create;
