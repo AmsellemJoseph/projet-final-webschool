@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+import './deconnection.css'
 
 const Deconnection = () => {
 

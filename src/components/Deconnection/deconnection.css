@@ -1,3 +1,20 @@
 .button-deconnection button{
-    height:30px
+    margin-top: 50px;
+    width: 100px;
+    height: 30px;
+    /* margin-right: 60px; */
+    outline: none;
+    border-radius: 9999px;
+    background: #333;
+    color: #9c3cff;
+    font-size: 16px;
+    border: 2px solid #21d2fe;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #1a1e4d;
+}
+
+.button-deconnection button:hover{
+    background: #9c3cff;
+    color:#21d2fe
 }
