@@ -25,6 +25,7 @@ const SideBar = ({pic})=>{
         <div className={sidebar?"main-container-sidebar-on":"main-container-sidebar-off"}>
             <UserImg pic={pic}/>
             <a href="/changephoto">Change your profil picture</a>
+            <a href="/changepassword">Change your password</a>
             <Deconnection/>
 
         </div>

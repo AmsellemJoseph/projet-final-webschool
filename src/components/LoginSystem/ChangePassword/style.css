@@ -1,0 +1,66 @@
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+.main-container-change-photo{
+    width:100%;
+    height:100vh;
+    background-color: #0d122f;
+}
+
+.main-container-change-photo h2{
+    font-family: 'Audiowide';
+    font-size:30px;
+    margin-bottom:20px;
+    color: #0d122f;
+}
+
+.container-form-change-pass{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.container-form-change-pass form{
+    display:flex;
+    flex-direction:column;
+    width:300px;
+    height:auto;
+    background:#9c3cff;
+    padding:25px;
+    border-radius: 5px;
+}
+
+.btn-sub-change{
+    background:#71f6ff;
+    color: #0d122f;
+    border: none;
+    outline: none;
+    height:25px;
+    font-family: 'Audiowide';
+    font-family: 'Audiowide';
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-sub-change:hover{
+    background:#0d122f;
+    color:#71f6ff;
+}
+
+.container-form-change-pass input[type="password"]{
+    outline: none;
+    border:none;
+    color: #0d122f;
+    border-bottom: 1px solid #0d122f;
+    background: #9c3cff;
+    font-size:20px;
+    margin-bottom:20px;
+    height:25px;
+}
+.container-form-change-pass input[type="password"]::placeholder{
+    color:#0d122f;
+}

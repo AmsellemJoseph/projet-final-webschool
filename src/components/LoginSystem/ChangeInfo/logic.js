@@ -10,8 +10,14 @@ class ChangeProfilPicture {
         this.picture = picture;
     }
 
+    verifNull = ()=>{
+        if(this.picture==null){
+            return false
+        }
+        return true
+    }
+
     verifType = () => {
-        console.log(this.picture)
         if (this.picture.type == "image/png" || this.picture.type == "image/jpeg" || this.picture.type == "image/gif") {
             return true;
         } else {

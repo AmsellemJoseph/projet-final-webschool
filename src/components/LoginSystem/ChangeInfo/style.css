@@ -8,6 +8,13 @@
     background-color: #0d122f;
 }
 
+.main-container-change-photo h2{
+    font-family: 'Audiowide';
+    font-size:30px;
+    margin-bottom:20px;
+    color: #0d122f;
+}
+
 .container-form-change-photo{
     width:100%;
     height:100%;
@@ -17,8 +24,60 @@
 }
 
 .container-form-change-photo form{
+    display:flex;
+    flex-direction:column;
     width:300px;
     height:auto;
     background:#9c3cff;
     padding:25px;
+    border-radius: 5px;
+}
+
+.container-form-change-photo form button{
+    background:#71f6ff;
+    color: #0d122f;
+    border: none;
+    outline: none;
+    height:25px;
+    font-family: 'Audiowide';
+    font-family: 'Audiowide';
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.container-form-change-photo form button:hover{
+    background:#0d122f;
+    color:#71f6ff;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Choose your picture';
+    display: inline-block;
+    background:#71f6ff;
+    font-family: 'Audiowide';
+    /* background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3); */
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    color: #0d122f;
+    /* -webkit-user-select: none; */
+    cursor: pointer;
+    margin-bottom: 25px;
+    /* text-shadow: 1px 1px #fff; */
+    transition: all 0.3s ease-in-out;
+
+}
+  .custom-file-input:hover::before {
+    /* border-color: black; */
+    background:#0d122f;
+    color:#71f6ff;
+}
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }

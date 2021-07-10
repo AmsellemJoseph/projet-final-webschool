@@ -33,7 +33,7 @@ const NavBarUser = ({getUser}) => {
             
             <p>Hi {getUser.username}!</p>
             <p style={{marginRight:'25px'}}>You have {getUser.credit} credit(s)</p>
-            <Avatar style={{width:'35px',height:'35px',marginRight:'25px'}} src={process.env.PUBLIC_URL + `uploads/${getUser.profilPic}`}/>
+            <Avatar style={{marginRight:'25px'}} src={process.env.PUBLIC_URL + `uploads/${getUser.profilPic}`}/>
 
         </div>
     )
