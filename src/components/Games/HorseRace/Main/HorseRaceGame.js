@@ -1,12 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import Token from '../../../../utils/Token'
 import HorseLine from './HorseLine'
-
 import './style.css'
 import HorceRaceResult from './HorceRaceResult'
 
+const axios = require('axios')
+
+
 const HorseRaceGame = () => {
+
+    const history = useHistory();
+
+    useEffect(() => {
+        const tok = async () => {
+            const mail = JSON.parse(localStorage.getItem('user'))
+            const tokenLocal = JSON.parse(localStorage.getItem('token'))
+            if (!mail || !tokenLocal) {
+                history.push('/login')
+            }
+            const mailCredit = mail.mail
+            const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
+            if (tokTemp.data == 1) {
+            } else {
+                localStorage.setItem("token", JSON.stringify(""))
+                localStorage.setItem("user", JSON.stringify(""))
+                history.push('/login')
+            }
+        }
+        tok()
+    }, [])
 
     const { nbrHorse, race } = useSelector(state => ({
         ...state.horseReducer,

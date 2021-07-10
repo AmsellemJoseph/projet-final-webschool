@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Deconnection from '../../Deconnection/Deconnection'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Avatar from '@material-ui/core/Avatar';
 import './styleNavBarUser.css'
 const axios = require('axios')
 
@@ -26,14 +27,13 @@ const NavBarUser = ({getUser}) => {
             type: "CLOSENAVUSER"
         })
     }
-
-console.log(sidebar)
     return (
         <div className="container-navbar-user">
             {sidebar?<p><FontAwesomeIcon onClick={open} icon={['fas','times']} style={{fontSize:'38px', cursor:'pointer'}}/></p>:<p><FontAwesomeIcon onClick={open} icon={['fas','bars']} style={{fontSize:'38px', cursor:'pointer'}}/></p>}
             
             <p>Hi {getUser.username}!</p>
             <p style={{marginRight:'25px'}}>You have {getUser.credit} credit(s)</p>
+            <Avatar style={{width:'35px',height:'35px',marginRight:'25px'}} src={process.env.PUBLIC_URL + `uploads/${getUser.profilPic}`}/>
 
         </div>
     )

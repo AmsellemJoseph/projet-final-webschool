@@ -20,11 +20,11 @@ const SideBar = ({pic})=>{
     }
 
     return(
-        <div className="main-container">
-            {sidebar?<div onClick={close} className="overlay"></div>:null}
+        <div className={sidebar?"main-container":'none'}>
+            {sidebar?<div onClick={close} className="overlay"></div>:<div onClick={close} className="overlay" ></div>}
         <div className={sidebar?"main-container-sidebar-on":"main-container-sidebar-off"}>
             <UserImg pic={pic}/>
-            
+            <a href="/changephoto">Change your profil picture</a>
             <Deconnection/>
 
         </div>

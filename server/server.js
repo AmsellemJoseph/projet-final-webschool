@@ -117,11 +117,20 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
 
         route.put('/majconnection', (req, res) => {
             const mail = req.body.params.mail
-            console.log(mail)
             const query = { mail: mail }
             const replacement = { $inc: { "nbrConnection": 1 }, $set: { "lastConnection": Date.now() } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options)
+            res.send(true)
+        })
+
+        route.put('/newnameimg', (req, res) => {
+            const mail = req.body.params.mail.mail;
+            const newName = req.body.params.newNameImg;
+            const query = { mail: mail }
+            const replacement = { $set: { "profilPic": newName } }
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query,replacement,options)
             res.send(true)
         })
 
@@ -173,15 +182,31 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             db.collection('users').findOneAndUpdate(query, replacement, options);
             res.send(true)
         })
+
+        let nameImg = ""
+        var storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, '../public/uploads')
+            },
+            filename: function (req, file, cb) {
+                nameImg = Date.now() + '-' + file.originalname
+                cb(null, nameImg)
+            }
+        })
+
+        var upload = multer({ storage: storage }).single('file')
+
         route.post('/img', (req, res) => {
-            console.log(req)
             upload(req, res, function (err) {
                 if (err instanceof multer.MulterError) {
-                    return res.status(500).json(err)
+                    // return res.status(500).json(err)
+                    return res.send(false)
                 } else if (err) {
-                    return res.status(500).json(err)
+                    // return res.status(500).json(err)
+                    return res.send(false)
                 }
-                return res.status(200).send(req.file)
+                // return res.status(200).send(req.file)
+                res.send({ nameImg: nameImg })
             })
 
         })
@@ -278,27 +303,3 @@ route.post("/sendmailreset", (req, res) => {
         }
     })
 })
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../public/uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname)
-    }
-})
-
-var upload = multer({ storage: storage }).single('file')
-
-// route.post('/img', (req, res) => {
-//     console.log(req)
-//     upload(req, res, function (err) {
-//         if (err instanceof multer.MulterError) {
-//             return res.status(500).json(err)
-//         } else if (err) {
-//             return res.status(500).json(err)
-//         }
-//         return res.status(200).send(req.file)
-//     })
-
-// })

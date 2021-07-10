@@ -7,10 +7,9 @@
 
 .container-main-bar-user{
     width:100%;
-    height:100vh;
+    height:40px;
     position: absolute;
 }
-
 .container-navbar-user{
     width: 100%;
     height:40px;
@@ -45,6 +44,20 @@
 }
 .container-navbar-user p:nth-child(1){
     margin-left: 20px;
+}
+
+.main-container a{
+    margin-top:20px;
+    font-family:'Audiowide';
+    color:#1a1e4d;
+    transition: all 0.3s ease-in-out;
+}
+.main-container a:hover{
+    color:#21d2fe;
+}
+
+.none{
+    display: none
 }
 
 .main-container{

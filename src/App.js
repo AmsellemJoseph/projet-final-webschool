@@ -7,12 +7,10 @@ import Accueil from './components/Mainsite/Acceuil/Accueil'
 import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
 import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
 import Reset from './components/LoginSystem/Forgot/Reset'
-import Test from './utils/Test'
-import MainBarUser from './components/Mainsite/NavBarUser/MainBarUser'
+import ChangeInfo from './components/LoginSystem/ChangeInfo/ChangePhoto'
 
 function App() {
   return (
-    // <Test />
     <Router>
       <div className="App">
         <Switch>
@@ -23,6 +21,7 @@ function App() {
           <Route path='/horserace' component={HorceRaceMain} />
           <Route path='/horseracegame' component={HorseRaceGame} />
           <Route path='/resetpassword' component={Reset} />
+          <Route path='/changephoto' component={ChangeInfo} />
 
         </Switch>
       </div>

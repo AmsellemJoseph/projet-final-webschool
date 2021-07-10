@@ -6,7 +6,29 @@ import './style.css'
 const axios = require('axios');
 
 
+
+
 const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
+
+    useEffect(() => {
+        const tok = async () => {
+            const mail = JSON.parse(localStorage.getItem('user'))
+            const tokenLocal = JSON.parse(localStorage.getItem('token'))
+            if (!mail || !tokenLocal) {
+                history.push('/login')
+            }
+            const mailCredit = mail.mail
+            const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
+            if (tokTemp.data == 1) {
+            } else {
+                localStorage.setItem("token", JSON.stringify(""))
+                localStorage.setItem("user", JSON.stringify(""))
+                history.push('/login')
+            }
+        }
+        tok()
+    }, [])
+
     const [gainCredit,setGainCredit]= useState(0)
     const history = useHistory();
     const { nbrHorse,race } = useSelector(state => ({

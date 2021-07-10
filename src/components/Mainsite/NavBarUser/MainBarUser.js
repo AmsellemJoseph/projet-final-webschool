@@ -35,8 +35,6 @@ const MainBarUser = () => {
 
     },[])
 
-    console.log(getUser.profilPic)
-
     return (
         <div className="container-main-bar-user">
             <NavBar getUser={getUser}/>
