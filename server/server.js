@@ -211,6 +211,16 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
 
         })
 
+        route.post("/sendresulthorse",(req,res)=>{
+            const result = req.body.params.result;
+            console.log(result)
+            db.collection("horsesgames").insertOne(result)
+            .then((result)=>{
+                res.send(true)
+            })
+            .catch((err)=>{ console.log(err) })
+        })
+
     })
 
 

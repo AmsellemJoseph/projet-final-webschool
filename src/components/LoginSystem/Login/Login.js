@@ -127,6 +127,7 @@ const Login = () => {
         }
         const user = {
             mail: info.data[0].mail,
+            username:info.data[0].username
         }
         if (info.data[0].admin == true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));

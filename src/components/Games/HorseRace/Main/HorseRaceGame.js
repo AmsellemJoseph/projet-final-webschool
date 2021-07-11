@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Token from '../../../../utils/Token'
 import HorseLine from './HorseLine'
 import './style.css'
@@ -13,6 +13,22 @@ const HorseRaceGame = () => {
 
     const history = useHistory();
 
+    const looseCredit = async (mail, mise) => {
+        return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
+    }
+
+    useEffect(() => {
+
+        const credits = async () => {
+            const userTemp = JSON.parse(localStorage.getItem('user'))
+            const mail = userTemp.mail
+            const mise = nbrHorse.mise
+            looseCredit(mail, mise)
+        }
+        credits()
+
+    }, [])
+
     useEffect(() => {
         const tok = async () => {
             const mail = JSON.parse(localStorage.getItem('user'))
@@ -20,7 +36,6 @@ const HorseRaceGame = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -50,7 +65,7 @@ const HorseRaceGame = () => {
             let tempLignArr = []
             for (let i = 0; i < lignes; i++) {
                 for (let j = 0; j < 5; j++) {
-                    let tempsTemp = (Math.random() * 2.5) + (Math.random() * 2.5);
+                    let tempsTemp = (Math.random() * 2) + (Math.random() * 2);
                     tempsTemp = Math.floor(tempsTemp * 100) / 100
                     tempLignArr.push(tempsTemp);
                     tempsTemp = 0;
@@ -93,7 +108,7 @@ const HorseRaceGame = () => {
 
     setTimeout(() => {
         setFlag(true);
-    }, 22000);
+    }, 20000);
     return (<>
         {race ? null : <Token />}
         {flag ? <HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal} ind={ind} /> :

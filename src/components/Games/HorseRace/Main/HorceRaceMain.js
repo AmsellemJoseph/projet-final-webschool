@@ -12,7 +12,7 @@ const axios = require('axios')
 const HorceRaceMain = () => {
 
     const [getUser, setUser] = useState({})
-    useEffect(() => {
+        useEffect(() => {
         const tok = async () => {
             const mail = JSON.parse(localStorage.getItem('user'))
             const tokenLocal = JSON.parse(localStorage.getItem('token'))

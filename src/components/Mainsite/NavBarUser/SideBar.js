@@ -26,6 +26,7 @@ const SideBar = ({pic})=>{
             <UserImg pic={pic}/>
             <a href="/changephoto">Change your profil picture</a>
             <a href="/changepassword">Change your password</a>
+            <a href="/paypal">Buy more credits</a>
             <Deconnection/>
 
         </div>

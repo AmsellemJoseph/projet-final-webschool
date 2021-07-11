@@ -9,6 +9,7 @@ import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
 import Reset from './components/LoginSystem/Forgot/Reset'
 import ChangeInfo from './components/LoginSystem/ChangeInfo/ChangePhoto'
 import ChangePassword from './components/LoginSystem/ChangePassword/ChangePassword'
+import Paypal from './components/Mainsite/Paypal/Paypal'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/resetpassword' component={Reset} />
           <Route path='/changephoto' component={ChangeInfo} />
           <Route path='/changepassword' component={ChangePassword} />
+          <Route path='/paypal' component={Paypal} />
 
         </Switch>
       </div>

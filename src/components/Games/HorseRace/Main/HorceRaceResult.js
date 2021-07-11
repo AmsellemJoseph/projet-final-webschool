@@ -29,9 +29,9 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
         tok()
     }, [])
 
-    const [gainCredit,setGainCredit]= useState(0)
+    const [gainCredit, setGainCredit] = useState(0)
     const history = useHistory();
-    const { nbrHorse,race } = useSelector(state => ({
+    const { nbrHorse, race } = useSelector(state => ({
         ...state.horseReducer,
         ...state.gameLauncherReducer
     }))
@@ -54,51 +54,60 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
         const credits = async () => {
             const userTemp = JSON.parse(localStorage.getItem('user'))
             const mail = userTemp.mail
+            const username = userTemp.username
             const mise = nbrHorse.mise
             const nbrHorses = nbrHorse.nbrHorse;
             if (nbrHorse.choix != (ind + 1)) {
-                looseCredit(mail, mise)
                 setLoose("YOU LOOSE!!")
             }
             // if (nbrHorse.choix == ind) {
             else {
                 let gain = 0
                 if (nbrHorses == 2) {
-                    gain = mise;
+                    gain = 2 * mise;
                     setGainCredit(gain)
                 } else if (nbrHorses == 3) {
-                    gain = 2 * mise
-                    setGainCredit(gain)
-                } else if (nbrHorses == 4) {
                     gain = 3 * mise
                     setGainCredit(gain)
-                } else if (nbrHorses == 5) {
+                } else if (nbrHorses == 4) {
                     gain = 4 * mise
                     setGainCredit(gain)
+                } else if (nbrHorses == 5) {
+                    gain = 5 * mise
+                    setGainCredit(gain)
                 }
+                const result = {
+                    username: username,
+                    date: Date.now(),
+                    gain: gain,
+                }
+                await axios.post("http://localhost:2108/registration/sendresulthorse", { params: { result } })
                 winCredits(mail, gain)
                 setWin("YOU WON!!")
                 setFlag(true)
             }
+
         }
         credits()
     }, [])
-    setTimeout(() => {
-        dispatch({
-            type:"RESETGAME"
-        })
-        history.push('/')
-    }, 4000);
+    // setTimeout(() => {
+    //     dispatch({
+    //         type: "RESETGAME"
+    //     })
+    //     history.push('/')
+    // }, 4000);
 
     console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 
     return (
         <div className="container-result">
-            {race?null:<Token/>}
+            {race ? null : <Token />}
             {flag ? <div className="container-result-win">
                 <h2>CONGRATULATION</h2>
                 <p>You won {gainCredit} tokens</p>
-            </div> : <div className="container-result-loose"></div>}
+                <a href="/">Main menu</a>
+            </div> : <div className="container-result-loose">
+                <a href="/">Main menu</a></div>}
         </div>
     )
 }
