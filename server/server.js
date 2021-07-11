@@ -183,6 +183,16 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             res.send(true)
         })
 
+        route.put('/setcredits',(req,res)=>{
+            const mail = req.body.params.mail
+            const credit = req.body.params.credit
+            const query = {mail: mail}
+            const replacement = {$inc:{"credit":credit}}
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query, replacement, options);
+            res.send(true)
+        })
+
         let nameImg = ""
         var storage = multer.diskStorage({
             destination: function (req, file, cb) {

@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   horseReducer,
   gameLauncherReducer,
   loadingReducer,
-  navBarUserReducer
+  navBarUserReducer,
 })
 
 const store = createStore(rootReducer)
