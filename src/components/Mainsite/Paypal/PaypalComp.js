@@ -1,8 +1,10 @@
-import React,{useState,useEffect} from 'react';
-import {useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import MainBarUser from '../NavBarUser/MainBarUser'
+import { useHistory } from 'react-router-dom'
+import PaypalCredit from './PaypalCredits'
+import './style.css'
 const axios = require('axios')
-const PaypalComp = ()=>{
+const PaypalComp = () => {
 
     useEffect(() => {
         const tok = async () => {
@@ -23,50 +25,51 @@ const PaypalComp = ()=>{
         tok()
     }, [])
 
-    const [checkout,setCheckout]=useState(false)
-    const [choice,setChoice] = useState("")
+    const [checkout, setCheckout] = useState(false)
+    const [choice, setChoice] = useState({ price: 0, credit: 0 })
 
     const history = useHistory();
 
-    const dispatch = useDispatch();
-
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault()
         console.log(choice)
-        if (choice==10){
-            history.push('/paypal10credits')
-        }else if(choice==20){
-            history.push('/paypal20credits')
-        }else if(choice==40){
-            history.push('/paypal40credits')
-        }else if(choice==80){
-            history.push('/paypal80credits')
+        if (choice == 10) {
+            setChoice({ price: 10, credit: 100 })
+        } else if (choice == 20) {
+            setChoice({ price: 20, credit: 250 })
+        } else if (choice == 40) {
+            setChoice({ price: 40, credit: 500 })
+        } else if (choice == 80) {
+            setChoice({ price: 80, credit: 1250 })
         }
+        setCheckout(true)
 
     }
 
-    return(
+    return (
         <div>
-            {/* {checkout?(<Paypal/>):(<button onClick={()=>setCheckout(true)}>Checkout</button>)} */}
-            <form action="" method="post" onSubmit={handleSubmit}>
-                <div>
-                <input type="radio" onChange={(e)=>setChoice(e.target.value)} value="10" name="credit" id="100credits" />
-                <label htmlFor="100credits">100 credits - 10nis</label>
-            </div>
-            <div>
-                <input type="radio" onChange={(e)=>setChoice(e.target.value)} value="20" name="credit" id="250credits" />
-                <label htmlFor="250credits">250 credits - 20nis</label>
-            </div>
-            <div>
-                <input type="radio" onChange={(e)=>setChoice(e.target.value)} value="40" name="credit" id="500credits" />
-                <label htmlFor="500credits">500 credits - 40nis</label>
-            </div>
-            <div>
-                <input type="radio" onChange={(e)=>setChoice(e.target.value)} value="80" name="credit" id="1000credits" />
-                <label htmlFor="1000credits">1000 credits - 80nis</label>
-            </div>
-            <button type="submit">Checkout</button>
-            </form>
+            <MainBarUser />
+            {checkout ? <PaypalCredit choice={choice} /> : (<div className="main-form-choix-paypal"><form classname="form-choix-paypal" action="" method="post" onSubmit={handleSubmit}>
+                <h2>Choose how many credits you want to buy</h2>
+                <div className="radio-paypal">
+                    <input type="radio" onChange={(e) => setChoice(e.target.value)} value="10" name="credit" id="100credits" />
+                    <label htmlFor="100credits">100 credits - 10nis</label>
+                </div>
+                <div className="radio-paypal">
+                    <input type="radio" onChange={(e) => setChoice(e.target.value)} value="20" name="credit" id="250credits" />
+                    <label htmlFor="250credits">250 credits - 20nis</label>
+                </div>
+                <div className="radio-paypal">
+                    <input type="radio" onChange={(e) => setChoice(e.target.value)} value="40" name="credit" id="500credits" />
+                    <label htmlFor="500credits">500 credits - 40nis</label>
+                </div>
+                <div className="radio-paypal">
+                    <input type="radio" onChange={(e) => setChoice(e.target.value)} value="80" name="credit" id="1000credits" />
+                    <label htmlFor="1000credits">1250 credits - 80nis</label>
+                </div>
+                <button type="submit">Checkout</button>
+            </form></div>)}
+
         </div>
     )
 }

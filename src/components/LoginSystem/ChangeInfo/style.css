@@ -31,6 +31,7 @@
     background:#9c3cff;
     padding:25px;
     border-radius: 5px;
+    box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4;
 }
 
 .container-form-change-photo form button{

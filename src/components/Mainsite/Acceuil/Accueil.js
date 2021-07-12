@@ -33,8 +33,6 @@ const Accueil = () => {
         tok()
     }, [])
 
-    console.log(credit)
-
     const handleHorse = () => {
         dispatch({
             type:"SETRACE"
