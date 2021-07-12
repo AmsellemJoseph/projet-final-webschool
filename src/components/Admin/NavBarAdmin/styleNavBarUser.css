@@ -1,0 +1,118 @@
+*,::before,::after{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container-main-bar-user{
+    width:100%;
+    height:40px;
+    position: absolute;
+}
+.container-navbar-user{
+    width: 100%;
+    height:45px;
+    background: #1a1e4d;
+    border-bottom: 1px dotted #891199;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:absolute;
+    z-index: 10;
+}
+.container-navbar-user button{
+    width:100px;
+    height:30px;
+    margin-right: 60px;
+    outline: none;
+    border-radius: 9999px;
+    background: #1a1e4d;
+    color: #9c3cff;
+    font-size: 14px;
+    border:2px solid #21d2fe;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #1a1e4d;
+}
+.container-navbar-user button:hover{
+    color:#21d2fe;
+    background: #9c3cff;
+}
+.container-navbar-user p{
+    color:#9c3cff
+}
+.container-navbar-user p:nth-child(1){
+    margin-left: 20px;
+}
+
+.main-container a{
+    margin-top:20px;
+    font-family:'Audiowide';
+    color:#1a1e4d;
+    transition: all 0.3s ease-in-out;
+}
+.main-container a:hover{
+    color:#21d2fe;
+}
+
+.none{
+    display: none
+}
+
+.main-container{
+    position: relative;
+    width:100%;
+    height:100vh;
+    display: flex;
+}
+.overlay{
+    background:rgba(156, 60, 255,0.5);
+    position:absolute;
+    width:100%;
+    height:100%;
+
+}
+
+.main-container-sidebar-on{
+    position: absolute;
+    width:280px;
+    height:100%;
+    background:#9c3cff;
+    opacity:1;
+    left: 0px;
+    /* z-index: 10; */
+    transition: all 0.3s ease-in-out;
+    border-right: 1px solid #21d2fe;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+.main-container-sidebar-off{
+    position: absolute;
+    width:280px;
+    height:100%;
+    background:#9c3cff;
+    transition: all 0.3s ease-in-out;
+    opacity:0;
+    /* z-index: 10; */
+    left:-280px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+@media screen and (max-width:600px){
+    .container-navbar-user p{
+        font-size:12px
+    }
+    .container-navbar-user button{
+        margin:0px;
+        width:70px;
+        font-size:12px
+    }
+    .container-navbar-user p:nth-child(1){
+        margin-left: 0px;
+        text-align: left ;
+    }
+}

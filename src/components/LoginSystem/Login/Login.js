@@ -129,12 +129,12 @@ const Login = () => {
             mail: info.data[0].mail,
             username:info.data[0].username
         }
+        const flag = await userCookie(user);
         if (info.data[0].admin == true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));
             stopLoad()
             return history.push('/admin')
         }
-        const flag = await userCookie(user);
         const majConnection = await Logger.majConnection();
         if (!majConnection) {
             stopLoad();

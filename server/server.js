@@ -130,7 +130,7 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             const query = { mail: mail }
             const replacement = { $set: { "profilPic": newName } }
             const options = { "returnNewDocument": false };
-            db.collection("users").findOneAndUpdate(query,replacement,options)
+            db.collection("users").findOneAndUpdate(query, replacement, options)
             res.send(true)
         })
 
@@ -183,11 +183,11 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             res.send(true)
         })
 
-        route.put('/setcredits',(req,res)=>{
+        route.put('/setcredits', (req, res) => {
             const mail = req.body.params.mail
             const credit = req.body.params.credit
-            const query = {mail: mail}
-            const replacement = {$inc:{"credit":credit}}
+            const query = { mail: mail }
+            const replacement = { $inc: { "credit": credit } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options);
             res.send(true)
@@ -221,14 +221,41 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
 
         })
 
-        route.post("/sendresulthorse",(req,res)=>{
+        route.post("/sendresulthorse", (req, res) => {
             const result = req.body.params.result;
             console.log(result)
             db.collection("horsesgames").insertOne(result)
+                .then((result) => {
+                    res.send(true)
+                })
+                .catch((err) => { console.log(err) })
+        })
+
+        route.put("/incrgame",(req,res)=>{
+            const nameGame = req.body.params.nameGame;
+            const query = {nameGame: nameGame}
+            const replacement = {$inc:{nbrTotal:1}}
+            const options = { "returnNewDocument": false };
+            db.collection("nbrgamesplayed").findOneAndUpdate(query, replacement, options)
+            res.send(true);
+        })
+
+        route.get("/getnbr",(req,res)=>{
+            const nameGame = req.query.nameGame
+            db.collection("nbrgamesplayed").findOne({nameGame:nameGame})
             .then((result)=>{
-                res.send(true)
+                res.send(result)
             })
             .catch((err)=>{ console.log(err) })
+        })
+
+        route.get("/getwin",(req,res)=>{
+            const coll = req.query.coll
+            db.collection(coll).find().sort({"date":-1}).limit(10).toArray()
+            .then((result)=>{
+                res.send(result)
+            })
+            .catch((err)=>{ console.log(err)})
         })
 
     })

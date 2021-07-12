@@ -12,7 +12,7 @@ const axios = require('axios')
 const HorceRaceMain = () => {
 
     const [getUser, setUser] = useState({})
-        useEffect(() => {
+    useEffect(() => {
         const tok = async () => {
             const mail = JSON.parse(localStorage.getItem('user'))
             const tokenLocal = JSON.parse(localStorage.getItem('token'))
@@ -67,15 +67,15 @@ const HorceRaceMain = () => {
         })
     }
 
-    const handleChangeMise = (e)=>{
+    const handleChangeMise = (e) => {
         let miseTemp = e.target.value
-        if(miseTemp>getUser.credit){
+        if (miseTemp > getUser.credit) {
             setMise(getUser.credit)
-        }else{
+        } else {
             setMise(miseTemp)
         }
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const game = {
             nbrHorse: part,
@@ -84,9 +84,13 @@ const HorceRaceMain = () => {
         }
         handleHorses(game)
         dispatch({
-            type:"SETRACE"
+            type: "SETRACE"
         })
-        history.push('/horseracegame')
+        const nameGame = "horseGame"
+        const incrGame = axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
+        if(incrGame){
+            history.push('/horseracegame')
+        }
 
     }
     useEffect(() => {
@@ -99,7 +103,7 @@ const HorceRaceMain = () => {
 
     return (
         <div className="container-main-Race">
-            {race?null:<Token/>}
+            {race ? null : <Token />}
             {/* <NavBar/> */}
             <h2>STAR RACE GAME</h2>
 
