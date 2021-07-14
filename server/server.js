@@ -9,6 +9,9 @@ const multer = require('multer')
 
 
 
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -20,6 +23,9 @@ const PORT = process.env.PORT || 2108;
 const server = app.listen(PORT, () => {
     console.log("Connected to the port: " + PORT);
 });
+
+
+
 
 MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((client) => {
@@ -154,6 +160,9 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
         route.post('/gettoken', (req, res) => {
             const mail = req.body.params.mail.mail;
             const tokenLocal = req.body.params.tokenLocal;
+            if (mail == null || tokenLocal==null) {
+                return res.send(false)
+            }
             db.collection('users').find({ mail: mail }).toArray()
                 .then((result) => {
                     if (result[0].token == tokenLocal) {
@@ -231,31 +240,31 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 .catch((err) => { console.log(err) })
         })
 
-        route.put("/incrgame",(req,res)=>{
+        route.put("/incrgame", (req, res) => {
             const nameGame = req.body.params.nameGame;
-            const query = {nameGame: nameGame}
-            const replacement = {$inc:{nbrTotal:1}}
+            const query = { nameGame: nameGame }
+            const replacement = { $inc: { nbrTotal: 1 } }
             const options = { "returnNewDocument": false };
             db.collection("nbrgamesplayed").findOneAndUpdate(query, replacement, options)
             res.send(true);
         })
 
-        route.get("/getnbr",(req,res)=>{
+        route.get("/getnbr", (req, res) => {
             const nameGame = req.query.nameGame
-            db.collection("nbrgamesplayed").findOne({nameGame:nameGame})
-            .then((result)=>{
-                res.send(result)
-            })
-            .catch((err)=>{ console.log(err) })
+            db.collection("nbrgamesplayed").findOne({ nameGame: nameGame })
+                .then((result) => {
+                    res.send(result)
+                })
+                .catch((err) => { console.log(err) })
         })
 
-        route.get("/getwin",(req,res)=>{
+        route.get("/getwin", (req, res) => {
             const coll = req.query.coll
-            db.collection(coll).find().sort({"date":-1}).limit(10).toArray()
-            .then((result)=>{
-                res.send(result)
-            })
-            .catch((err)=>{ console.log(err)})
+            db.collection(coll).find().sort({ "date": -1 }).limit(10).toArray()
+                .then((result) => {
+                    res.send(result)
+                })
+                .catch((err) => { console.log(err) })
         })
 
     })
@@ -350,3 +359,7 @@ route.post("/sendmailreset", (req, res) => {
         }
     })
 })
+
+
+// CHAT
+

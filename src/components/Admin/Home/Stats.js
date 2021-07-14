@@ -28,6 +28,7 @@ const Stats = (props) => {
         getStats()
     }, [])
 
+    console.log(win)
 
 
     return (

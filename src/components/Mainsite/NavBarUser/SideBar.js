@@ -29,6 +29,7 @@ const SideBar = ({pic})=>{
             <a href="/changepassword">Change your password</a>
             <Barre/>
             <a href="/accueil">Home</a>
+            <a href="/chat">Chat</a>
             <Barre/>
             <a href="/paypal">Buy more credits</a>
             <Deconnection/>

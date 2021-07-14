@@ -20,6 +20,8 @@ const Accueil = () => {
                 history.push('/login')
             }
             const mailCredit = mail.mail
+            console.log(mailCredit)
+            console.log("coucou")
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -28,6 +30,7 @@ const Accueil = () => {
                 history.push('/login')
             }
             const userCredit = await axios.post('http://localhost:2108/registration/getcredit', { params: { mailCredit} })
+            console.log(userCredit)
             setCredit(userCredit.data.credit)
         }
         tok()
