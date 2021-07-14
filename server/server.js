@@ -4,12 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const dbUri = require('./database/dbUri').db;
-const route = express.Router();
 const multer = require('multer')
-
-
-
-
 
 
 app.use(bodyParser.json());
@@ -18,7 +13,13 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(cors());
 
+
+
+const route = express.Router();
 app.use('/registration', route);
+
+
+
 const PORT = process.env.PORT || 2108;
 const server = app.listen(PORT, () => {
     console.log("Connected to the port: " + PORT);
@@ -160,7 +161,7 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
         route.post('/gettoken', (req, res) => {
             const mail = req.body.params.mail.mail;
             const tokenLocal = req.body.params.tokenLocal;
-            if (mail == null || tokenLocal==null) {
+            if (mail == null || tokenLocal == null) {
                 return res.send(false)
             }
             db.collection('users').find({ mail: mail }).toArray()

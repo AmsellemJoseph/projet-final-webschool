@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import MainBarUser from '../NavBarUser/MainBarUser'
 import Avatar from '@material-ui/core/Avatar';
 import './style.css'
+import ScrollToBottom from 'react-scroll-to-bottom';
 
-import ButtonChat from './ButtonChat'
 
 import firebase from "firebase/app";
 import 'firebase/auth';
@@ -23,19 +23,32 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore()
+const axios = require('axios')
 
 const Chat = () => {
 
-    const {username} = JSON.parse(localStorage.getItem('user'))
+    const { username, mail } = JSON.parse(localStorage.getItem('user'))
     const [user] = useAuthState(auth)
+    const [localUser, setLocalUser] = useState({})
+
+    useEffect(() => {
+
+        const getInfoUser = async () => {
+            const getUser = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } })
+            setLocalUser(getUser.data[0])
+        }
+        getInfoUser();
+
+    }, [])
+
 
 
     return (
         <div className="main">
             {/* <MainBarUser /> */}
             <div>
-                {user ? <Chatroom /> : <SignIn />}
-                <SignOut/>
+                {user ? (<div className="chatroom"><h2>Amazing chat</h2><Chatroom /></div>) : <SignIn />}
+                <SignOut />
             </div>
         </div>
     )
@@ -46,7 +59,7 @@ const Chat = () => {
         //     auth.signInWithPopup(provider)
         // }
         // return <button onClick={signInWithGoogle} >Sign in with Google</button>
-        const signInAnonymously = ()=>{
+        const signInAnonymously = () => {
             const provider = new firebase.auth().signInAnonymously()
         }
         return <button onClick={signInAnonymously} >Sign in </button>
@@ -68,9 +81,10 @@ const Chat = () => {
 
             await messagesRef.add({
                 text: formValue,
+                sender: username,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                uid:username,
-                photoURL:process.env.PUBLIC_URL + `uploads/default.jpg`
+                uid: username,
+                photoURL: process.env.PUBLIC_URL + `uploads/${localUser.profilPic}`
             })
 
             setFormValue('');
@@ -79,10 +93,19 @@ const Chat = () => {
         const messagesRef = firestore.collection("messages")
         const query = messagesRef.orderBy('createdAt').limitToLast(25)
         const [messages] = useCollectionData(query, { idField: 'id' })
+        const messagesEndRef = useRef(null)
+        const scrollToBottom = () => {
+            // messagesRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+
+
+
         return (<>
-            <main>
+            <ScrollToBottom className="container-main-chatroom">
+
                 {messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-            </main>
+                <div ref={messagesEndRef} />
+            </ScrollToBottom>
             <form onSubmit={sendMessage}>
 
                 <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
@@ -94,13 +117,20 @@ const Chat = () => {
     }
     function ChatMessage(props) {
         const { text, uid, photoURL } = props.message;
-
         const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
         return (
-            <div className={`message ${messageClass}`} >
-                <Avatar src={photoURL} />
-                <p>{text}</p>
+            // <div className={`message ${messageClass}`} >
+            <div className="container-message">
+                <div className={uid == username ? "message" : "message-g"}>
+                    <div className={uid == username ? "inbl" : "inbl-g"}>
+                        <div className={uid == username ? "infos-sender" : "infos-sender-g"}>
+                            <Avatar src={photoURL} />
+                            <p className="user">{uid}</p>
+                        </div>
+                        <p className="text">{text}</p>
+                    </div>
+                </div>
             </div>
         )
     }
