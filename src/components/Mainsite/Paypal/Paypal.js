@@ -22,7 +22,6 @@ const Paypal = () => {
             },
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
-                console.log("Success " + order)
             },
             onError:(err)=>{
                 console.log(err)

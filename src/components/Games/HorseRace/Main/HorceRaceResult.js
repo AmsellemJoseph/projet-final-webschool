@@ -97,7 +97,7 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
     //     history.push('/')
     // }, 4000);
 
-    console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
+    // console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 
     return (
         <div className="container-result">

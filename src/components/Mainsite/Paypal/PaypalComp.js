@@ -32,7 +32,6 @@ const PaypalComp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(choice)
         if (choice == 10) {
             setChoice({ price: 10, credit: 100 })
         } else if (choice == 20) {

@@ -24,12 +24,9 @@ const PaypalCredit = ({ choice }) => {
         tok()
     }, [])
 
-    console.log(choice)
     const history = useHistory();
     const price = choice.price
     const credit = choice.credit
-    console.log(price)
-    console.log(credit)
     const user = JSON.parse(localStorage.getItem('user'))
     const mail = user.mail
     const paypal = useRef()
@@ -52,7 +49,6 @@ const PaypalCredit = ({ choice }) => {
             },
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
-                console.log("Success " + order)
                 const setCred = await axios.put('http://localhost:2108/registration/setcredits', { params: { mail, credit } })
                 if (setCred) {
                     history.push('/')

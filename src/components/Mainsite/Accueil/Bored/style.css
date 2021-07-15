@@ -1,0 +1,19 @@
+.bored-container h4, .bored-container p{
+    color: #21d2fe;
+    font-family: 'Happy Monkey';
+}
+
+.bored-container h4{
+    font-size:25px;
+    margin-bottom:10px
+}
+
+.bored-container p{
+    font-size:18px;
+    /* font-weight:bold; */
+}
+.bored-container p:last-child{
+    margin-top: 20px;
+    font-size:22px;
+    font-weight:bold;
+}

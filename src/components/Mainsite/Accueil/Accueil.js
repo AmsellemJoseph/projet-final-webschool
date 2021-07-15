@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
-import Deconnection from '../../Deconnection/Deconnection'
 import MainBarUser from '../NavBarUser/MainBarUser'
+import Bored from './Bored/Bored'
 import './accueil.css'
 const axios = require('axios')
 // import HorceRaceMain from '../../Games/HorseRace/Main/HorceRaceMain'
 const Accueil = () => {
 
     const history = useHistory();
-    const [credit,setCredit]=useState('')
+    const [credit, setCredit] = useState('')
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,8 +20,6 @@ const Accueil = () => {
                 history.push('/login')
             }
             const mailCredit = mail.mail
-            console.log(mailCredit)
-            console.log("coucou")
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -29,8 +27,7 @@ const Accueil = () => {
                 localStorage.setItem("user", JSON.stringify(""))
                 history.push('/login')
             }
-            const userCredit = await axios.post('http://localhost:2108/registration/getcredit', { params: { mailCredit} })
-            console.log(userCredit)
+            const userCredit = await axios.post('http://localhost:2108/registration/getcredit', { params: { mailCredit } })
             setCredit(userCredit.data.credit)
         }
         tok()
@@ -38,18 +35,22 @@ const Accueil = () => {
 
     const handleHorse = () => {
         dispatch({
-            type:"SETRACE"
+            type: "SETRACE"
         })
         history.push('/horserace')
     }
 
     return (
         <div className='container-accueil'>
-            <MainBarUser />
-            <div className='main-container-game'>
-                <h2>Choose which game you want to play.</h2>
-                <div className="containerGames">
-                    {credit>=10?<button onClick={handleHorse}>HorceRaceMain</button>:<div><button style={{background:'black'}} disabled onClick={handleHorse}>HorceRaceMain <p style={{color:'red'}}>You don't have enough credit</p></button></div>}
+            <div className="container-accueil-auto">
+                <MainBarUser />
+                <div className="spacenav"></div>
+                <div className="bored"><Bored /></div>
+                <div className='main-container-game'>
+                    <h2>Choose which game you want to play.</h2>
+                    <div className="containerGames">
+                        {credit >= 10 ? <button onClick={handleHorse}>HorceRaceMain</button> : <div><button style={{ background: 'black' }} disabled onClick={handleHorse}>HorceRaceMain <p style={{ color: 'red' }}>You don't have enough credit</p></button></div>}
+                    </div>
                 </div>
             </div>
         </div>

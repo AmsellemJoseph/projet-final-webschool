@@ -13,9 +13,7 @@ const Token = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            console.log(tokenLocal);
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-            console.log(tokTemp.data);
             if (tokTemp.data == 1) {
                 history.push('/accueil')
             } else {

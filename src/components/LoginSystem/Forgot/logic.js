@@ -25,7 +25,6 @@ class ForgotLogic {
 
     mailSendingReset = async () => {
         const mailLower = this.mail.toLocaleLowerCase();
-        console.log(mailLower);
         
         const verifMail = await axios.post(`${this.server}/sendmailreset`, { params: { mailLower } })
         return verifMail;
