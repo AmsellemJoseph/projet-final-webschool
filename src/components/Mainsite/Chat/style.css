@@ -14,6 +14,7 @@
 }
 
 .chatroom{
+
     margin: auto;
     padding-top:60px;
     width:96%;
@@ -31,21 +32,30 @@
 }
 .chatroom .user{
     font-weight: bold;
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    padding:0 10px
 }
 .chatroom .text{
-    /* font-weight: bold; */
-    padding: 0 5px;
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    /* padding: 0 5px; */
     margin-bottom: 5px;
+    padding:0 20px;
+    margin:0 20px
 }
 
 .container-main-chatroom{
     width:100%;
     height:75vh;
+    
 }
 .container-message{
     width:100%;
     height:auto;
-    background: #f1f1f1;
+    
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(69,69,69,1) 50%, rgba(0,0,0,1) 100%);
     display: flex;
 }
 
@@ -68,35 +78,128 @@
 
 }
 .inbl{
-    padding:0 20px;
+    /* padding:0 20px; */
     display:inline-block;
-    background: #9c3cff;
-    border-radius: 15px;
+    /* background: #9c3cff; */
+    background:green;
+    border: 2px solid #000;
+    color: black;
+    
+    /* border-radius: 15px; */
     /* box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4; */
 }
 .inbl-g{
-    padding:0 20px;
+    /* padding:0 20px; */
     display:inline-block;
-    background: #71f6ff;
-    border-radius: 15px;
+    /* background: #71f6ff; */
+    /* border-radius: 15px; */
     /* box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4; */
+    background:red;
+    border: 2px solid black;
+    color: black;
 }
 .infos-sender{
     width: 100%;
     display: flex;
     flex-direction:row-reverse;
     margin-top:4px;
+    justify-content:flex-start;
 }
 .infos-sender-g{
     width: 100%;
     display: flex;
     flex-direction:row;
     margin-top:4px;
+    justify-content:space-between;
+    
 }
 .infos-sender p{
     margin:10px;
+    /* font-family: 'Press Start 2P'; */
 }
 
 .message p{
     margin-right: 15px;
+    /* font-family: 'Press Start 2P';
+    font-size: 16px; */
+}
+
+.signin-chatroom{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.signin-button{
+    width:250px;
+    height:75px;
+    border:none;
+    outline: none;
+    font-family: 'Press Start 2P';
+    color: green;
+    background: #000;
+    border: 2px solid green;
+}
+.signin-button:hover{
+    color: #000;
+    border: 2px solid #000;
+    background: green;
+}
+.signout-button{
+    width:150px;
+    height:40px;
+    border:none;
+    outline: none;
+    font-family: 'Press Start 2P';
+    color: green;
+    background: #000;
+    border: 2px solid green;
+}
+.signout-button:hover{
+    color: #000;
+    border: 2px solid #000;
+    background: green;
+}
+/* .img-sender{
+   margin-right: -10px;
+   margin-left:5px
+}
+.img-sender-g{
+   margin-left: -100px;
+} */
+.text-form{
+    width:100%;
+    display: flex;
+}
+
+.text-form input{
+    width:100%;
+    height:30px;
+    border:none;
+    outline:none;
+    padding-left:20px;
+    border-radius:0px 0px 0px 3px;
+    font-family: 'Press Start 2P';
+    background:black;
+    color:green
+}
+
+.text-form button{
+    width:10%;
+    height:30px;
+    padding-left:20px;
+    border-radius:0px 0px 3px 0px;
+    border:none;
+    outline: none;
+    font-family: 'Press Start 2P';
+    color: black;
+    background: green;
+    /* border: 2px solid green; */
+}
+.text-form button:hover{
+    color: green;
+    border: 2px solid green;
+    background: black;
 }

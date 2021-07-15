@@ -3,6 +3,7 @@ import MainBarUser from '../NavBarUser/MainBarUser'
 import Avatar from '@material-ui/core/Avatar';
 import './style.css'
 import ScrollToBottom from 'react-scroll-to-bottom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import firebase from "firebase/app";
@@ -45,10 +46,11 @@ const Chat = () => {
 
     return (
         <div className="main">
-            {/* <MainBarUser /> */}
+            <MainBarUser />
             <div>
-                {user ? (<div className="chatroom"><h2>Amazing chat</h2><Chatroom /></div>) : <SignIn />}
-                <SignOut />
+            
+                {user ? (<div className="chatroom"><SignOut /><Chatroom /></div>) : <div className="signin-chatroom"><SignIn /></div>}
+                
             </div>
         </div>
     )
@@ -62,11 +64,11 @@ const Chat = () => {
         const signInAnonymously = () => {
             const provider = new firebase.auth().signInAnonymously()
         }
-        return <button onClick={signInAnonymously} >Sign in </button>
+        return <button className="signin-button" onClick={signInAnonymously} >Sign in </button>
     }
     function SignOut() {
         return auth.currentUser && (
-            <button onClick={() => auth.signOut()} >Sign Out</button>
+            <button className="signout-button" onClick={() => auth.signOut()} >Sign Out</button>
         )
     }
     function Chatroom() {
@@ -107,11 +109,11 @@ const Chat = () => {
                 <div ref={messagesEndRef} />
             </ScrollToBottom>
             <form onSubmit={sendMessage}>
+                <div className="text-form">
+                    <input value={formValue}  onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
 
-                <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
-
-                <button type="submit" disabled={!formValue}>🕊️</button>
-
+                    <button type="submit"  disabled={!formValue}><FontAwesomeIcon icon={['fas','paper-plane']} style={{width:'100%'}} /></button>
+                </div>
             </form>
         </>)
     }
@@ -125,7 +127,7 @@ const Chat = () => {
                 <div className={uid == username ? "message" : "message-g"}>
                     <div className={uid == username ? "inbl" : "inbl-g"}>
                         <div className={uid == username ? "infos-sender" : "infos-sender-g"}>
-                            <Avatar src={photoURL} />
+                            <Avatar className={username ? 'img-sender' : 'img-sender-g'} src={photoURL} />
                             <p className="user">{uid}</p>
                         </div>
                         <p className="text">{text}</p>

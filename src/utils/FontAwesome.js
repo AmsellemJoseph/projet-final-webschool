@@ -8,13 +8,15 @@ import {faSpaceShuttle as fasSpaceShuttle} from '@fortawesome/free-solid-svg-ico
 import {faAngleDoubleRight as fasAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {faBars as fasBars} from '@fortawesome/free-solid-svg-icons';
 import {faTimes as fasTimes} from '@fortawesome/free-solid-svg-icons';
+import {faPaperPlane as fasPaperPlane} from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     fasPortrait,
     fasSpaceShuttle,
     fasAngleDoubleRight,
     fasBars,
-    fasTimes
+    fasTimes,
+    fasPaperPlane,
 
     // more icons go here
 );
