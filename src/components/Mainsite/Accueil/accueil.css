@@ -1,6 +1,14 @@
 html{
     background-color: #1a1e4d;
 }
+.containerGames{
+    margin: auto;
+    width: 80%;
+    height:auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 .containerGames button{
     cursor: pointer;
     border:none;
@@ -13,8 +21,6 @@ html{
     border:2px solid #21d2fe;
     transition: all 0.3s ease-in-out;
     background:#0d122f
-    
-
 }
 .containerGames button:hover{
     color:#21d2fe;
@@ -36,11 +42,4 @@ html{
     color: #21d2fe;
     margin-bottom: 20px;
     font-family: 'Audiowide';
-}
-.containerGames{
-    margin: auto;
-    width: 80%;
-    height:auto;
-    display:flex;
-    flex-wrap: wrap;
 }
