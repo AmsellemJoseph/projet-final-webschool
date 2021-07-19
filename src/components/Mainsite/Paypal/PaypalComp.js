@@ -17,8 +17,7 @@ const PaypalComp = () => {
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
         }

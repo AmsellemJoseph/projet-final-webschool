@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Token from '../../../../utils/Token'
 import './style.css'
@@ -8,7 +8,7 @@ const axios = require('axios');
 
 
 
-const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
+const HorceRaceResult = ({ ind }) => {
 
     useEffect(() => {
         const tok = async () => {
@@ -17,12 +17,10 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
         }
@@ -38,14 +36,8 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
 
     const [flag, setFlag] = useState(false)
 
-    const [win, setWin] = useState('');
-    const [loose, setLoose] = useState('');
 
-    const dispatch = useDispatch();
 
-    const looseCredit = async (mail, mise) => {
-        return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
-    }
     const winCredits = async (mail, gain) => {
         return await axios.put(`http://localhost:2108/registration/creditsplus`, { params: { mail, gain } })
     }
@@ -58,7 +50,6 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
             const mise = nbrHorse.mise
             const nbrHorses = nbrHorse.nbrHorse;
             if (nbrHorse.choix != (ind + 1)) {
-                setLoose("YOU LOOSE!!")
             }
             // if (nbrHorse.choix == ind) {
             else {
@@ -83,7 +74,6 @@ const HorceRaceResult = ({ tempsTotal, petitTemps, ind }) => {
                 }
                 await axios.post("http://localhost:2108/registration/sendresulthorse", { params: { result } })
                 winCredits(mail, gain)
-                setWin("YOU WON!!")
                 setFlag(true)
             }
 

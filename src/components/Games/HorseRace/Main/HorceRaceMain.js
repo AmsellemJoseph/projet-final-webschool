@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../../../Mainsite/NavBarUser/NavBar'
+import MainBarUser from '../../../Mainsite/NavBarUser/MainBarUser'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Token from '../../../../utils/Token'
@@ -23,8 +23,7 @@ const HorceRaceMain = () => {
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
         }
@@ -88,7 +87,7 @@ const HorceRaceMain = () => {
         })
         const nameGame = "horseGame"
         const incrGame = axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
-        if(incrGame){
+        if (incrGame) {
             history.push('/horseracegame')
         }
 
@@ -103,15 +102,15 @@ const HorceRaceMain = () => {
 
     return (
         <div className="container-main-Race">
-            {race ? null : <Token />}
-            {/* <NavBar/> */}
+            {/* {race ? null : <Token />} */}
+            <MainBarUser />
             <h2>STAR RACE GAME</h2>
 
             <div className="container-form-race">
 
                 <form action="" method="post">
                     <div className="form-par">
-
+                        <h3>Choose the number of ships for the race, then the ships on which you bet your credits, pray, and WIN !!</h3>
                         <label htmlFor="credit">How many credit (s) do you want to bet?</label>
                         <input type="number"
                             onChange={handleChangeMise} defaultValue='10' min='10' max={getUser.credit} />

@@ -12,6 +12,7 @@ const axios = require('axios')
 const HorseRaceGame = () => {
 
     const history = useHistory();
+    const [countDown,setCountDown] = useState(0)
 
     const looseCredit = async (mail, mise) => {
         return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
@@ -39,8 +40,7 @@ const HorseRaceGame = () => {
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
         }
@@ -103,12 +103,34 @@ const HorseRaceGame = () => {
             petitTemps = tempsTotal[i];
         }
     }
+    const [grandTemps,setGrandTemps] = useState(0)
+
+    for (let i = 0; i < tempsTotal.length; i++) {
+        if (tempsTotal[i] > grandTemps) {
+            setGrandTemps(tempsTotal[i]);
+        }
+    }
 
     const ind = tempsTotal.indexOf(petitTemps)
 
-    setTimeout(() => {
-        setFlag(true);
-    }, 20000);
+    // setTimeout(() => {
+    //     setFlag(true);
+    // }, 20000);
+
+    useEffect(() => {
+        const countGame = ()=>{
+            var x=null;
+            x = setInterval(() => {
+                setCountDown(countDown+1)
+            }, 1000);
+            if(countDown>=grandTemps+1){
+                clearInterval(x)
+                setFlag(true)
+            }
+        }
+        countGame();
+    },[countDown])
+
     return (<>
         {race ? null : <Token />}
         {flag ? <HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal} ind={ind} /> :

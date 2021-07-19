@@ -23,8 +23,7 @@ const Accueil = () => {
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
             const userCredit = await axios.post('http://localhost:2108/registration/getcredit', { params: { mailCredit } })
@@ -39,6 +38,12 @@ const Accueil = () => {
         })
         history.push('/horserace')
     }
+    const handleClicker = () => {
+        dispatch({
+            type: "SETCLICKER"
+        })
+        history.push('/clicker')
+    }
 
     return (
         <div className='container-accueil'>
@@ -49,7 +54,8 @@ const Accueil = () => {
                 <div className='main-container-game'>
                     <h2>Choose which game you want to play.</h2>
                     <div className="containerGames">
-                        {credit >= 10 ? <button onClick={handleHorse}>HorceRaceMain</button> : <div><button style={{ background: 'black' }} disabled onClick={handleHorse}>HorceRaceMain <p style={{ color: 'red' }}>You don't have enough credit</p></button></div>}
+                        {credit >= 10 ? <button onClick={handleHorse}>STAR RACE GAME<p style={{marginTop:'10px'}}>min bet: 10 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleHorse}>STAR RACE GAME<p style={{ color: 'red',marginTop:'10px' }}>You don't have enough credit</p></button></div>}
+                        {credit >= 50 ? <button onClick={handleClicker}>Clicker Mania<p style={{marginTop:'10px'}}>min bet: 50 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleClicker}>Clicker Mania <p style={{ color: 'red',marginTop:'10px' }}>You don't have enough credit</p></button></div>}
                     </div>
                 </div>
             </div>

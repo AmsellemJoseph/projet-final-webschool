@@ -20,8 +20,7 @@ const Login = () => {
             if (tokTemp.data == 1) {
                 history.push('/accueil')
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
             }
         }
 

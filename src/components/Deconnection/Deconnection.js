@@ -24,9 +24,10 @@ const Deconnection = () => {
         dispatch({
             type: "DESTROY"
         })
-        localStorage.setItem("logged", JSON.stringify(false))
-        localStorage.setItem("user", JSON.stringify(""))
-        localStorage.setItem("token", JSON.stringify(""))
+        localStorage.clear()
+        // localStorage.setItem("logged", JSON.stringify(false))
+        // localStorage.setItem("user", JSON.stringify(""))
+        // localStorage.setItem("token", JSON.stringify(""))
         history.push('/');
     }
 
