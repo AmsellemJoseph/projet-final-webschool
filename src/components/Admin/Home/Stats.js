@@ -26,9 +26,7 @@ const Stats = (props) => {
             setWin(win.data)
         }
         getStats()
-    }, [])
-
-    console.log(win)
+    }, [])  
 
 
     return (
@@ -49,9 +47,9 @@ const Stats = (props) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Player</td>
-                            <td>Credits won</td>
-                            <td>Date</td>
+                            <td style={{fontWeight:'bold'}}>Player</td>
+                            <td style={{fontWeight:'bold'}}>Credits won</td>
+                            <td style={{fontWeight:'bold'}}>Date</td>
                         </tr>
                     {win.length ? win.map((map,i) => {
                         const formData = new Date(map.date)

@@ -259,6 +259,27 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             res.send(true);
         })
 
+        route.put("/addgameclick", (req, res) => {
+            console.log(req.body.params.mail)
+            const mail = req.body.params.mail.mail
+            console.log(mail)
+            const query = { mail: mail }
+            const replacement = { $inc: { nbrClick: 1 } }
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query, replacement, options)
+            res.send(true)
+        })
+        route.put("/addgamerace", (req, res) => {
+            console.log(req.body.params.mail)
+            const mail = req.body.params.mail.mail
+            console.log(mail)
+            const query = { mail: mail }
+            const replacement = { $inc: { nbrRace: 1 } }
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query, replacement, options)
+            res.send(true)
+        })
+
         route.get("/getnbr", (req, res) => {
             const nameGame = req.query.nameGame
             db.collection("nbrgamesplayed").findOne({ nameGame: nameGame })

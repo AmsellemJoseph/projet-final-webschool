@@ -129,6 +129,8 @@ class Registering {
             created:Date.now(),
             lastConnection:Date.now(),
             nbrConnection:0,
+            nbrClick:0,
+            nbrRacce:0,
         }
         const create = await axios.post(`${this.server}/createuser`, { params: { newUser } })
         return create;

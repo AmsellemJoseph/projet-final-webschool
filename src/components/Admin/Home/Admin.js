@@ -4,6 +4,9 @@ import Deconnection from '../../Deconnection/Deconnection'
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
 import Stats from './Stats'
+import PlayersInfos from './PlayersInfos'
+import PlayersGame from './PlayersGame'
+import PlayersStats from './PlayersStats'
 
 import './style.css'
 const axios = require('axios')
@@ -12,14 +15,14 @@ const Admin = () => {
 
     const history = useHistory();
 
-    const [stat,setStat]=useState([
+    const [stat, setStat] = useState([
         {
-            nameGame : "horseGame",
-            coll : "horsesgames"
+            nameGame: "horseGame",
+            coll: "horsesgames"
         },
         {
-            nameGame : "clickGame",
-            coll : "clickgames"
+            nameGame: "clickGame",
+            coll: "clickgames"
         },
     ])
 
@@ -35,8 +38,7 @@ const Admin = () => {
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
-                localStorage.setItem("token", JSON.stringify(""))
-                localStorage.setItem("user", JSON.stringify(""))
+                localStorage.clear()
                 history.push('/login')
             }
             // if (admin.admin != true) {
@@ -61,14 +63,22 @@ const Admin = () => {
 
     return (
         <div className="main-container-admin-page">
-            <MainBarAdmin/>
-            <div>
-                <h3 style={{fontSize:'20px',paddingTop:'100px',marginBottom:'25px',fontFamily:'Audiowide',color:"#71f6ff"}}>Statistics</h3>
+            <MainBarAdmin />
+            <div className="players">
+                <h3 style={{ fontSize: '20px', paddingTop: '100px', marginBottom: '25px', fontFamily: 'Audiowide', color: "#71f6ff" }}>Players</h3>
+                <div className="container-player">
+                    <PlayersInfos />
+                    <PlayersGame />
+                    <PlayersStats />
+                </div>
+            </div>
+            <div className="stats">
+                <h3 style={{ fontSize: '20px', paddingTop: '100px', marginBottom: '25px', fontFamily: 'Audiowide', color: "#71f6ff" }}>Statistics</h3>
                 <div className="container-stats">
-                    {stat.map((stat,i)=>{
-                        return <Stats key={i} nameGame={stat.nameGame} coll={stat.coll}  />
+                    {stat.map((stat, i) => {
+                        return <Stats key={i} nameGame={stat.nameGame} coll={stat.coll} />
                     })}
-                    
+
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@
     width:300px;
     display:flex;
     justify-content:center;
+    margin: 25px;
 }
 
 .container-info{
@@ -29,7 +30,7 @@
     box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4;
 
 }
-.container-stats{
+.container-stats,.container-player{
     width:100%;
     height:auto;
     display: flex;
@@ -44,4 +45,12 @@ td{
     border: 1px solid #1a1e4d;
     border-collapse: collapse;
     color: #1a1e4d;
+}
+
+
+.main-container-users{
+    width:300px;
+    display:flex;
+    justify-content:center;
+    margin: 25px;
 }

@@ -15,11 +15,11 @@ const ClickerMain = () => {
     const [mise, setMise] = useState(50);
 
     const dispatch = useDispatch();
+    const mail = JSON.parse(localStorage.getItem('user'))
 
 
     useEffect(() => {
         const tok = async () => {
-            const mail = JSON.parse(localStorage.getItem('user'))
             const tokenLocal = JSON.parse(localStorage.getItem('token'))
             if (!mail || !tokenLocal) {
                 history.push('/login')
@@ -58,7 +58,7 @@ const ClickerMain = () => {
         }
     }
 
-    const letsGo = (e) => {
+    const letsGo = async (e) => {
         e.preventDefault()
         dispatch({
             type: "MISECLICKER",
@@ -68,9 +68,12 @@ const ClickerMain = () => {
             type: "SETCLICKER",
         })
         const nameGame = "clickGame"
-        const incrGame = axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
-        if (incrGame) {
-            history.push('/clickercount')
+        const addGame = await axios.put('http://localhost:2108/registration/addgameclick', { params: { mail } })
+        if (addGame) {
+            const incrGame = await axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
+            if (incrGame) {
+                history.push('/clickercount')
+            }
         }
     }
 

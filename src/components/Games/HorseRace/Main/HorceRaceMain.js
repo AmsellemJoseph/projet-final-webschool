@@ -7,6 +7,7 @@ import './style.css'
 const axios = require('axios')
 
 
+const mail = JSON.parse(localStorage.getItem('user'))
 
 
 const HorceRaceMain = () => {
@@ -14,7 +15,6 @@ const HorceRaceMain = () => {
     const [getUser, setUser] = useState({})
     useEffect(() => {
         const tok = async () => {
-            const mail = JSON.parse(localStorage.getItem('user'))
             const tokenLocal = JSON.parse(localStorage.getItem('token'))
             if (!mail || !tokenLocal) {
                 history.push('/login')
@@ -86,9 +86,12 @@ const HorceRaceMain = () => {
             type: "SETRACE"
         })
         const nameGame = "horseGame"
-        const incrGame = axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
-        if (incrGame) {
-            history.push('/horseracegame')
+        const addGame = await axios.put('http://localhost:2108/registration/addgamerace', { params: { mail } })
+        if (addGame) {
+            const incrGame = await axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
+            if (incrGame) {
+                history.push('/horseracegame')
+            }
         }
 
     }

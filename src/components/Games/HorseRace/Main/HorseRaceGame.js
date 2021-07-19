@@ -121,8 +121,8 @@ const HorseRaceGame = () => {
         const countGame = ()=>{
             var x=null;
             x = setInterval(() => {
-                setCountDown(countDown+1)
-            }, 1000);
+                setCountDown(countDown+3)
+            }, 3000);
             if(countDown>=grandTemps+1){
                 clearInterval(x)
                 setFlag(true)
