@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import MainBarUser from '../../Mainsite/NavBarUser/MainBarUser'
 import Token from '../../../utils/Token'
 import './style.css'
@@ -12,6 +13,8 @@ const ClickerMain = () => {
 
     const [getUser, setUser] = useState({})
     const [mise, setMise] = useState(50);
+
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -57,7 +60,18 @@ const ClickerMain = () => {
 
     const letsGo = (e) => {
         e.preventDefault()
-        history.push('/clickercount')
+        dispatch({
+            type: "MISECLICKER",
+            payload: mise
+        })
+        dispatch({
+            type: "SETCLICKER",
+        })
+        const nameGame = "clickGame"
+        const incrGame = axios.put("http://localhost:2108/registration/incrgame", { params: { nameGame } })
+        if (incrGame) {
+            history.push('/clickercount')
+        }
     }
 
 

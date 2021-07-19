@@ -240,6 +240,15 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
+        route.post("/sendresultclick", (req, res) => {
+            const result = req.body.params.result;
+            console.log(result)
+            db.collection("clickgames").insertOne(result)
+                .then((result) => {
+                    res.send(true)
+                })
+                .catch((err) => { console.log(err) })
+        })
 
         route.put("/incrgame", (req, res) => {
             const nameGame = req.body.params.nameGame;

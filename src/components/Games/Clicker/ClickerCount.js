@@ -12,7 +12,6 @@ const ClickerCount = () => {
     const {clickCount} = useSelector(state => ({
         ...state.clickerReducer
     }))
-    console.log(clickCount)
 
     useEffect(()=>{
         var x=null

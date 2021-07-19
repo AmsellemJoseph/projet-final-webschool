@@ -1,5 +1,6 @@
 const initialState ={
-    clickCount:0
+    clickCount:0,
+    miseClick:0,
 }
 
 export default function clickerReducer (state = initialState,action){
@@ -9,6 +10,12 @@ export default function clickerReducer (state = initialState,action){
             return{
                 ...state,
                 clickCount:state.clickCount+1
+            }
+        }
+        case "MISECLICKER":{
+            return{
+                ...state,
+                miseClick:action.payload
             }
         }
         default:{

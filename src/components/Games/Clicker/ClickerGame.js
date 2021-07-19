@@ -3,22 +3,47 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './style.css'
 
+const axios = require('axios')
+
 
 const ClickerGame = () => {
 
     const history = useHistory();
     const [countDown, setCountDown] = useState(15)
 
-    const { clickCount } = useSelector(state => ({
-        ...state.clickerReducer
+    const { clickCount, miseClick, clicker } = useSelector(state => ({
+        ...state.clickerReducer,
+        ...state.gameLauncherReducer
     }))
-    console.log(clickCount)
+
+    useEffect(() => {
+        const setGame = () => {
+            if (!clicker) {
+                history.push('/')
+            }
+        }
+        setGame();
+    }, [])
+
+    const looseCredit = async (mail, mise) => {
+        return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
+    }
+
+    useEffect(() => {
+
+        const credits = async () => {
+            const userTemp = JSON.parse(localStorage.getItem('user'))
+            const mail = userTemp.mail
+            const mise = miseClick
+            looseCredit(mail, mise)
+        }
+        credits()
+
+    }, [])
 
     const dispatch = useDispatch();
 
     const clickButton = (e) => {
-        console.log(e.target.key)
-        // KeyboardEvent.repeat(false)
         dispatch({
             type: 'ADDCLICKGAME'
         })
@@ -47,7 +72,6 @@ const ClickerGame = () => {
         <div className="container-game">
             <h2 className="number-clicks">Countdown: {countDown}s</h2>
             <h2 className="number-clicks">Number of clicks: {clickCount}</h2>
-            {/* <div onClick={clickButton} className="button-push"></div> */}
             <button className="button-push" onKeyPress={handleKey} onClick={clickButton}></button>
         </div>
     )

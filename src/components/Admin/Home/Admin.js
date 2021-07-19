@@ -16,7 +16,11 @@ const Admin = () => {
         {
             nameGame : "horseGame",
             coll : "horsesgames"
-        }
+        },
+        {
+            nameGame : "clickGame",
+            coll : "clickgames"
+        },
     ])
 
     const admin = JSON.parse(localStorage.getItem('admin'));

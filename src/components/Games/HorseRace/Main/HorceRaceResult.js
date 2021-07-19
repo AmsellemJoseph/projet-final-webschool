@@ -94,7 +94,7 @@ const HorceRaceResult = ({ ind }) => {
             {race ? null : <Token />}
             {flag ? <div className="container-result-win">
                 <h2>CONGRATULATION</h2>
-                <p>You won {gainCredit} tokens</p>
+                <p>You won {gainCredit} credits</p>
                 <a href="/">Main menu</a>
             </div> : <div className="container-result-loose">
                 <a href="/">Main menu</a></div>}
