@@ -10,8 +10,7 @@ export default function horseReducer(state = initialState, action) {
                 nbrHorse: action.payload
             }
         }
-        default: {
+        default:
             return state
-        }
     }
 }

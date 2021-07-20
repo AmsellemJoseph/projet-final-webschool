@@ -16,8 +16,7 @@ export default function userInfoReducer(state = initialState, action) {
                 user: ""
             }
         }
-        default: {
+        default:
             return state
-        }
     }
 }

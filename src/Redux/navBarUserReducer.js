@@ -23,10 +23,7 @@ export default function navBarUserReducer(state = initialState, action) {
                 sidebar: false
             }
         }
-        default: {
-            return {
-                state
-            }
-        }
+        default:
+            return state
     }
 }

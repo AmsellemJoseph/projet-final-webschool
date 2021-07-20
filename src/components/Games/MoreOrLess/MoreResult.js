@@ -3,18 +3,28 @@ import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 const axios = require('axios')
 
-const ClickerResult = () => {
+const MoreResult = () => {
 
-    
 
-    const { clickCount, miseClick } = useSelector(state => ({
-        ...state.clickerReducer
+
+    const { miseMoreOrLess, countMore, moreOrLess } = useSelector(state => ({
+        ...state.moreOrLessReducer,
+        ...state.gameLauncherReducer
     }))
 
+    const history = useHistory();
     const [flag, setFlag] = useState(false)
     const [gain, setGain] = useState(0)
     const { mail, username } = JSON.parse(localStorage.getItem('user'))
 
+    useEffect(() => {
+        const setGame = () => {
+            if (!moreOrLess) {
+                history.push('/')
+            }
+        }
+        setGame();
+    }, [])
 
     const winCredits = async (mail, gain) => {
         return await axios.put(`http://localhost:2108/registration/creditsplus`, { params: { mail, gain } })
@@ -25,20 +35,20 @@ const ClickerResult = () => {
 
         const resultGame = async () => {
 
-            if (clickCount > 80) {
+            if (countMore > 0) {
                 setFlag(true)
-                if (clickCount === 80) {
-                    setGain(miseClick)
-                } else if (clickCount <= 90) {
-                    setGain(miseClick * 1.5)
-                } else if (clickCount <= 100) {
-                    setGain(miseClick * 2)
-                } else if (clickCount <= 150) {
-                    setGain(miseClick * 3)
-                } else if (clickCount <= 200) {
-                    setGain(miseClick * 5)
+                if (countMore <= 5) {
+                    setGain(miseMoreOrLess)
+                } else if (countMore <= 7) {
+                    setGain(miseMoreOrLess * 1.5)
+                } else if (countMore <= 10) {
+                    setGain(miseMoreOrLess * 2)
+                } else if (countMore <= 12) {
+                    setGain(miseMoreOrLess * 3)
+                } else if (countMore <= 13) {
+                    setGain(miseMoreOrLess * 5)
                 } else {
-                    setGain(miseClick * 10)
+                    setGain(miseMoreOrLess * 10)
                 }
 
             }
@@ -46,10 +56,10 @@ const ClickerResult = () => {
                 const result = {
                     username: username,
                     date: Date.now(),
-                    clickCount: clickCount,
+                    try: 15 - countMore,
                     gain: gain,
                 }
-                await axios.post("http://localhost:2108/registration/sendresultclick", { params: { result } })
+                await axios.post("http://localhost:2108/registration/sendresultmore", { params: { result } })
                 winCredits(mail, gain)
             }
         }
@@ -69,4 +79,4 @@ const ClickerResult = () => {
     )
 }
 
-export default ClickerResult
+export default MoreResult

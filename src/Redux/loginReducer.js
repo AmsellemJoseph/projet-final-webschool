@@ -65,8 +65,7 @@ export default function loginReducer(state = initialState, action) {
                 showForgot:false
             }
         }
-        default:{
-            return state;
-        }
+        default:
+            return state
     }
 }

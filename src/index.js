@@ -13,6 +13,7 @@ import gameLauncherReducer from './Redux/gameLauncherReducer'
 import loadingReducer from './Redux/loadingReducer'
 import navBarUserReducer from './Redux/navBarUserReducer'
 import clickerReducer from './Redux/clickerReducer'
+import moreOrLessReducer from './Redux/moreOrLessReducer'
 import './utils/FontAwesome'
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   loadingReducer,
   navBarUserReducer,
   clickerReducer,
+  moreOrLessReducer,
 })
 
 const store = createStore(rootReducer)

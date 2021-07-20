@@ -32,9 +32,8 @@ export default function userLoggedReducer(state = initialState, action) {
                 admin: false,
             }
         }
-        default: {
+        default:
             return state
-        }
     }
 
 }

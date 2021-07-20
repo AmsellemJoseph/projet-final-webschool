@@ -1,0 +1,133 @@
+.main-container-admin-page{
+    width:100%;
+    height: 100vh;
+    background: #1a1e4d;
+
+}
+
+.main-container-admin-page h2{
+    font-family: 'Audiowide';
+    color:#71f6ff ;
+    font-size:25px;
+    padding-top: 25px;
+    margin-bottom: 50px;
+}
+
+.main-container-stat{
+    width:300px;
+    display:flex;
+    justify-content:center;
+    margin: 25px;
+}
+
+.container-info{
+    width:300px;
+    height:auto;
+    background:#9c3cff;
+    padding: 10px 5px;
+    margin:10px 5px;
+    border-radius: 5px;
+    box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4;
+
+}
+.container-stats,.container-player{
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-wrap: wrap;
+    background: #1a1e4d;
+    justify-content:center
+}
+table{
+    border-collapse: collapse;
+}
+td{
+    border: 1px solid #1a1e4d;
+    border-collapse: collapse;
+    color: #1a1e4d;
+}
+
+
+.main-container-users{
+    width:300px;
+    display:flex;
+    justify-content:center;
+    margin: 25px;
+}
+
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+.main-container-more{
+    width:100%;
+    height:100vh;
+    background-color: #0d122f;
+    background:url('../../../assets/img/more.jpg') no-repeat center/cover;
+}
+
+.main-container-more h2{
+    font-family: 'Audiowide';
+    font-size:16px;
+    margin-bottom:50px;
+    color:#0d122f;
+}
+.main-container-more p{
+    font-family: 'Audiowide';
+    font-size:16px;
+    margin-bottom:50px;
+    color:#0d122f;
+}
+
+.container-form-more{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.container-form-more form{
+    display:flex;
+    flex-direction:column;
+    width:300px;
+    height:auto;
+    background:#9c3cff;
+    padding:25px;
+    border-radius: 5px;
+    box-shadow: 8px 8px 26px 8px #71f6ff,-8px -8px 26px 8px #71f6ff;
+}
+
+.btn-sub-change{
+    background:#71f6ff;
+    color: #0d122f;
+    border: none;
+    outline: none;
+    height:25px;
+    font-family: 'Audiowide';
+    font-family: 'Audiowide';
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-sub-change:hover{
+    background:#0d122f;
+    color:#71f6ff;
+}
+
+.container-form-more input[type="number"]{
+    outline: none;
+    border:none;
+    color: #0d122f;
+    border-bottom: 1px solid #0d122f;
+    background: #9c3cff;
+    font-size:20px;
+    margin-bottom:20px;
+    height:25px;
+    
+}
+.container-form-more input[type="number"]::placeholder{
+    color:#0d122f;
+    font-family: 'Audiowide';
+}

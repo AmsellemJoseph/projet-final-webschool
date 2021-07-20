@@ -45,6 +45,13 @@ const Accueil = () => {
         history.push('/clicker')
     }
 
+    const handleMoreOrLess = () => {
+        dispatch({
+            type: "SETMOREORLESS"
+        })
+        history.push('/moreorless')
+    }
+
     return (
         <div className='container-accueil'>
             <div className="container-accueil-auto">
@@ -54,8 +61,9 @@ const Accueil = () => {
                 <div className='main-container-game'>
                     <h2>Choose which game you want to play.</h2>
                     <div className="containerGames">
-                        {credit >= 10 ? <button onClick={handleHorse}>STAR RACE GAME<p style={{marginTop:'10px'}}>min bet: 10 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleHorse}>STAR RACE GAME<p style={{ color: 'red',marginTop:'10px' }}>You don't have enough credit</p></button></div>}
-                        {credit >= 50 ? <button onClick={handleClicker}>Clicker Mania<p style={{marginTop:'10px'}}>min bet: 50 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleClicker}>Clicker Mania <p style={{ color: 'red',marginTop:'10px' }}>You don't have enough credit</p></button></div>}
+                        {credit >= 10 ? <button onClick={handleHorse}>STAR RACE GAME<p style={{ marginTop: '10px' }}>min bet: 10 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleHorse}>STAR RACE GAME<p style={{ color: 'red', marginTop: '10px' }}>You don't have enough credit</p></button></div>}
+                        {credit >= 50 ? <button onClick={handleClicker}>Clicker Mania<p style={{ marginTop: '10px' }}>min bet: 50 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleClicker}>Clicker Mania <p style={{ color: 'red', marginTop: '10px' }}>You don't have enough credit</p></button></div>}
+                        {credit >= 75 ? <button onClick={handleMoreOrLess}>More or less<p style={{ marginTop: '10px' }}>min bet: 75 credits</p></button> : <div><button style={{ background: 'black' }} disabled onClick={handleClicker}>Clicker Mania <p style={{ color: 'red', marginTop: '10px' }}>You don't have enough credit</p></button></div>}
                     </div>
                 </div>
             </div>

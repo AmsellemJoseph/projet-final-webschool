@@ -1,6 +1,7 @@
 const initialState = {
     race: false,
     clicker: false,
+    moreOrLess: false,
 }
 
 export default function gameLauncherReducer(state = initialState, action) {
@@ -9,26 +10,35 @@ export default function gameLauncherReducer(state = initialState, action) {
             return {
                 ...state,
                 race: true,
-                clicker:false
+                clicker: false,
+                moreOrLess: false,
             }
         }
-        case "SETCLICKER":{
-            return{
+        case "SETCLICKER": {
+            return {
                 ...state,
-                race:false,
-                clicker:true,
+                race: false,
+                clicker: true,
+                moreOrLess: false,
             }
         }
-        case "RESETGAME":{
-            return{
+        case "SETMOREORLESS": {
+            return {
                 ...state,
-                race:false,
-                clicker:false
+                race: false,
+                clicker: false,
+                moreOrLess: true,
+            }
+        }
+        case "RESETGAME": {
+            return {
+                ...state,
+                race: false,
+                clicker: false,
+                moreOrLess: false,
             }
         }
         default:
-            return {
-                state
-            }
+            return state
     }
 }

@@ -11,16 +11,25 @@ const axios = require('axios')
 const Login = () => {
     const history = useHistory()
     const dispatch = useDispatch();
+    const [tokenLocal,setTokenLocal] = useState(localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):false)
+    const [mail,setMail] = useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):false)
 
     useEffect(() => {
         const tok = async () => {
-            const tokenLocal = JSON.parse(localStorage.getItem('token'))
-            const mail = JSON.parse(localStorage.getItem('user'))
-            const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-            if (tokTemp.data == 1) {
-                history.push('/accueil')
-            } else {
-                localStorage.clear()
+            // var tokenLocal = JSON.parse(localStorage.getItem('token'))
+            // var mail = JSON.parse(localStorage.getItem('user'))
+            // if(tokenLocal==null || mail==null){
+            //     tokenLocal=''
+            //     mail=''
+            // }
+            if (tokenLocal !==false && mail!==false) {
+                
+                const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
+                if (tokTemp.data == 1) {
+                    history.push('/accueil')
+                } else {
+                    localStorage.clear()
+                }
             }
         }
 
@@ -122,7 +131,7 @@ const Login = () => {
         }
         const user = {
             mail: info.data[0].mail,
-            username:info.data[0].username
+            username: info.data[0].username
         }
         const flag = await userCookie(user);
         if (info.data[0].admin == true) {

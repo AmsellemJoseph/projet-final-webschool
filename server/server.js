@@ -159,11 +159,13 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
         })
 
         route.post('/gettoken', (req, res) => {
-            const mail = req.body.params.mail.mail;
-            const tokenLocal = req.body.params.tokenLocal;
-            if (mail == null || tokenLocal == null) {
+            if (req.body.params.mail === null || req.body.params.tokenLocal === null) {
                 return res.send(false)
             }
+            const mail = req.body.params.mail.mail;
+            const tokenLocal = req.body.params.tokenLocal;
+            console.log(req.body.params.mail.mail)
+            console.log(tokenLocal)
             db.collection('users').find({ mail: mail }).toArray()
                 .then((result) => {
                     if (result[0].token == tokenLocal) {
@@ -173,6 +175,7 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                     }
                 })
                 .catch((err) => { console.log(err) })
+            // console.log(req.body)
         })
         route.put('/settoken', (req, res) => {
             const token = req.body.params.token
@@ -249,6 +252,15 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 })
                 .catch((err) => { console.log(err) })
         })
+        route.post("/sendresultmore", (req, res) => {
+            const result = req.body.params.result;
+            console.log(result)
+            db.collection("moreorlessgame").insertOne(result)
+                .then((result) => {
+                    res.send(true)
+                })
+                .catch((err) => { console.log(err) })
+        })
 
         route.put("/incrgame", (req, res) => {
             const nameGame = req.body.params.nameGame;
@@ -275,6 +287,16 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             console.log(mail)
             const query = { mail: mail }
             const replacement = { $inc: { nbrRace: 1 } }
+            const options = { "returnNewDocument": false };
+            db.collection("users").findOneAndUpdate(query, replacement, options)
+            res.send(true)
+        })
+        route.put("/addgamemoreorless", (req, res) => {
+            console.log(req.body.params.mail)
+            const mail = req.body.params.mail.mail
+            console.log(mail)
+            const query = { mail: mail }
+            const replacement = { $inc: { nbrMoreOrLess: 1 } }
             const options = { "returnNewDocument": false };
             db.collection("users").findOneAndUpdate(query, replacement, options)
             res.send(true)

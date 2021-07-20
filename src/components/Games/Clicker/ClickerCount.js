@@ -9,9 +9,19 @@ const ClickerCount = () => {
     const history = useHistory();
     const [count,setCount] = useState(3)
 
-    const {clickCount} = useSelector(state => ({
-        ...state.clickerReducer
+    const { clickCount, miseClick, clicker } = useSelector(state => ({
+        ...state.clickerReducer,
+        ...state.gameLauncherReducer
     }))
+
+    useEffect(() => {
+        const setGame = () => {
+            if (!clicker) {
+                history.push('/')
+            }
+        }
+        setGame();
+    }, [])
 
     useEffect(()=>{
         var x=null
