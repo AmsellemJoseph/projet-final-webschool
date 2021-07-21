@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import MainBarUser from '../../../Mainsite/NavBarUser/MainBarUser'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import Token from '../../../../utils/Token'
 import './style.css'
 const axios = require('axios')
 
@@ -104,7 +103,6 @@ const HorceRaceMain = () => {
 
     return (
         <div className="container-main-Race">
-            {/* {race ? null : <Token />} */}
             <MainBarUser />
             <h2>STAR RACE GAME</h2>
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import Token from '../../../../utils/Token'
 import HorseLine from './HorseLine'
 import './style.css'
 import HorceRaceResult from './HorceRaceResult'
@@ -132,7 +131,6 @@ const HorseRaceGame = () => {
     },[countDown])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (<>
-        {race ? null : <Token />}
         {flag ? <HorceRaceResult petitTemps={petitTemps} tempsTotal={tempsTotal} ind={ind} /> :
             <div className="horseracegame-main-container">
                 {temps.map((temp, i) => {

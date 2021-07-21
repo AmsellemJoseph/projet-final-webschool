@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import Token from '../../../../utils/Token'
 import './style.css'
 const axios = require('axios');
 
@@ -91,7 +90,6 @@ const HorceRaceResult = ({ ind }) => {
 
     return (
         <div className="container-result">
-            {race ? null : <Token />}
             {flag ? <div className="container-result-win">
                 <h2>CONGRATULATION</h2>
                 <p>You won {gainCredit} credits</p>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import MainBarUser from '../../Mainsite/NavBarUser/MainBarUser'
-import Token from '../../../utils/Token'
 import './style.css'
 
 const axios = require('axios')
@@ -23,8 +22,7 @@ const ClickerMain = () => {
             const tokenLocal = JSON.parse(localStorage.getItem('token'))
             if (!mail || !tokenLocal) {
                 history.push('/login')
-            }
-            const mailCredit = mail.mail
+            }   
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -80,7 +78,6 @@ const ClickerMain = () => {
 
     return (
         <div className="container-main-Race">
-            {/* {race ? null : <Token />} */}
             <MainBarUser />
             <h2>CLICKER MANIA</h2>
 

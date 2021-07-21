@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import MainBarUser from '../../Mainsite/NavBarUser/MainBarUser'
-import Token from '../../../utils/Token'
 import './style.css'
 
 const axios = require('axios')
@@ -84,7 +83,6 @@ const MoreOrLessMain = () => {
 
     return (
         <div className="container-main-Race">
-            {/* {race ? null : <Token />} */}
             <MainBarUser />
             <h2>MORE OR LESS</h2>
 
