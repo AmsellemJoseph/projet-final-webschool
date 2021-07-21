@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
 import UserDates from './UsersInfos/UserDates'
-import TableBase from './UsersInfos/TableBase'
+import UserGames from './UsersInfos/UserGames'
 
 import './style.css'
 const axios = require('axios')
@@ -65,7 +65,8 @@ const Admin = () => {
             <MainBarAdmin />
             <div className="main-container-users-tab">
                 <UserDates />
-                <TableBase/>
+                <UserGames />
+                {/* <TableBase/> */}
 
             </div>
 

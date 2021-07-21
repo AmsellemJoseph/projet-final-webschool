@@ -13,6 +13,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Avatar from '@material-ui/core/Avatar';
 
 const axios = require('axios')
 
@@ -147,15 +148,21 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   },
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
     backgroundColor:'#9c3cff',
+    minWidth: 300,
+    maxWidth:620,
+    boxShadow: '8px 8px 26px 8px #71f6ff,-8px -8px 26px 8px #71f6ff'
 
   },
   table: {
     minWidth: 300,
+    maxWidth:620,
   },
   tableRow:{
     borderTop:"1.02px solid #21d2fe",
@@ -204,14 +211,14 @@ export default function UserDates() {
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
-  function createData(username, created, last, nbrConn) {
-    return { username, created, last, nbrConn };
+  function createData(username, created, last, nbrConn,pic) {
+    return { username, created, last, nbrConn,pic };
   }
 
   const rows = users.map((user, i) => {
     const dateCreated = new Date(user.created)
     const dateLast = new Date(user.lastConnection)
-    return createData(user.username, dateCreated.toLocaleDateString(), dateLast.toLocaleDateString(), user.nbrConnection)
+    return createData(user.username, dateCreated.toLocaleDateString(), dateLast.toLocaleDateString(), user.nbrConnection,user.profilPic)
   })
 
   console.log(rows)
@@ -286,8 +293,8 @@ export default function UserDates() {
                       <TableCell className={classes.tableCell} padding="checkbox">
 
                       </TableCell>
-                      <TableCell className={classes.tableCell}  component="th" id={labelId} scope="row" padding="none">
-                        {row.username}
+                      <TableCell style={{display:'flex',border:'none',alignItem: 'center'}} className={classes.tableCell}  component="th" id={labelId} scope="row" padding="none">
+                      <Avatar style={{width:'25px',height:'25px',marginRight:'5px'}} src={process.env.PUBLIC_URL + `uploads/${row.pic}`}/>{row.username}
                       </TableCell>
                       <TableCell className={classes.tableCell} align="right">{row.created}</TableCell>
                       <TableCell className={classes.tableCell} align="right">{row.last}</TableCell>

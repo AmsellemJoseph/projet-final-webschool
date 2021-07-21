@@ -66,7 +66,7 @@ const MoreGame = () => {
         dispatch({
             type: "COUNTLEFT"
         })
-        if (countMore === 0) {
+        if (countMore === 1) {
             return history.push('/moreresult')
         }
     }
