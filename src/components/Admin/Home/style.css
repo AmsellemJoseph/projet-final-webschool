@@ -5,59 +5,7 @@
 
 }
 
-.main-container-admin-page h2{
-    font-family: 'Audiowide';
-    color:#71f6ff ;
-    font-size:25px;
-    padding-top: 25px;
-    margin-bottom: 50px;
-}
-
-.main-container-stat{
-    width:300px;
-    display:flex;
-    justify-content:center;
-    margin: 25px;
-}
-
-.container-info{
-    width:300px;
-    height:auto;
-    background:#9c3cff;
-    padding: 10px 5px;
-    margin:10px 5px;
-    border-radius: 5px;
-    box-shadow: 8px 8px 26px 8px #a465e4,-8px -8px 26px 8px #a465e4;
-
-}
-.container-stats,.container-player{
-    width:100%;
-    height:auto;
-    display: flex;
-    flex-wrap: wrap;
-    background: #1a1e4d;
-    justify-content:center;
-}
-table{
-    border-collapse: collapse;
-}
-td{
-    border: 1px solid #1a1e4d;
-    border-collapse: collapse;
-    color: #1a1e4d;
-}
-
-
-.main-container-users{
-    width:300px;
-    display:flex;
-    justify-content:center;
-    margin: 25px;
-}
-
-.auto{
-    width:100%;
-    height:auto;
-    background: red;
-    position:relative;
+.main-container-users-tab{
+    padding-top: 100px;
+    width:80%;
 }

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
-import Stats from './Stats'
-import PlayersInfos from './PlayersInfos'
-import PlayersGame from './PlayersGame'
-import PlayersStats from './PlayersStats'
+import UserDates from './UsersInfos/UserDates'
+import TableBase from './UsersInfos/TableBase'
 
 import './style.css'
 const axios = require('axios')
@@ -13,20 +11,30 @@ const Admin = () => {
 
     const history = useHistory();
 
-    const [stat] = useState([
-        {
-            nameGame: "horseGame",
-            coll: "horsesgames"
-        },
-        {
-            nameGame: "clickGame",
-            coll: "clickgames"
-        },
-        {
-            nameGame: "moreorlessgame",
-            coll: "moreorlessgame"
-        },
-    ])
+
+    // const [tableaux] = useState([
+    //     {
+    //         titre: 'Users',
+    //         headCells: [
+    //             { id: 'username', numeric: false, disablePadding: true, label: 'Username' },
+    //             { id: 'created', numeric: false, disablePadding: true, label: 'Created' },
+    //             { id: 'last', numeric: false, disablePadding: true, label: 'Last connection' },
+    //             { id: 'nbrConnection', numeric: true, disablePadding: true, label: 'Nbr of Connections' },
+    //         ],
+    //         rows: [
+    //             users.map((user,i) => {
+    //                 return {
+    //                     key:i,
+    //                     n0:user.username,
+    //                     n1:user.created,
+    //                     n2:user.lastConnection,
+    //                     n3:user.nbrConnection
+    //                 }
+    //             })
+    //         ]
+    //     },
+    // ])
+
 
     useEffect(() => {
         const verifAdmin = async () => {
@@ -35,21 +43,13 @@ const Admin = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
+
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
             } else {
                 localStorage.clear()
                 history.push('/login')
             }
-            // if (admin.admin != true) {
-            //     history.push('/')
-            //     console.log(admin.admin);
-            //     return localStorage.setItem('admin', JSON.stringify({ admin: false }));
-            // }
-            // console.log(admin.admin);
-            // localStorage.setItem('admin', JSON.stringify({ admin: false }));
-            // localStorage.setItem('logged', JSON.stringify(false));
-            // localStorage.setItem("user", JSON.stringify(""));
         }
         verifAdmin();
 
@@ -60,27 +60,15 @@ const Admin = () => {
 
 
 
-
     return (
         <div className="main-container-admin-page">
             <MainBarAdmin />
-            <div className="players">
-                <h3 style={{ fontSize: '20px', paddingTop: '100px', marginBottom: '25px', fontFamily: 'Audiowide', color: "#71f6ff" }}>Players</h3>
-                <div className="container-player">
-                    <PlayersInfos />
-                    <PlayersGame />
-                    <PlayersStats />
-                </div>
-            </div>
-            <div className="stats">
-                <h3 style={{ fontSize: '20px', paddingTop: '100px', marginBottom: '25px', fontFamily: 'Audiowide', color: "#71f6ff" }}>Statistics</h3>
-                <div className="container-stats">
-                    {stat.map((stat, i) => {
-                        return <Stats key={i} nameGame={stat.nameGame} coll={stat.coll} />
-                    })}
+            <div className="main-container-users-tab">
+                <UserDates />
+                <TableBase/>
 
-                </div>
             </div>
+
         </div>
     )
 }
