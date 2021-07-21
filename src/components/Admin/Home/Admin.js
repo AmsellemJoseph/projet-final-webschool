@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import Deconnection from '../../Deconnection/Deconnection'
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
 import Stats from './Stats'
@@ -15,7 +13,7 @@ const Admin = () => {
 
     const history = useHistory();
 
-    const [stat, setStat] = useState([
+    const [stat] = useState([
         {
             nameGame: "horseGame",
             coll: "horsesgames"
@@ -30,7 +28,6 @@ const Admin = () => {
         },
     ])
 
-    const admin = JSON.parse(localStorage.getItem('admin'));
     useEffect(() => {
         const verifAdmin = async () => {
             const mail = JSON.parse(localStorage.getItem('user'))
@@ -38,7 +35,6 @@ const Admin = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
             } else {

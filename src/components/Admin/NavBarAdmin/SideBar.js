@@ -2,7 +2,6 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import UserImg from './OptionsSideBar/UserImg'
 import Deconnection from '../../Deconnection/Deconnection'
-import Barre from '../../../utils/Barre'
 import './styleNavBarUser.css'
 
 

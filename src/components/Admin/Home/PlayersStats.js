@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Avatar from '@material-ui/core/Avatar';
 
 import './style.css'
 

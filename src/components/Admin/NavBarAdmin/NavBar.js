@@ -1,10 +1,8 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import Deconnection from '../../Deconnection/Deconnection'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from '@material-ui/core/Avatar';
 import './styleNavBarUser.css'
-const axios = require('axios')
 
 
 const NavBarUser = ({getUser}) => {
@@ -22,11 +20,6 @@ const NavBarUser = ({getUser}) => {
         })
     }
 
-    const close = () => {
-        dispatch({
-            type: "CLOSENAVUSER"
-        })
-    }
     return (
         <div className="container-navbar-user">
             {sidebar?<p><FontAwesomeIcon onClick={open} icon={['fas','times']} style={{fontSize:'38px', cursor:'pointer'}}/></p>:<p><FontAwesomeIcon onClick={open} icon={['fas','bars']} style={{fontSize:'38px', cursor:'pointer'}}/></p>}
