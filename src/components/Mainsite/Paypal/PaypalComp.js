@@ -47,7 +47,7 @@ const PaypalComp = () => {
     return (
         <div>
             <MainBarUser />
-            {checkout ? <PaypalCredit choice={choice} /> : (<div className="main-form-choix-paypal"><form classname="form-choix-paypal" action="" method="post" onSubmit={handleSubmit}>
+            {checkout ? <PaypalCredit choice={choice} /> : (<div className="main-form-choix-paypal"><form className="form-choix-paypal" action="" method="post" onSubmit={handleSubmit}>
                 <h2>Choose how many credits you want to buy</h2>
                 <div className="radio-paypal">
                     <input type="radio" onChange={(e) => setChoice(e.target.value)} value="10" name="credit" id="100credits" />

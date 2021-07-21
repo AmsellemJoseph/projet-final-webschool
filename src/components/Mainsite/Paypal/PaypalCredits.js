@@ -12,9 +12,8 @@ const PaypalCredit = ({ choice }) => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-            if (tokTemp.data == 1) {
+            if (Number(tokTemp.data) === 1) {
             } else {
                 localStorage.clear()
                 history.push('/login')
@@ -47,7 +46,7 @@ const PaypalCredit = ({ choice }) => {
                 })
             },
             onApprove: async (data, actions) => {
-                const order = await actions.order.capture()
+                // const order = await actions.order.capture()
                 const setCred = await axios.put('http://localhost:2108/registration/setcredits', { params: { mail, credit } })
                 if (setCred) {
                     history.push('/')
