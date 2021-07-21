@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux'
 import MainBarUser from '../../Mainsite/NavBarUser/MainBarUser'
 import './style.css'
 
 
-import CircularIndeterminate from '../../../utils/CircularIndeterminate'
 
 var md5 = require('md5');
 const axios = require('axios')
@@ -21,7 +19,6 @@ const ChangePassword = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
             } else {
@@ -34,7 +31,7 @@ const ChangePassword = () => {
 
 
     const [error, setError] = useState("")
-    const [success, setSuccess] = useState('')
+    const [success] = useState('')
     const [pass, setPass] = useState('');
 
     const handleChange = (e) => {

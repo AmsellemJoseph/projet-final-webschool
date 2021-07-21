@@ -98,7 +98,7 @@ class Registering {
         // } else {
         //     mailLower = this.mail
         // }
-        const regex = new RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
+        const regex = new RegExp(/^([\w-]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
 
         var valid = regex.test(mailLower)
         if (!valid) {

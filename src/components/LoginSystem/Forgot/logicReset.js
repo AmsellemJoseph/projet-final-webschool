@@ -15,7 +15,7 @@ class ResetPassword {
     }
 
     verifPass = () => {
-        if (!this.pass1 || !this.pass2 || this.pass1 != this.pass2) {
+        if (!this.pass1 || !this.pass2 || this.pass1 !== this.pass2) {
             return false;
         }
         return true;

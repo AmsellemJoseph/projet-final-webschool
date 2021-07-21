@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import Register from '../Register/Register'
 import Login from '../Login/Login'
@@ -12,18 +12,6 @@ const LoginSystem = () => {
         ...state.loginReducer
     }))
 
-    // const [localLog, setLocalLog] = useState({ logged: false })
-    // useState(() => {
-    //     const verifLog = () => {
-    //         var ver = JSON.parse(localStorage.getItem('logged'));
-    //         if (ver) {
-    //             if (ver.logged == true || ver.logged == false) {
-    //                 setLocalLog({ logged: ver.logged })
-    //             }
-    //         }
-    //     }
-    //     verifLog()
-    // }, [])
 
     return (
         <div className="container-main-logPage">

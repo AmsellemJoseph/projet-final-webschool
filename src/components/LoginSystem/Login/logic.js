@@ -37,7 +37,8 @@ class LoginLogic {
             mail = this.mail
         }
         const user = {
-            mail: this.mail.toLowerCase(),
+            mail: mail.toLowerCase(),
+            // mail: this.mail.toLowerCase(),
             password: md5(this.password),
             // password: this.password,
         }

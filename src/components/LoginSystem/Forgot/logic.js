@@ -1,5 +1,4 @@
 const axios = require('axios');
-var md5 = require('md5');
 
 class ForgotLogic {
 

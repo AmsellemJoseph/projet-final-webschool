@@ -11,8 +11,8 @@ const axios = require('axios')
 const Login = () => {
     const history = useHistory()
     const dispatch = useDispatch();
-    const [tokenLocal,setTokenLocal] = useState(localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):false)
-    const [mail,setMail] = useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):false)
+    const [tokenLocal] = useState(localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):false)
+    const [mail] = useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):false)
 
     useEffect(() => {
         const tok = async () => {
@@ -48,7 +48,7 @@ const Login = () => {
     }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
-    const { showLogin, logged, admin, loading } = useSelector(state => ({
+    const { showLogin, loading } = useSelector(state => ({
         ...state.loginReducer,
         ...state.userLoggedReducer,
         ...state.loadingReducer
@@ -91,7 +91,7 @@ const Login = () => {
         })
     }
 
-    const userCookie = async (user, token) => {
+    const userCookie = async (user) => {
         dispatch({
             type: "CREATE",
             payload: user
@@ -137,7 +137,8 @@ const Login = () => {
             username: info.data[0].username
         }
         const flag = await userCookie(user);
-        if (info.data[0].admin == true) {
+        console.log((info.data[0].admin))
+        if (info.data[0].admin === true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));
             stopLoad()
             return history.push('/admin')
