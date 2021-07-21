@@ -13,9 +13,8 @@ const PaypalComp = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-            if (tokTemp.data == 1) {
+            if (Number(tokTemp.data) === 1) {
             } else {
                 localStorage.clear()
                 history.push('/login')
@@ -31,13 +30,13 @@ const PaypalComp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (choice == 10) {
+        if (Number(choice) === 10) {
             setChoice({ price: 10, credit: 100 })
-        } else if (choice == 20) {
+        } else if (Number(choice) === 20) {
             setChoice({ price: 20, credit: 250 })
-        } else if (choice == 40) {
+        } else if (Number(choice) === 40) {
             setChoice({ price: 40, credit: 500 })
-        } else if (choice == 80) {
+        } else if (Number(choice) === 80) {
             setChoice({ price: 80, credit: 1250 })
         }
         setCheckout(true)

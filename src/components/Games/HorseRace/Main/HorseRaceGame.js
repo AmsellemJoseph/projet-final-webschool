@@ -37,7 +37,7 @@ const HorseRaceGame = () => {
                 history.push('/login')
             }
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
-            if (tokTemp.data == 1) {
+            if (Number(tokTemp.data) === 1) {
             } else {
                 localStorage.clear()
                 history.push('/login')
