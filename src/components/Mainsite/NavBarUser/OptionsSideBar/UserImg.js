@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-const axios = require('axios')
 
 const UserImg = ({pic})=>{
 

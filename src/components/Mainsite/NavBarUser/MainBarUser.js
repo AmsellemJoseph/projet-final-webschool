@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
 import './styleNavBarUser.css'
@@ -7,22 +6,8 @@ const axios = require('axios')
 
 const MainBarUser = () => {
 
-    const { sidebar } = useSelector(state => ({
-        ...state.navBarUserReducer
-    }))
-    const dispatch = useDispatch();
 
-    const open = () => {
-        dispatch({
-            type: "TOGGLENAVUSER"
-        })
-    }
 
-    const close = () => {
-        dispatch({
-            type: "CLOSENAVUSER"
-        })
-    }
     const [getUser,setUser] = useState({})
     useEffect(()=>{
         const recup = async()=>{
