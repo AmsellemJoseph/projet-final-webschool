@@ -18,7 +18,8 @@ class ChangeProfilPicture {
     }
 
     verifType = () => {
-        if (this.picture.type == "image/png" || this.picture.type == "image/jpeg" || this.picture.type == "image/gif") {
+        console.log(typeof(this.picture.type))
+        if (this.picture.type === "image/png" || this.picture.type === "image/jpeg" || this.picture.type === "image/gif") {
             return true;
         } else {
             return false;

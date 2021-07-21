@@ -8,7 +8,7 @@ const axios = require('axios')
 
 const MoreGame = () => {
     
-    const { clicker,moreOrLess, miseMoreOrLess, countMore } = useSelector(state => ({
+    const { moreOrLess, miseMoreOrLess, countMore } = useSelector(state => ({
         ...state.moreOrLessReducer,
         ...state.gameLauncherReducer
     }))
@@ -55,7 +55,7 @@ const MoreGame = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (choice == random) {
+        if (Number(choice) === random) {
             return history.push('/moreresult')
         } else if (choice > random) {
             setError("Its less than " + choice)

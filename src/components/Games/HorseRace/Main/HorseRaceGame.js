@@ -46,7 +46,7 @@ const HorseRaceGame = () => {
         tok()
     }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
-    const { nbrHorse, race } = useSelector(state => ({
+    const { nbrHorse } = useSelector(state => ({
         ...state.horseReducer,
         ...state.gameLauncherReducer,
     }))

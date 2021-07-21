@@ -28,7 +28,7 @@ const HorceRaceResult = ({ ind }) => {
 
     const [gainCredit, setGainCredit] = useState(0)
     const history = useHistory();
-    const { nbrHorse, race } = useSelector(state => ({
+    const { nbrHorse } = useSelector(state => ({
         ...state.horseReducer,
         ...state.gameLauncherReducer
     }))
@@ -48,21 +48,21 @@ const HorceRaceResult = ({ ind }) => {
             const username = userTemp.username
             const mise = nbrHorse.mise
             const nbrHorses = nbrHorse.nbrHorse;
-            if (nbrHorse.choix != (ind + 1)) {
+            if (nbrHorse.choix !== (ind + 1)) {
             }
             // if (nbrHorse.choix == ind) {
             else {
                 let gain = 0
-                if (nbrHorses == 2) {
+                if (nbrHorses === 2) {
                     gain = 2 * mise;
                     setGainCredit(gain)
-                } else if (nbrHorses == 3) {
+                } else if (nbrHorses === 3) {
                     gain = 3 * mise
                     setGainCredit(gain)
-                } else if (nbrHorses == 4) {
+                } else if (nbrHorses === 4) {
                     gain = 4 * mise
                     setGainCredit(gain)
-                } else if (nbrHorses == 5) {
+                } else if (nbrHorses === 5) {
                     gain = 5 * mise
                     setGainCredit(gain)
                 }

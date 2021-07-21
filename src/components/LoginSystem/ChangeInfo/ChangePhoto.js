@@ -37,7 +37,6 @@ const ChangeInfo = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
             } else {
@@ -85,6 +84,7 @@ const ChangeInfo = () => {
 
     const handleChange = (e) => {
         setNewPic(e.target.files[0]);
+        setSuccess(e.target.files[0].name)
     }
 
     return (
@@ -94,7 +94,7 @@ const ChangeInfo = () => {
                 <form action="" method="post">
                     <h2>Choose your profile picture</h2>
                     <p style={{ color: '#0d122f',marginBottom:'20px' }}>{error}</p>
-                    <p style={{ color: '#f3ef83' }}>{success}</p>
+                    <p style={{ color: '#f3ef83',marginBottom:'15px' }}>{success}</p>
                     {loading ? <CircularIndeterminate /> : null}
                     <input className="custom-file-input" onChange={handleChange} type="file" name="profilPicture" />
                     <button onClick={handleSubmit} type="button">Upload your profile picture</button>

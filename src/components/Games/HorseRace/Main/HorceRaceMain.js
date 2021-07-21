@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MainBarUser from '../../../Mainsite/NavBarUser/MainBarUser'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './style.css'
 const axios = require('axios')
@@ -31,28 +31,23 @@ const HorceRaceMain = () => {
 
     useEffect(() => {
         const recup = async () => {
-            const userTemp = JSON.parse(localStorage.getItem('user'))
-            const mail = userTemp.mail
-            const user = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } });
-            setUser(user.data[0]);
+            const userTemp = localStorage.user ? JSON.parse(localStorage.getItem('user')) : 'none'
+            if (userTemp !== 'none') {
+                const mail = userTemp.mail
+                const user = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } });
+                setUser(user.data[0]);
+            }
         }
         recup()
 
     }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
-    const { race } = useSelector(state => ({
-        ...state.gameLauncherReducer,
-    }))
     const [part, setPart] = useState(2);
     const [mise, setMise] = useState(10);
     const [choix, setChoix] = useState(1);
     const [option, setOption] = useState()
 
-    const verifLog = JSON.parse(localStorage.getItem('logged'))
-    if (!verifLog || verifLog.logged == false) {
-        history.push('/');
-    }
 
     const handleChange = (e) => {
         setPart(e.currentTarget.value)

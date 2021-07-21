@@ -26,7 +26,6 @@ const auth = firebase.auth();
 const firestore = firebase.firestore()
 const axios = require('axios')
 
-
 const Chat = () => {
 
     const { username, mail } = JSON.parse(localStorage.getItem('user'))
@@ -36,6 +35,7 @@ const Chat = () => {
     useEffect(() => {
 
         const getInfoUser = async () => {
+            auth.signOut()
             const getUser = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } })
             setLocalUser(getUser.data[0])
         }
@@ -63,7 +63,8 @@ const Chat = () => {
         // }
         // return <button onClick={signInWithGoogle} >Sign in with Google</button>
         const signInAnonymously = () => {
-            // const provider = new firebase.auth().signInAnonymously()
+
+            new firebase.auth().signInAnonymously()
         }
         return <button className="signin-button" onClick={signInAnonymously} >Sign in </button>
     }
@@ -97,7 +98,9 @@ const Chat = () => {
         const query = messagesRef.orderBy('createdAt').limitToLast(25)
         const [messages] = useCollectionData(query, { idField: 'id' })
         const messagesEndRef = useRef(null)
-
+        // const scrollToBottom = () => {
+        //     // messagesRef.current.scrollIntoView({ behavior: 'smooth' })
+        // }
 
 
 
@@ -119,8 +122,8 @@ const Chat = () => {
     function ChatMessage(props) {
         const { text, uid, photoURL } = props.message;
 
-
         return (
+            // <div className={`message ${messageClass}`} >
             <div className="container-message">
                 <div className={uid === username ? "message" : "message-g"}>
                     <div className={uid === username ? "inbl" : "inbl-g"}>
