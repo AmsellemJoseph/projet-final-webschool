@@ -26,7 +26,7 @@ const Stats = (props) => {
             setWin(win.data)
         }
         getStats()
-    }, [])  
+    }, [])  //eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (

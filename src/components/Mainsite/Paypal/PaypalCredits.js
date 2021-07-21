@@ -21,7 +21,7 @@ const PaypalCredit = ({ choice }) => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const history = useHistory();
     const price = choice.price
@@ -57,7 +57,7 @@ const PaypalCredit = ({ choice }) => {
                 console.log(err)
             }
         }).render(paypal.current)
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="main-form-choix-paypal">

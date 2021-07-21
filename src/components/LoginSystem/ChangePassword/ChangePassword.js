@@ -30,7 +30,7 @@ const ChangePassword = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     const [error, setError] = useState("")

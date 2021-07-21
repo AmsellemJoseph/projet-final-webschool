@@ -33,7 +33,7 @@ const MainBarAdmin = () => {
         }
         recup()
 
-    },[])
+    },[])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container-main-bar-user">

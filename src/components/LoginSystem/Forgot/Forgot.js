@@ -25,7 +25,7 @@ const Forgot = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')

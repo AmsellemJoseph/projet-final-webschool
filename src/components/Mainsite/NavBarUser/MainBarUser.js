@@ -31,7 +31,7 @@ const MainBarUser = () => {
             const user = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } });
             setUser(user.data[0]);
         }
-        recup()
+        recup()//eslint-disable-line react-hooks/exhaustive-deps
 
     },[])
 

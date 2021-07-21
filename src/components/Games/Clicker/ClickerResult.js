@@ -54,7 +54,7 @@ const ClickerResult = () => {
             }
         }
         resultGame()
-    }, [gain])
+    }, [gain])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (

@@ -28,7 +28,7 @@ const HorseRaceGame = () => {
         }
         credits()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const tok = async () => {
@@ -45,7 +45,7 @@ const HorseRaceGame = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const { nbrHorse, race } = useSelector(state => ({
         ...state.horseReducer,
@@ -78,7 +78,7 @@ const HorseRaceGame = () => {
 
         tempA();
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const tempT = () => {
@@ -95,7 +95,7 @@ const HorseRaceGame = () => {
             setTempTotal(totalArr);
         }
         tempT();
-    }, [temps])
+    }, [temps])//eslint-disable-line react-hooks/exhaustive-deps
 
     var petitTemps = 30;
     for (let i = 0; i < tempsTotal.length; i++) {
@@ -129,7 +129,7 @@ const HorseRaceGame = () => {
             }
         }
         countGame();
-    },[countDown])
+    },[countDown])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (<>
         {race ? null : <Token />}

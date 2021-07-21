@@ -46,7 +46,7 @@ const ChangeInfo = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const [newPic, setNewPic] = useState(null);
     const [error, setError] = useState("")

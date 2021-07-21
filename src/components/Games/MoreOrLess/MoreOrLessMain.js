@@ -34,7 +34,7 @@ const MoreOrLessMain = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const recup = async () => {
@@ -45,7 +45,7 @@ const MoreOrLessMain = () => {
         }
         recup()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
 

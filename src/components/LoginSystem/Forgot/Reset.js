@@ -45,7 +45,7 @@ const Reset = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const addInput = (elements) => {
         if (elements && !inputs.current.includes(elements)) {

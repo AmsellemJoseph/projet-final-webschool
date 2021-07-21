@@ -25,7 +25,7 @@ const MoreGame = () => {
             }
         }
         setGame();
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const rand = () => {
@@ -33,7 +33,7 @@ const MoreGame = () => {
             setRandom(numTemp)
         }
         rand()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const looseCredit = async (mail, mise) => {
         return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
@@ -49,7 +49,7 @@ const MoreGame = () => {
         }
         credits()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
 

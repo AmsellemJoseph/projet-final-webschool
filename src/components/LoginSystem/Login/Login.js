@@ -34,15 +34,18 @@ const Login = () => {
         }
 
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     useEffect(() => {
         dispatch({
             type: "DESTROY",
         })
+        dispatch({
+            type:"CLOSENAVUSER"
+        })
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     const { showLogin, logged, admin, loading } = useSelector(state => ({

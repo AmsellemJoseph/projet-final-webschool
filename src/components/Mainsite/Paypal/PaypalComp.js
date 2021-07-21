@@ -22,7 +22,7 @@ const PaypalComp = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const [checkout, setCheckout] = useState(false)
     const [choice, setChoice] = useState({ price: 0, credit: 0 })

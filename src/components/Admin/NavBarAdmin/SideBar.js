@@ -22,8 +22,8 @@ const SideBar = ({pic})=>{
 
     return(
         <div className={sidebar?"main-container":'none'}>
-            {sidebar?<div onClick={close} className="overlay"></div>:<div onClick={close} className="overlay" ></div>}
-        <div className={sidebar?"main-container-sidebar-on":"main-container-sidebar-off"}>
+            {sidebar?<div onClick={close} className="overlay-adm"></div>:<div onClick={close} className="overlay" ></div>}
+        <div className={sidebar?"main-container-sidebar-on-adm":"main-container-sidebar-off"}>
             <UserImg pic={pic}/>
             <Deconnection/>
 

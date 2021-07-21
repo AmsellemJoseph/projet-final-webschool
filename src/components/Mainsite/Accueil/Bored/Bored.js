@@ -17,7 +17,7 @@ const Bored = () => {
         }
         getBored()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="bored-container">

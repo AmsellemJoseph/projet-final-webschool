@@ -24,7 +24,7 @@ const MoreResult = () => {
             }
         }
         setGame();
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const winCredits = async (mail, gain) => {
         return await axios.put(`http://localhost:2108/registration/creditsplus`, { params: { mail, gain } })
@@ -64,7 +64,7 @@ const MoreResult = () => {
             }
         }
         resultGame()
-    }, [gain])
+    }, [gain])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (

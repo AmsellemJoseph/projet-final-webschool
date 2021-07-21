@@ -40,7 +40,7 @@ const Chat = () => {
         }
         getInfoUser();
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
 

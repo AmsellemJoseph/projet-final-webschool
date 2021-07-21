@@ -30,7 +30,7 @@ const Accueil = () => {
             setCredit(userCredit.data.credit)
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const handleHorse = () => {
         dispatch({

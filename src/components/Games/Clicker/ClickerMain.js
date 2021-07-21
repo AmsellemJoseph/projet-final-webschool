@@ -33,7 +33,7 @@ const ClickerMain = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const recup = async () => {
@@ -44,7 +44,7 @@ const ClickerMain = () => {
         }
         recup()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
 

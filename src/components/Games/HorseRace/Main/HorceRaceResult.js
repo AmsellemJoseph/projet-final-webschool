@@ -25,7 +25,7 @@ const HorceRaceResult = ({ ind }) => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const [gainCredit, setGainCredit] = useState(0)
     const history = useHistory();
@@ -79,7 +79,7 @@ const HorceRaceResult = ({ ind }) => {
 
         }
         credits()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
     // setTimeout(() => {
     //     dispatch({
     //         type: "RESETGAME"

@@ -20,7 +20,7 @@ const PlayersStats = () => {
 
         }
         getAllUsers();
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
 
@@ -32,7 +32,7 @@ const PlayersStats = () => {
         }
         filtUser()
 
-    }, [userTemp])
+    }, [userTemp])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     console.log(users)

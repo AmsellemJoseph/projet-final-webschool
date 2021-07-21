@@ -7,10 +7,11 @@ import './style.css'
 const axios = require('axios')
 
 
-const mail = JSON.parse(localStorage.getItem('user'))
 
 
 const HorceRaceMain = () => {
+    const history = useHistory();
+    const mail = JSON.parse(localStorage.getItem('user'))
 
     const [getUser, setUser] = useState({})
     useEffect(() => {
@@ -19,7 +20,6 @@ const HorceRaceMain = () => {
             if (!mail || !tokenLocal) {
                 history.push('/login')
             }
-            const mailCredit = mail.mail
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (tokTemp.data == 1) {
             } else {
@@ -28,7 +28,7 @@ const HorceRaceMain = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const recup = async () => {
@@ -39,9 +39,8 @@ const HorceRaceMain = () => {
         }
         recup()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
-    const history = useHistory();
     const dispatch = useDispatch();
     const { race } = useSelector(state => ({
         ...state.gameLauncherReducer,
@@ -101,7 +100,7 @@ const HorceRaceMain = () => {
             opt.push(<option key={i} value={i}>Starship number {i}</option>)
         }
         setOption(opt)
-    }, [part])
+    }, [part])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container-main-Race">

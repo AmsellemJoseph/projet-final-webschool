@@ -21,7 +21,7 @@ const ClickerCount = () => {
             }
         }
         setGame();
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(()=>{
         var x=null
@@ -32,7 +32,7 @@ const ClickerCount = () => {
             clearTimeout(x)
             history.push('/clickergame')
         }
-    },[count])
+    },[count])//eslint-disable-line react-hooks/exhaustive-deps
 
 
 

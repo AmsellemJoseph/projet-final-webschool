@@ -23,7 +23,7 @@ const ClickerGame = () => {
             }
         }
         setGame();
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const looseCredit = async (mail, mise) => {
         return await axios.put(`http://localhost:2108/registration/credits`, { params: { mail, mise } })
@@ -39,7 +39,7 @@ const ClickerGame = () => {
         }
         credits()
 
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ const ClickerGame = () => {
             }
         }
         timeCount()
-    }, [countDown])
+    }, [countDown])//eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (

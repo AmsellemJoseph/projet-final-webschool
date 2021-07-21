@@ -23,7 +23,7 @@ const Token = () => {
             }
         }
         tok()
-    }, [])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

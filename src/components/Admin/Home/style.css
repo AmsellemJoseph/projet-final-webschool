@@ -36,7 +36,7 @@
     display: flex;
     flex-wrap: wrap;
     background: #1a1e4d;
-    justify-content:center
+    justify-content:center;
 }
 table{
     border-collapse: collapse;
@@ -53,4 +53,11 @@ td{
     display:flex;
     justify-content:center;
     margin: 25px;
+}
+
+.auto{
+    width:100%;
+    height:auto;
+    background: red;
+    position:relative;
 }
