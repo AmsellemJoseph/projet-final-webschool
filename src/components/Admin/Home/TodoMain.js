@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
 import TodoList from './TodoList/TodoList'
@@ -10,7 +10,26 @@ const TodoMain = () => {
 
     const history = useHistory();
 
+    const [flag,setFlag]=useState(false)
+    useEffect(() => {
+        
+        const getUser = async()=>{
 
+            const {mail} = JSON.parse(localStorage.getItem('user'))
+
+            const username = await axios.post('http://localhost:2108/registration/getuser',{ params: { mail}})
+                    // console.log(username.data[0].username)
+                    if(username.data[0].username !== 'admin'){
+                        localStorage.clear()
+                      return  history.push('/login')
+                    }else{
+                        setFlag(true)
+                    }
+
+        }
+            getUser();
+
+    },[])
 
     useEffect(() => {
         const verifAdmin = async () => {
@@ -22,6 +41,7 @@ const TodoMain = () => {
 
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
+                
             } else {
                 localStorage.clear()
                 history.push('/login')
@@ -40,7 +60,7 @@ const TodoMain = () => {
         <div className="main-container-admin-page">
             <MainBarAdmin />
             <div className="main-container-users-tab">
-                <TodoList />
+                {flag?<TodoList />:null}
 
             </div>
 
