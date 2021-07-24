@@ -2,7 +2,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoginSystem from './components/LoginSystem/Home/LoginSystem'
-import Admin from './components/Admin/Home/Admin'
 import Accueil from './components/Mainsite/Accueil/Accueil'
 import HorceRaceMain from './components/Games/HorseRace/Main/HorceRaceMain'
 import HorseRaceGame from './components/Games/HorseRace/Main/HorseRaceGame'
@@ -18,6 +17,8 @@ import ChangeInfo from './components/LoginSystem/ChangeInfo/ChangePhoto'
 import ChangePassword from './components/LoginSystem/ChangePassword/ChangePassword'
 import PaypalComp from './components/Mainsite/Paypal/PaypalComp'
 import Chat from './components/Mainsite/Chat/Chat'
+import Admin from './components/Admin/Home/Admin'
+import TodoMain from './components/Admin/Home/TodoMain'
 
 
 
@@ -35,7 +36,6 @@ function App() {
           <Route exact path='/' component={LoginSystem} />
           <Route path='/login' component={LoginSystem} />
           <Route path='/accueil' component={Accueil} />
-          <Route path="/admin" component={Admin} />
           <Route path='/horserace' component={HorceRaceMain} />
           <Route path='/horseracegame' component={HorseRaceGame} />
           <Route path='/clicker' component={ClickerMain} />
@@ -50,6 +50,8 @@ function App() {
           <Route path='/changepassword' component={ChangePassword} />
           <Route path='/paypal' component={PaypalComp} />
           <Route path="/chat" component={Chat} />
+          <Route path="/admin" component={Admin} />
+          <Route path='/todo' component={TodoMain} />
 
         </Switch>
       </div>

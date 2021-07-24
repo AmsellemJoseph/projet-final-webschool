@@ -292,7 +292,7 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
 
         route.get("/getnbr", (req, res) => {
             const nameGame = req.query.nameGame
-            db.collection("nbrgamesplayed").findOne({ nameGame: nameGame })
+            db.collection("nbrgamesplayed").find().toArray()
                 .then((result) => {
                     res.send(result)
                 })
@@ -402,5 +402,59 @@ route.post("/sendmailreset", (req, res) => {
 })
 
 
-// CHAT
+// SQL
 
+const mysql = require('mysql')
+
+const dbMysql = mysql.createConnection({
+
+    host: "localhost",
+
+    user: "JoAms",
+
+    password: "DT4nlhcQUwIJX2dA",
+
+    database: "projet_final_webschool",
+
+});
+dbMysql.connect((err) => {
+    if (err) {
+        throw err
+    }
+    console.log("Connected to MySql!!")
+
+
+})
+
+
+route.get('/getallsql', (req, res) => {
+
+    dbMysql.query('SELECT * FROM todo_list', ((err, result) => {
+
+        if (err) {
+            throw err
+        }
+        res.send(result)
+    }))
+})
+
+route.delete('/deletetodo', (req, res) => {
+    const id = req.query.id
+    dbMysql.query(`DELETE FROM todo_list WHERE id = "${id}"`, ((err, result) => {
+        if (err) {
+            throw err
+        }
+        res.send(true)
+    }))
+})
+
+route.post('/sendtodo',(req,res)=>{
+    const title = req.body.params.title;
+    const text = req.body.params.text;
+    dbMysql.query(`INSERT INTO todo_list(title, text) VALUES ("${title}","${text}")`,((err,result)=>{
+        if(err){
+            throw err
+        }
+        res.send(true)
+    }))
+})

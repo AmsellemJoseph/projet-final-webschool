@@ -219,14 +219,11 @@ export default function UserGames() {
         const nbrRaceGood = user.nbrRace === undefined ? 0 : user.nbrRace;
         const nbrClickGood = user.nbrClick === undefined ? 0 : user.nbrClick;
         const nbrMoreOrLessGood = user.nbrMoreOrLess === undefined ? 0 : user.nbrMoreOrLess;
-        console.log(user.nbrMoreOrLess)
+
         return createData(user.username, nbrRaceGood, nbrClickGood, nbrMoreOrLessGood)
     })
 
-    console.log(rows)
 
-
-    console.log(users)
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');

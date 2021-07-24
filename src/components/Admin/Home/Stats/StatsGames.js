@@ -46,10 +46,8 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'username', numeric: false, disablePadding: true, label: 'Username' },
-  { id: 'created', numeric: true, disablePadding: false, label: 'Created' },
-  { id: 'last', numeric: true, disablePadding: false, label: 'Last connection' },
-  { id: 'nbrConn', numeric: true, disablePadding: false, label: 'Nbr of connection' },
+  { id: 'usename', numeric: false, disablePadding: true, label: 'usename' },
+  { id: 'total', numeric: true, disablePadding: false, label: 'Nbr total played' },
 ];
 
 function EnhancedTableHead(props) {
@@ -66,7 +64,7 @@ function EnhancedTableHead(props) {
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
-          style={{fontWeight:'bold',color:'#1a1e4d'}}
+            style={{ fontWeight: 'bold', color: '#1a1e4d' }}
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -118,9 +116,9 @@ const useToolbarStyles = makeStyles((theme) => ({
       },
   title: {
     flex: '1 1 100%',
-    fontFamily:'Audiowide',
-    fontSize:"30px",
-    color:'#1a1e4d'
+    fontFamily: 'Audiowide',
+    fontSize: "30px",
+    color: '#1a1e4d'
   },
 }));
 
@@ -133,7 +131,7 @@ const EnhancedTableToolbar = (props) => {
       })}
     >
       <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-        Users
+        Stats Games
       </Typography>
 
 
@@ -154,23 +152,23 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    backgroundColor:'#9c3cff',
+    backgroundColor: '#9c3cff',
     minWidth: 300,
-    maxWidth:620,
+    maxWidth: 620,
     boxShadow: '8px 8px 26px 8px #71f6ff,-8px -8px 26px 8px #71f6ff'
 
   },
   table: {
     minWidth: 300,
-    maxWidth:620,
+    maxWidth: 620,
   },
-  tableRow:{
-    borderTop:"1.02px solid #21d2fe",
-    borderBottom:"1.02px solid #21d2fe",
-    zIndex:'2',
+  tableRow: {
+    borderTop: "1.02px solid #21d2fe",
+    borderBottom: "1.02px solid #21d2fe",
+    zIndex: '2',
   },
-  tableCell:{
-    color:'#1a1e4d'
+  tableCell: {
+    color: '#1a1e4d'
   },
   visuallyHidden: {
     border: 0,
@@ -182,13 +180,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 20,
     width: 1,
-    
+
   },
 }));
 
 
 
-export default function UserDates() {
+export default function StatsGames() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -196,35 +194,32 @@ export default function UserDates() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const [users, setUsers] = useState([])
+  const [games, setGames] = useState([])
 
   useEffect(() => {
 
-    const getUsers = async () => {
-      const userTemp = await axios.get('http://localhost:2108/registration/allUsers')
-      setUsers(userTemp.data.filter((user) => (
-        user.username !== 'admin'
-      )))
+    const getGames = async () => {
+      const gameTemp = await axios.get('http://localhost:2108/registration/getnbr')
+      setGames(gameTemp.data)
+      console.log(gameTemp)
     }
-    getUsers()
+    getGames()
 
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
-  function createData(username, created, last, nbrConn,pic) {
-    return { username, created, last, nbrConn,pic };
+  function createData(usename, total) {
+    return { usename, total };
   }
+  // const rows=[];
 
-  const rows = users.map((user, i) => {
-    const dateCreated = new Date(user.created)
-    const dateLast = new Date(user.lastConnection)
-    return createData(user.username, dateCreated.toLocaleDateString(), dateLast.toLocaleDateString(), user.nbrConnection,user.profilPic)
+  const rows = games.map((game, i) => {
+    console.log(game.usename)
+    console.log(game.nbrtotal)
+    return createData(game.usename, game.nbrTotal)
   })
-
   console.log(rows)
 
-
-  console.log(users)
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -233,7 +228,7 @@ export default function UserDates() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.username);
+      const newSelecteds = rows.map((n) => n.usename);
       setSelected(newSelecteds);
       return;
     }
@@ -250,7 +245,7 @@ export default function UserDates() {
     setPage(0);
   };
 
-  const isSelected = (username) => selected.indexOf(username) !== -1;
+  const isSelected = (usename) => selected.indexOf(usename) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -278,7 +273,7 @@ export default function UserDates() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.username);
+                  const isItemSelected = isSelected(row.usename);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -286,19 +281,17 @@ export default function UserDates() {
                       hover
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.username}
+                      key={row.usename}
                       selected={isItemSelected}
                       className={classes.tableRow}
                     >
                       <TableCell className={classes.tableCell} padding="checkbox">
 
                       </TableCell>
-                      <TableCell style={{display:'flex',border:'none',alignItem: 'center'}} className={classes.tableCell}  component="th" id={labelId} scope="row" padding="none">
-                      <Avatar style={{width:'25px',height:'25px',marginRight:'5px'}} src={process.env.PUBLIC_URL + `uploads/${row.pic}`}/>{row.username}
+                      <TableCell className={classes.tableCell} component="th" id={labelId} scope="row" padding="none">
+                        {row.usename}
                       </TableCell>
-                      <TableCell className={classes.tableCell} align="right">{row.created}</TableCell>
-                      <TableCell className={classes.tableCell} align="right">{row.last}</TableCell>
-                      <TableCell className={classes.tableCell} align="right">{row.nbrConn}</TableCell>
+                      <TableCell className={classes.tableCell} align="right">{row.total}</TableCell>
                     </TableRow>
                   );
                 })}

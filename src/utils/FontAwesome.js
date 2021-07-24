@@ -9,6 +9,7 @@ import {faAngleDoubleRight as fasAngleDoubleRight} from '@fortawesome/free-solid
 import {faBars as fasBars} from '@fortawesome/free-solid-svg-icons';
 import {faTimes as fasTimes} from '@fortawesome/free-solid-svg-icons';
 import {faPaperPlane as fasPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import {faTrashAlt as fasTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     fasPortrait,
@@ -17,6 +18,7 @@ library.add(
     fasBars,
     fasTimes,
     fasPaperPlane,
+    fasTrashAlt,
 
     // more icons go here
 );

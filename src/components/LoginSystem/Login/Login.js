@@ -11,8 +11,8 @@ const axios = require('axios')
 const Login = () => {
     const history = useHistory()
     const dispatch = useDispatch();
-    const [tokenLocal] = useState(localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):false)
-    const [mail] = useState(localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):false)
+    const [tokenLocal] = useState(localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : false)
+    const [mail] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : false)
 
     useEffect(() => {
         const tok = async () => {
@@ -22,13 +22,19 @@ const Login = () => {
             //     tokenLocal=''
             //     mail=''
             // }
-            if (tokenLocal !==false && mail!==false) {
-                
+            if (tokenLocal !== false && mail !== false) {
+
                 const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
                 if (Number(tokTemp.data) === 1) {
-                    history.push('/accueil')
+                    const { username } = JSON.parse(localStorage.getItem('user'))
+                    console.log(username)
+                    if (username === 'admin') {
+                        return history.push('/admin')
+                    } else {
+                        return history.push('/accueil')
+                    }
                 } else {
-                    localStorage.clear()
+                    return localStorage.clear()
                 }
             }
         }
@@ -42,7 +48,7 @@ const Login = () => {
             type: "DESTROY",
         })
         dispatch({
-            type:"CLOSENAVUSER"
+            type: "CLOSENAVUSER"
         })
 
     }, [])//eslint-disable-line react-hooks/exhaustive-deps

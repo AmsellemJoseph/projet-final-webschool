@@ -7,7 +7,7 @@ import TodoList from './TodoList/TodoList'
 import './style.css'
 const axios = require('axios')
 
-const Admin = () => {
+const TodoMain = () => {
 
     const history = useHistory();
 
@@ -41,8 +41,7 @@ const Admin = () => {
         <div className="main-container-admin-page">
             <MainBarAdmin />
             <div className="main-container-users-tab">
-                {/* <TodoList /> */}
-                <Stats/>
+                <TodoList />
 
             </div>
 
@@ -50,4 +49,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default TodoMain
