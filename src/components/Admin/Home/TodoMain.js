@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
-import Stats from './Stats/Stats'
 import TodoList from './TodoList/TodoList'
 
 import './style.css'
