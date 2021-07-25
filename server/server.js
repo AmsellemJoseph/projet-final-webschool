@@ -71,9 +71,16 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
         })
         route.post("/verifUsername", (req, res) => {
             const username = req.body.params.usernameLower;
-            db.collection("users").find({ username: username }).toArray()
+            console.log(username)
+            db.collection("users").find().toArray()
                 .then((result) => {
-                    if (result.length) {
+                    var flag = false;
+                    result.forEach((res) => {
+                        if (res.username.toLowerCase() == username) {
+                            flag = true
+                        }
+                    })
+                    if (flag) {
                         return res.send({ response: false })
                     }
                     return res.send({ response: true })
@@ -162,6 +169,9 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             if (req.body.params.mail === null || req.body.params.tokenLocal === null) {
                 return res.send(false)
             }
+            if (req.body.params.mail === undefined || req.body.params.tokenLocal === undefined) {
+                return res.send(false)
+            }
             const mail = req.body.params.mail.mail;
             const tokenLocal = req.body.params.tokenLocal;
             db.collection('users').find({ mail: mail }).toArray()
@@ -184,8 +194,13 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             res.send(true)
         })
         route.put('/newpassword', (req, res) => {
-            const mail = req.body.params.mail.mail
+            var mail = req.body.params.mail.mail
+            if (mail.includes("gmail")) {
+                mail = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+            }
             const pass = req.body.params.pass
+            console.log(mail)
+            console.log(pass)
             const query = { mail: mail }
             const replacement = { $set: { "password": pass } }
             const options = { "returnNewDocument": false };

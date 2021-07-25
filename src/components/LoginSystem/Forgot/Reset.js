@@ -78,7 +78,7 @@ const Reset = () => {
         setTimeout(() => {
             return history.push('/')
 
-        }, 5000);
+        }, 3000);
     }
 
 
