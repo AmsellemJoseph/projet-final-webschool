@@ -76,6 +76,7 @@ const Reset = () => {
         setError("")
         setSuccess('Password successfully updated');
         setTimeout(() => {
+            localStorage.clear();
             return history.push('/')
 
         }, 3000);

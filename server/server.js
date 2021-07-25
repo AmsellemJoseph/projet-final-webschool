@@ -71,7 +71,6 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
         })
         route.post("/verifUsername", (req, res) => {
             const username = req.body.params.usernameLower;
-            console.log(username)
             db.collection("users").find().toArray()
                 .then((result) => {
                     var flag = false;
@@ -172,21 +171,34 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
             if (req.body.params.mail === undefined || req.body.params.tokenLocal === undefined) {
                 return res.send(false)
             }
-            const mail = req.body.params.mail.mail;
+            var mail = req.body.params.mail.mail;
+
+            if (mail.includes("gmail")) {
+                mail = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+            }
             const tokenLocal = req.body.params.tokenLocal;
-            db.collection('users').find({ mail: mail }).toArray()
+
+            db.collection('users').findOne({ mail: mail })
                 .then((result) => {
-                    if (result[0].token == tokenLocal) {
-                        res.send(true)
+                    if(result===undefined){
+                        return res.send(false)
+                    }else if(!result.mail){
+                        return res.send(false)
+                    }
+                    else if (result.token == tokenLocal) {
+                        return res.send(true)
                     } else {
-                        res.send(false)
+                       return res.send(false)
                     }
                 })
                 .catch((err) => { console.log(err) })
         })
         route.put('/settoken', (req, res) => {
             const token = req.body.params.token
-            const mail = req.body.params.user.mail
+            var mail = req.body.params.user.mail
+            if (mail.includes("gmail")) {
+                mail = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
+            }
             const query = { mail: mail }
             const replacement = { $set: { "token": token } }
             const options = { "returnNewDocument": false };
@@ -199,8 +211,6 @@ MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
                 mail = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
             }
             const pass = req.body.params.pass
-            console.log(mail)
-            console.log(pass)
             const query = { mail: mail }
             const replacement = { $set: { "password": pass } }
             const options = { "returnNewDocument": false };
@@ -419,7 +429,6 @@ route.post("/mailingAdmin", (req, res) => {
     require('dotenv').config();
     const nodemailer = require('nodemailer');
     const hbs = require('nodemailer-express-handlebars')
-    console.log(req.body.params)
     const mails = req.body.params.mails
     const title = req.body.params.title
     const text = req.body.params.text
