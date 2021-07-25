@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
 import Stats from './Stats/Stats'
@@ -8,29 +8,28 @@ const axios = require('axios')
 
 const Admin = () => {
 
-    
+
     const history = useHistory();
-    
-    const [flag,setFlag]=useState(false)
+
+    const [flag, setFlag] = useState(false)
     useEffect(() => {
-        
-        const getUser = async()=>{
 
-            const {mail} = JSON.parse(localStorage.getItem('user'))
+        const getUser = async () => {
 
-            const username = await axios.post('http://localhost:2108/registration/getuser',{ params: { mail}})
-                    // console.log(username.data[0].username)
-                    if(username.data[0].username !== 'admin'){
-                        localStorage.clear()
-                      return  history.push('/login')
-                    }else{
-                        setFlag(true)
-                    }
+            const { mail } = JSON.parse(localStorage.getItem('user'))
+
+            const username = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } })
+            if (username.data[0].username !== 'admin') {
+                localStorage.clear()
+                return history.push('/login')
+            } else {
+                setFlag(true)
+            }
 
         }
-            getUser();
+        getUser();
 
-    },[])
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const verifAdmin = async () => {
@@ -40,7 +39,7 @@ const Admin = () => {
                 history.push('/login')
             }
 
-            
+
 
             const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
             if (Number(tokTemp.data) === 1) {
@@ -62,7 +61,7 @@ const Admin = () => {
         <div className="main-container-admin-page">
             <MainBarAdmin />
             <div className="main-container-users-tab">
-                {flag?<Stats />:null}
+                {flag ? <Stats /> : null}
 
             </div>
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import MainBarAdmin from '../NavBarAdmin/MainBarAdmin'
-import TodoList from './TodoList/TodoList'
+import Mailing from './Mailing/Mailing'
+
 
 import './style.css'
 const axios = require('axios')
 
-const TodoMain = () => {
+const MailingMain = () => {
 
     const history = useHistory();
 
@@ -59,7 +60,7 @@ const TodoMain = () => {
         <div className="main-container-admin-page">
             <MainBarAdmin />
             <div className="main-container-users-tab">
-                {flag ? <TodoList /> : null}
+                {flag ? <Mailing /> : null}
 
             </div>
 
@@ -67,4 +68,4 @@ const TodoMain = () => {
     )
 }
 
-export default TodoMain
+export default MailingMain

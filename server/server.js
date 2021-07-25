@@ -400,6 +400,50 @@ route.post("/sendmailreset", (req, res) => {
         }
     })
 })
+route.post("/mailingAdmin", (req, res) => {
+    require('dotenv').config();
+    const nodemailer = require('nodemailer');
+    const hbs = require('nodemailer-express-handlebars')
+    console.log(req.body.params)
+    const mails = req.body.params.mails
+    const title = req.body.params.title
+    const text = req.body.params.text
+    const mailsString = mails.toString()
+    const textString = text.replaceAll('\n', '</h3><h3>')
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+    let transporter = nodemailer.createTransport({
+        secure: false,
+        port: 25,
+        service: 'gmail',
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS,
+        }
+    })
+    transporter.use("compile", hbs({
+        viewEngine: 'express-handlebars',
+        viewPath: './'
+    }))
+
+    let mailOptions = {
+        from: 'no-reply@Youhouhou.com',
+        to: mailsString,
+        subject: title,
+        html: `<div style="background:#1a1e4d;text-align:center;color:#71f6ff;font-family:sans-serif;">
+                <h3 style="color:#71f6ff;padding:30px;">${textString}</h3>
+             </div>`,
+    };
+
+    transporter.sendMail(mailOptions, (err, data) => {
+        if (err) {
+            console.error(err)
+            return res.send({ response: false });
+        } else {
+            return res.send({ response: true });
+        }
+    })
+})
 
 
 // SQL
@@ -448,11 +492,11 @@ route.delete('/deletetodo', (req, res) => {
     }))
 })
 
-route.post('/sendtodo',(req,res)=>{
+route.post('/sendtodo', (req, res) => {
     const title = req.body.params.title;
     const text = req.body.params.text;
-    dbMysql.query(`INSERT INTO todo_list(title, text) VALUES ("${title}","${text}")`,((err,result)=>{
-        if(err){
+    dbMysql.query(`INSERT INTO todo_list(title, text) VALUES ("${title}","${text}")`, ((err, result) => {
+        if (err) {
             throw err
         }
         res.send(true)

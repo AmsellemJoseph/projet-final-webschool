@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
 import './styleNavBarUser.css'
@@ -8,9 +8,9 @@ const MainBarAdmin = () => {
 
 
 
-    const [getUser,setUser] = useState({})
-    useEffect(()=>{
-        const recup = async()=>{
+    const [getUser, setUser] = useState({})
+    useEffect(() => {
+        const recup = async () => {
             const userTemp = JSON.parse(localStorage.getItem('user'))
             const mail = userTemp.mail
             const user = await axios.post('http://localhost:2108/registration/getuser', { params: { mail } });
@@ -18,11 +18,11 @@ const MainBarAdmin = () => {
         }
         recup()
 
-    },[])//eslint-disable-line react-hooks/exhaustive-deps
+    }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container-main-bar-user">
-            <NavBar getUser={getUser}/>
+            <NavBar getUser={getUser} />
             <SideBar pic={getUser.profilPic} />
         </div>
     )

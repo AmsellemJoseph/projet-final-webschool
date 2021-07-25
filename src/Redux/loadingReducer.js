@@ -1,20 +1,20 @@
 const initialState = {
-    loading:false
+    loading: false
 }
 
-export default function loadingReducer(state=initialState, action){
+export default function loadingReducer(state = initialState, action) {
 
-    switch(action.type){
-        case "LOADING":{
-            return{
+    switch (action.type) {
+        case "LOADING": {
+            return {
                 ...state,
-                loading:true
+                loading: true
             }
         }
-        case "LOADED":{
-            return{
+        case "LOADED": {
+            return {
                 ...state,
-                loading:false
+                loading: false
             }
         }
         default:

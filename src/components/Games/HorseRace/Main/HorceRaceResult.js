@@ -79,14 +79,7 @@ const HorceRaceResult = ({ ind }) => {
         }
         credits()
     }, [])//eslint-disable-line react-hooks/exhaustive-deps
-    // setTimeout(() => {
-    //     dispatch({
-    //         type: "RESETGAME"
-    //     })
-    //     history.push('/')
-    // }, 4000);
 
-    // console.log(`Le choix est: ${nbrHorse.choix} et ind: ${ind + 1}`)
 
     return (
         <div className="container-result">

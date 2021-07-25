@@ -67,7 +67,7 @@ function EnhancedTableHead(props) {
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
-          style={{fontWeight:'bold',color:'#1a1e4d'}}
+            style={{ fontWeight: 'bold', color: '#1a1e4d' }}
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -119,9 +119,9 @@ const useToolbarStyles = makeStyles((theme) => ({
       },
   title: {
     flex: '1 1 100%',
-    fontFamily:'Audiowide',
-    fontSize:"30px",
-    color:'#1a1e4d'
+    fontFamily: 'Audiowide',
+    fontSize: "30px",
+    color: '#1a1e4d'
   },
 }));
 
@@ -155,23 +155,23 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
-    backgroundColor:'#9c3cff',
+    backgroundColor: '#9c3cff',
     minWidth: 300,
-    maxWidth:800,
+    maxWidth: 800,
     boxShadow: '8px 8px 26px 8px #71f6ff,-8px -8px 26px 8px #71f6ff'
 
   },
   table: {
     minWidth: 300,
-    maxWidth:800,
+    maxWidth: 800,
   },
-  tableRow:{
-    borderTop:"1.02px solid #21d2fe",
-    borderBottom:"1.02px solid #21d2fe",
-    zIndex:'2',
+  tableRow: {
+    borderTop: "1.02px solid #21d2fe",
+    borderBottom: "1.02px solid #21d2fe",
+    zIndex: '2',
   },
-  tableCell:{
-    color:'#1a1e4d'
+  tableCell: {
+    color: '#1a1e4d'
   },
   visuallyHidden: {
     border: 0,
@@ -183,7 +183,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 20,
     width: 1,
-    
+
   },
 }));
 
@@ -212,14 +212,14 @@ export default function StatsGames() {
   }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
 
-  function createData(username, created, last, nbrConn,pic,credit) {
-    return { username, created, last, nbrConn,pic,credit };
+  function createData(username, created, last, nbrConn, pic, credit) {
+    return { username, created, last, nbrConn, pic, credit };
   }
 
   const rows = users.map((user, i) => {
     const dateCreated = new Date(user.created)
     const dateLast = new Date(user.lastConnection)
-    return createData(user.username, dateCreated.toLocaleDateString(), dateLast.toLocaleDateString(), user.nbrConnection,user.profilPic,user.credit)
+    return createData(user.username, dateCreated.toLocaleDateString(), dateLast.toLocaleDateString(), user.nbrConnection, user.profilPic, user.credit)
   })
 
   const handleRequestSort = (event, property) => {
@@ -290,8 +290,8 @@ export default function StatsGames() {
                       <TableCell className={classes.tableCell} padding="checkbox">
 
                       </TableCell>
-                      <TableCell style={{display:'flex',border:'none',alignItem: 'center'}} className={classes.tableCell}  component="th" id={labelId} scope="row" padding="none">
-                      <Avatar style={{width:'25px',height:'25px',marginRight:'5px'}} src={process.env.PUBLIC_URL + `uploads/${row.pic}`}/>{row.username}
+                      <TableCell style={{ display: 'flex', border: 'none', alignItem: 'center' }} className={classes.tableCell} component="th" id={labelId} scope="row" padding="none">
+                        <Avatar style={{ width: '25px', height: '25px', marginRight: '5px' }} src={process.env.PUBLIC_URL + `uploads/${row.pic}`} />{row.username}
                       </TableCell>
                       <TableCell className={classes.tableCell} align="right">{row.created}</TableCell>
                       <TableCell className={classes.tableCell} align="right">{row.last}</TableCell>

@@ -7,7 +7,7 @@ class ForgotLogic {
 
     constructor(server, mail) {
         this.server = server;
-        let mailG=""
+        let mailG = ""
         if (mail.includes("gmail")) {
             mailG = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
         } else {
@@ -24,7 +24,7 @@ class ForgotLogic {
 
     mailSendingReset = async () => {
         const mailLower = this.mail.toLocaleLowerCase();
-        
+
         const verifMail = await axios.post(`${this.server}/sendmailreset`, { params: { mailLower } })
         return verifMail;
     }

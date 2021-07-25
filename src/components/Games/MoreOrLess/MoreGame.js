@@ -7,7 +7,7 @@ const axios = require('axios')
 
 
 const MoreGame = () => {
-    
+
     const { moreOrLess, miseMoreOrLess, countMore } = useSelector(state => ({
         ...state.moreOrLessReducer,
         ...state.gameLauncherReducer
@@ -55,6 +55,12 @@ const MoreGame = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!choice) {
+            return setError("please make a choice")
+        }
+        if (isNaN(choice)) {
+            return setError("please choose a number")
+        }
         if (Number(choice) === random) {
             return history.push('/moreresult')
         } else if (choice > random) {
@@ -85,7 +91,7 @@ const MoreGame = () => {
                     method="post">
                     <h2>Choose your number:</h2>
                     <p>You have {countMore} chance left</p>
-                    <p style={{background:"#0d122f",color:'#71f6ff',borderRadius:'9999px'}}>{error}</p>
+                    <p style={{ background: "#0d122f", color: '#71f6ff', borderRadius: '9999px' }}>{error}</p>
                     <input onChange={handleChange} value={choice} type="number" name="choice" placeholder="Your number" />
                     <input type="submit" className="btn-sub-change" value="Confirm" />
                 </form>

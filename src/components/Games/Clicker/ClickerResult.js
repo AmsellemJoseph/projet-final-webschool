@@ -4,7 +4,7 @@ const axios = require('axios')
 
 const ClickerResult = () => {
 
-    
+
 
     const { clickCount, miseClick } = useSelector(state => ({
         ...state.clickerReducer

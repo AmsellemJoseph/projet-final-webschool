@@ -1,7 +1,7 @@
 const initialState = {
     showLogin: false,
     showRegister: false,
-    showForgot:false
+    showForgot: false
 }
 
 export default function loginReducer(state = initialState, action) {
@@ -12,14 +12,14 @@ export default function loginReducer(state = initialState, action) {
                     ...state,
                     showLogin: false,
                     showRegister: false,
-                    showForgot:false
+                    showForgot: false
                 }
             } else {
                 return {
                     ...state,
                     showLogin: true,
                     showRegister: false,
-                    showForgot:false
+                    showForgot: false
                 }
             }
         }
@@ -29,31 +29,31 @@ export default function loginReducer(state = initialState, action) {
                     ...state,
                     showLogin: false,
                     showRegister: false,
-                    showForgot:false
+                    showForgot: false
                 }
             } else {
                 return {
                     ...state,
                     showLogin: false,
                     showRegister: true,
-                    showForgot:false
+                    showForgot: false
                 }
             }
         }
-        case 'TOGGLEFORGOT':{
-            if(state.showForgot){
-                return{
+        case 'TOGGLEFORGOT': {
+            if (state.showForgot) {
+                return {
                     ...state,
                     showLogin: false,
                     showRegister: false,
-                    showForgot:false
+                    showForgot: false
                 }
-            }else{
-                return{
+            } else {
+                return {
                     ...state,
                     showLogin: false,
                     showRegister: false,
-                    showForgot:true
+                    showForgot: true
                 }
             }
         }
@@ -62,7 +62,7 @@ export default function loginReducer(state = initialState, action) {
                 ...state,
                 showLogin: false,
                 showRegister: false,
-                showForgot:false
+                showForgot: false
             }
         }
         default:

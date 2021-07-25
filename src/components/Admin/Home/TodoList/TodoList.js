@@ -19,13 +19,10 @@ const TodoList = () => {
         const getAllSql = async () => {
 
             const resTemp = await axios.get('http://localhost:2108/registration/getallsql')
-            console.log(resTemp.data)
             setTodo(resTemp.data)
         }
         getAllSql()
     }, [flag])
-
-    console.log(todo)
 
     const inputs = useRef([])
 
@@ -36,7 +33,6 @@ const TodoList = () => {
     }
 
     const handleRemove = async (e) => {
-        console.log(e.target.parentNode.parentNode.id)
         const id = e.target.parentNode.parentNode.id
         const del = await axios.delete('http://localhost:2108/registration/deletetodo', { params: { id } })
         if (del) {
@@ -51,7 +47,7 @@ const TodoList = () => {
         if (!title || !text) {
             return setError("Please fill all fields")
         }
-        if(title.includes('<')|| text.includes('<')){
+        if (title.includes('<') || text.includes('<')) {
             inputs.current[0].value = "";
             inputs.current[1].value = "";
             return setError("Please don't inject me!!!")

@@ -1,13 +1,13 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import './style.css'
 
 
 const ClickerCount = () => {
 
     const history = useHistory();
-    const [count,setCount] = useState(3)
+    const [count, setCount] = useState(3)
 
     const { clickCount, miseClick, clicker } = useSelector(state => ({
         ...state.clickerReducer,
@@ -23,22 +23,22 @@ const ClickerCount = () => {
         setGame();
     }, [])//eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(()=>{
-        var x=null
+    useEffect(() => {
+        var x = null
         x = setTimeout(() => {
-            setCount(count-1);
-        },1000)
-        if(count===-1){
+            setCount(count - 1);
+        }, 1000)
+        if (count === -1) {
             clearTimeout(x)
             history.push('/clickergame')
         }
-    },[count])//eslint-disable-line react-hooks/exhaustive-deps
+    }, [count])//eslint-disable-line react-hooks/exhaustive-deps
 
 
 
     return (
         <div className="container-game">
-            <h2 className="count-game">{count===0?'GO!!':count}</h2>
+            <h2 className="count-game">{count === 0 ? 'GO!!' : count}</h2>
         </div>
     )
 }

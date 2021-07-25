@@ -1,24 +1,24 @@
-const initialState ={
-    clickCount:0,
-    miseClick:0,
+const initialState = {
+    clickCount: 0,
+    miseClick: 0,
 }
 
-export default function clickerReducer (state = initialState,action){
+export default function clickerReducer(state = initialState, action) {
 
-    switch(action.type){
-        case "ADDCLICKGAME":{
-            return{
+    switch (action.type) {
+        case "ADDCLICKGAME": {
+            return {
                 ...state,
-                clickCount:state.clickCount+1
+                clickCount: state.clickCount + 1
             }
         }
-        case "MISECLICKER":{
-            return{
+        case "MISECLICKER": {
+            return {
                 ...state,
-                miseClick:action.payload
+                miseClick: action.payload
             }
         }
-        default:{
+        default: {
             return state
         }
     }

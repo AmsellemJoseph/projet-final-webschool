@@ -12,7 +12,7 @@ export default function CircularIndeterminate() {
 
   return (
     <div className={classes.root}>
-      <CircularProgress style={{color: '#d149e4'}} />
+      <CircularProgress style={{ color: '#d149e4' }} />
     </div>
   );
 }

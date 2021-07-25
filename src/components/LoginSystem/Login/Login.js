@@ -27,7 +27,6 @@ const Login = () => {
                 const tokTemp = await axios.post('http://localhost:2108/registration/gettoken', { params: { mail, tokenLocal } })
                 if (Number(tokTemp.data) === 1) {
                     const { username } = JSON.parse(localStorage.getItem('user'))
-                    console.log(username)
                     if (username === 'admin') {
                         return history.push('/admin')
                     } else {
@@ -143,7 +142,6 @@ const Login = () => {
             username: info.data[0].username
         }
         const flag = await userCookie(user);
-        console.log((info.data[0].admin))
         if (info.data[0].admin === true) {
             localStorage.setItem('admin', JSON.stringify({ admin: true }));
             stopLoad()

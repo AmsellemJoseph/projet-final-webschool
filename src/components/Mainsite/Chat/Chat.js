@@ -49,9 +49,9 @@ const Chat = () => {
         <div className="main">
             <MainBarUser />
             <div>
-            
+
                 {user ? (<div className="chatroom"><SignOut /><Chatroom /></div>) : <div className="signin-chatroom"><SignIn /></div>}
-                
+
             </div>
         </div>
     )
@@ -112,9 +112,9 @@ const Chat = () => {
             </ScrollToBottom>
             <form onSubmit={sendMessage}>
                 <div className="text-form">
-                    <input value={formValue}  onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+                    <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
 
-                    <button type="submit"  disabled={!formValue}><FontAwesomeIcon icon={['fas','paper-plane']} style={{width:'100%'}} /></button>
+                    <button type="submit" disabled={!formValue}><FontAwesomeIcon icon={['fas', 'paper-plane']} style={{ width: '100%' }} /></button>
                 </div>
             </form>
         </>)

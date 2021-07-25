@@ -19,10 +19,10 @@ export default function moreOrLessReducer(state = initialState, action) {
                 countMore: state.countMore - 1
             }
         }
-        case "RESETMORE":{
-            return{
+        case "RESETMORE": {
+            return {
                 ...state,
-                countMore:15
+                countMore: 15
             }
         }
         default:

@@ -1,4 +1,4 @@
-import React, { useState, useRef,useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import ForgotLogic from './logic'
@@ -30,7 +30,7 @@ const Forgot = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-    const { showForgot,loading } = useSelector(state => ({
+    const { showForgot, loading } = useSelector(state => ({
         ...state.loginReducer,
         ...state.loadingReducer
     }))
@@ -49,14 +49,14 @@ const Forgot = () => {
         })
     }
 
-    const load = ()=>{
+    const load = () => {
         dispatch({
-            type:"LOADING"
+            type: "LOADING"
         })
     }
-    const stopLoad = ()=>{
+    const stopLoad = () => {
         dispatch({
-            type:"LOADED"
+            type: "LOADED"
         })
     }
 
@@ -102,7 +102,7 @@ const Forgot = () => {
                 <h2>Forgot</h2>
                 <p style={{ color: '#a035fd' }}>{error}</p>
                 <p style={{ color: '#f3ef83' }}>{success}</p>
-                {loading?<CircularIndeterminate/>:null}
+                {loading ? <CircularIndeterminate /> : null}
                 <form className="form-log"
                     onSubmit={handleSubmit}
                     method="post">

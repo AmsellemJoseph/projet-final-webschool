@@ -19,6 +19,7 @@ import PaypalComp from './components/Mainsite/Paypal/PaypalComp'
 import Chat from './components/Mainsite/Chat/Chat'
 import Admin from './components/Admin/Home/Admin'
 import TodoMain from './components/Admin/Home/TodoMain'
+import MailingMain from './components/Admin/Home/MailingMain'
 
 
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/chat" component={Chat} />
           <Route path="/admin" component={Admin} />
           <Route path='/todo' component={TodoMain} />
+          <Route path='/mailing' component={MailingMain} />
 
         </Switch>
       </div>

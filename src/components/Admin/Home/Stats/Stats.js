@@ -3,13 +3,13 @@ import UserDates from './UserDates'
 import UserGames from './UserGames'
 import StatsGames from './StatsGames'
 
-const Stats = ()=>{
+const Stats = () => {
 
-    return(
+    return (
         <div>
-            <UserDates/>
-            <UserGames/>
-            <StatsGames/>
+            <UserDates />
+            <UserGames />
+            <StatsGames />
         </div>
     )
 }

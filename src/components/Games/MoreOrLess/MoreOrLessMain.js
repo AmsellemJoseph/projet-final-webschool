@@ -8,7 +8,7 @@ const axios = require('axios')
 
 const MoreOrLessMain = () => {
 
-    
+
     const history = useHistory();
 
     const [getUser, setUser] = useState({})

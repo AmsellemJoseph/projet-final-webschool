@@ -200,7 +200,6 @@ export default function StatsGames() {
     const getGames = async () => {
       const gameTemp = await axios.get('http://localhost:2108/registration/getnbr')
       setGames(gameTemp.data)
-      console.log(gameTemp)
     }
     getGames()
 
@@ -213,11 +212,8 @@ export default function StatsGames() {
   // const rows=[];
 
   const rows = games.map((game, i) => {
-    console.log(game.usename)
-    console.log(game.nbrtotal)
     return createData(game.usename, game.nbrTotal)
   })
-  console.log(rows)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

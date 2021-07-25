@@ -1,6 +1,6 @@
-import React, { useState, useRef,useEffect } from 'react';
-import {useHistory} from 'react-router-dom'
-import {useDispatch,useSelector} from 'react-redux'
+import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './reset.css'
 import ResetPassword from './logicReset'
 import CircularIndeterminate from '../../../utils/CircularIndeterminate'
@@ -10,21 +10,21 @@ const Reset = () => {
 
     const history = useHistory();
     const [error, setError] = useState('');
-    const [success, setSuccess]=useState('');
+    const [success, setSuccess] = useState('');
 
-    const {loading} = useSelector(state => ({
+    const { loading } = useSelector(state => ({
         ...state.loadingReducer
     }))
 
     const dispatch = useDispatch();
-    const load = ()=>{
+    const load = () => {
         dispatch({
-            type:"LOADING"
+            type: "LOADING"
         })
     }
-    const stopLoad = ()=>{
+    const stopLoad = () => {
         dispatch({
-            type:"LOADED"
+            type: "LOADED"
         })
     }
 
@@ -56,28 +56,28 @@ const Reset = () => {
         e.preventDefault();
         load()
         const mail = JSON.parse(localStorage.getItem('user'))
-        const Reset = new ResetPassword("http://localhost:2108/registration",mail,inputs.current[0].value,inputs.current[1].value)
+        const Reset = new ResetPassword("http://localhost:2108/registration", mail, inputs.current[0].value, inputs.current[1].value)
         const verifPass = Reset.verifPass()
-        if(!verifPass){
+        if (!verifPass) {
             stopLoad()
             return setError("Please confirm the same password!")
         }
         const verifPassStrong = Reset.verifPassStrong();
-        if(!verifPassStrong){
+        if (!verifPassStrong) {
             stopLoad()
             return setError('Please choose a password with a leat one lowercase character, one uppercase character, one digit and one special character and a least 8 characters long')
         }
         const res = await Reset.resetingPassword();
-        if(!res){
+        if (!res) {
             stopLoad()
-           return setError('An error as occured,please try again later')
+            return setError('An error as occured,please try again later')
         }
         stopLoad()
         setError("")
         setSuccess('Password successfully updated');
         setTimeout(() => {
             return history.push('/')
-        
+
         }, 5000);
     }
 
@@ -90,7 +90,7 @@ const Reset = () => {
                     <h2>Reset</h2>
                     <p style={{ color: '#a035fd' }}>{error}</p>
                     <p style={{ color: '#f3ef83' }}>{success}</p>
-                    {loading?<CircularIndeterminate/>:null}
+                    {loading ? <CircularIndeterminate /> : null}
                     <form className="form-res"
                         onSubmit={handleSubmit}
                         method="post">

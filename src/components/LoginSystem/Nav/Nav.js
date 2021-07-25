@@ -1,23 +1,23 @@
 import React from "react";
 import './nav.css'
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-const Nav = ()=>{
+const Nav = () => {
 
     const dispatch = useDispatch();
 
-    const showLog = ()=>{
+    const showLog = () => {
         dispatch({
-            type:"TOGGLELOGIN"
+            type: "TOGGLELOGIN"
         })
     }
-    const showReg = ()=>{
+    const showReg = () => {
         dispatch({
-            type:"TOGGLEREG"
+            type: "TOGGLEREG"
         })
     }
 
-    return(
+    return (
         <div className="navbar">
             <button onClick={showLog}>Login</button>
             <button onClick={showReg}>Register</button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MainBarUser from '../../../Mainsite/NavBarUser/MainBarUser'
-import {  useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './style.css'
 const axios = require('axios')

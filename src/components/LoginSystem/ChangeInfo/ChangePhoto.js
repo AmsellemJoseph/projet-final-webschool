@@ -55,7 +55,7 @@ const ChangeInfo = () => {
         load()
         const ChangePicture = new ChangeProfilPicture(newPic);
         const verifNull = ChangePicture.verifNull();
-        if(!verifNull){
+        if (!verifNull) {
             stopLoad()
             return setError("Please choose a picture")
         }
@@ -74,7 +74,7 @@ const ChangeInfo = () => {
             stopLoad()
             return setError("An error occurred, please try again later")
         } else {
-           await ChangePicture.sendDB(sending);
+            await ChangePicture.sendDB(sending);
         }
         stopLoad()
         setError("");
@@ -93,8 +93,8 @@ const ChangeInfo = () => {
             <div className="container-form-change-photo">
                 <form action="" method="post">
                     <h2>Choose your profile picture</h2>
-                    <p style={{ color: '#0d122f',marginBottom:'20px' }}>{error}</p>
-                    <p style={{ color: '#f3ef83',marginBottom:'15px' }}>{success}</p>
+                    <p style={{ color: '#0d122f', marginBottom: '20px' }}>{error}</p>
+                    <p style={{ color: '#f3ef83', marginBottom: '15px' }}>{success}</p>
                     {loading ? <CircularIndeterminate /> : null}
                     <input className="custom-file-input" onChange={handleChange} type="file" name="profilPicture" />
                     <button onClick={handleSubmit} type="button">Upload your profile picture</button>

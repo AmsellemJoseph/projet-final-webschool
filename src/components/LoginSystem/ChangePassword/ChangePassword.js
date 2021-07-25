@@ -42,14 +42,14 @@ const ChangePassword = () => {
         e.preventDefault();
         const local = JSON.parse(localStorage.getItem('user'))
         const user = {
-            mail:local.mail,
-            password:md5(pass)
+            mail: local.mail,
+            password: md5(pass)
         }
 
-        const verif = await axios.post('http://localhost:2108/registration/connection',{params:{user}})
-        if(!verif.data.connection){
-           return setError("Sorry, but it's not the current password")
-        }else{
+        const verif = await axios.post('http://localhost:2108/registration/connection', { params: { user } })
+        if (!verif.data.connection) {
+            return setError("Sorry, but it's not the current password")
+        } else {
             history.push('/resetpassword')
         }
     }
@@ -59,7 +59,7 @@ const ChangePassword = () => {
         <div className="main-container-change-photo">
             <MainBarUser />
             <div className="container-form-change-pass">
-                <form action="" onSubmit={handleSubmit}  method="post">
+                <form action="" onSubmit={handleSubmit} method="post">
                     <h2>Confirm your current password</h2>
                     <p style={{ color: '#0d122f', marginBottom: '20px' }}>{error}</p>
                     <p style={{ color: '#f3ef83' }}>{success}</p>

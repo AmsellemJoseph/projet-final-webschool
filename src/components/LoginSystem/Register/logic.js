@@ -19,7 +19,7 @@ class Registering {
         this.pass2 = pass2;
         this.first = first;
         this.last = last;
-        let mailG=""
+        let mailG = ""
         if (mail.includes("gmail")) {
             mailG = mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
         } else {
@@ -108,7 +108,7 @@ class Registering {
 
     }
     createUser = async () => {
-        let mailLower=this.mail;
+        let mailLower = this.mail;
         // if(this.mail.includes("gmail")){
         //     mailLower = this.mail.replace(/['.']/g,"").replace('gmailcom',"gmail.com")
         // }else{
@@ -125,18 +125,18 @@ class Registering {
             credit: 100,
             admin: false,
             token: md5(Date.now()),
-            profilPic:'default.jpg',
-            created:Date.now(),
-            lastConnection:Date.now(),
-            nbrConnection:0,
-            nbrClick:0,
-            nbrRace:0,
+            profilPic: 'default.jpg',
+            created: Date.now(),
+            lastConnection: Date.now(),
+            nbrConnection: 0,
+            nbrClick: 0,
+            nbrRace: 0,
         }
         const create = await axios.post(`${this.server}/createuser`, { params: { newUser } })
         return create;
     }
     sendMail = async () => {
-        let mail=this.mail
+        let mail = this.mail
         // if (this.mail.includes("gmail")) {
         //     mail = this.mail.replace(/['.']/g, "").replace('gmailcom', "gmail.com")
         // } else {

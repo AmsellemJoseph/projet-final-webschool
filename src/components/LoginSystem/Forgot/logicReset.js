@@ -30,8 +30,8 @@ class ResetPassword {
     resetingPassword = async () => {
         const mail = this.mail;
         const pass = md5(this.pass1)
-        const res = await axios.put(`${this.server}/newpassword`,{ params: { mail,pass }})
-        if(!res){
+        const res = await axios.put(`${this.server}/newpassword`, { params: { mail, pass } })
+        if (!res) {
             return false
         }
         return true;
