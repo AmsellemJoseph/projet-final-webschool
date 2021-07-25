@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './style.css'
 
@@ -9,7 +9,7 @@ const ClickerCount = () => {
     const history = useHistory();
     const [count, setCount] = useState(3)
 
-    const { clickCount, miseClick, clicker } = useSelector(state => ({
+    const { clicker } = useSelector(state => ({
         ...state.clickerReducer,
         ...state.gameLauncherReducer
     }))
